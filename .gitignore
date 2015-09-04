@@ -1,0 +1,8 @@
+elpa
+*.dat
+thumbs
+user
+eshell
+smex-items
+.*
+!/.gitignore

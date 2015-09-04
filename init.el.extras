@@ -1,0 +1,245 @@
+;; ============ switch to minibugger with kbd ============
+(defun switch-to-minibuffer ()
+  "Switch to minibuffer window."
+  (interactive)
+  (if (active-minibuffer-window)
+      (select-window (active-minibuffer-window))
+    (error "Minibuffer is not active")))
+(global-set-key "\C-co" 'switch-to-minibuffer) ;; Bind to `C-c o'
+
+
+
+
+;; ========= highlight settings =============
+;; In every buffer, the line which contains the cursor will be fully highlighted
+(global-hl-line-mode 1)
+;;Set any color as the background face of the current line
+(set-face-background 'hl-line "#3e4446")
+;;To keep syntax highlighting in the current line:
+(set-face-foreground 'highlight nil)
+
+
+
+;; ========== Project browser ========
+(add-to-list 'load-path "~/.emacs.d/emacs-nav-49/")
+(require 'nav)
+(nav-disable-overeager-window-splitting)
+
+
+
+;; ====== Javascript mode =======
+(add-to-list 'load-path "~/.emacs.d/js2-mode/")
+(autoload 'js2-mode "js2" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
+
+;; ============= Set frame size ===============
+(defun set-frame-size-according-to-resolution ()
+  (interactive)
+  (if window-system
+  (progn
+    ;; use 120 char wide window for largeish displays
+    ;; and smaller 80 column windows for smaller displays
+    ;; pick whatever numbers make sense for you
+    (if (> (x-display-pixel-width) 1280)
+           (add-to-list 'default-frame-alist (cons 'width 300))
+           (add-to-list 'default-frame-alist (cons 'width 140)))
+    ;; for the height, subtract a couple hundred pixels
+    ;; from the screen height (for panels, menubars and
+    ;; whatnot), then divide by the height of a char to
+    ;; get the height we want
+    (add-to-list 'default-frame-alist
+         (cons 'height (/ (- (x-display-pixel-height) 400)
+                             (frame-char-height)))))))
+(set-frame-size-according-to-resolution)
+
+
+
+
+;;=========== Configure Mail ===============
+;;Tell the program who you are
+(setq user-full-name "Parag M")
+(setq user-mail-address "parag@evomob.com")
+
+;;Tell Emacs to use GNUTLS instead of STARTTLS
+;;to authenticate when sending mail.
+(setq starttls-use-gnutls t)
+
+;;Tell Emacs about your mail server and credentials
+(setq send-mail-function 'smtpmail-send-it
+message-send-mail-function 'smtpmail-send-it
+smtpmail-starttls-credentials
+'(("smtp.gmail.com" 587 nil nil))
+smtpmail-auth-credentials
+(expand-file-name "~/.authinfo")
+smtpmail-default-smtp-server "smtp.gmail.com"
+smtpmail-smtp-server "smtp.gmail.com"
+smtpmail-smtp-service 587
+smtpmail-debug-info t)
+(require 'smtpmail)
+
+
+
+;; ========= HAML mode ==========
+(add-to-list 'load-path "~/.emacs.d/haml-mode/")
+(require 'haml-mode)
+
+;; ======== Jade and style mode  ============
+(add-to-list 'load-path "~/.emacs.d/jade-mode")
+(require 'sws-mode)
+(require 'jade-mode)
+(require 'stylus-mode)
+(add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
+(add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+
+;; ------- Indentation setting (not sure if this works -----------
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 2)
+
+
+;; =========== Other customizations ===========
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(column-number-mode t)
+ '(display-time-24hr-format t)
+ '(display-time-day-and-date nil)
+ '(display-time-default-load-average nil)
+ '(display-time-mail-file (quote none))
+ '(display-time-mode t)
+ '(indicate-buffer-boundaries (quote ((t . right) (top . left))))
+ '(indicate-empty-lines t)
+ '(save-place t nil (saveplace))
+ '(scroll-bar-mode (quote right))
+ '(show-paren-mode t)
+ '(tab-stop-list (quote (4 8)))
+ '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
+ '(tool-bar-mode nil)
+ '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
+
+
+
+;; Helper function
+(defun shorten-directory (dir max-length)
+  "Show up to `max-length' characters of a directory name `dir'."
+  (let ((path (reverse (split-string (abbreviate-file-name dir) "/")))
+        (output ""))
+    (when (and path (equal "" (car path)))
+      (setq path (cdr path)))
+    (while (and path (< (length output) (- max-length 4)))
+      (setq output (concat (car path) "/" output))
+      (setq path (cdr path)))
+    (when path
+      (setq output (concat ".../" output)))
+    output))
+
+
+
+
+
+
+;; Mode line setup
+(setq-default
+ mode-line-format
+ '(; Position, including warning for 80 columns
+   (:propertize "%4l:" face mode-line-position-face)
+   (:eval (propertize "%3c" 'face
+                      (if (>= (current-column) 80)
+                          'mode-line-80col-face
+                        'mode-line-position-face)))
+   ; emacsclient [default -- keep?]
+   mode-line-client
+   "  "
+   ; read-only or modified status
+   (:eval
+    (cond (buffer-read-only
+           (propertize " RO " 'face 'mode-line-read-only-face))
+          ((buffer-modified-p)
+           (propertize " ** " 'face 'mode-line-modified-face))
+          (t "      ")))
+   "    "
+   ; directory and buffer/file name
+   (:propertize (:eval (shorten-directory default-directory 30))
+                face mode-line-folder-face)
+   (:propertize "%b"
+                face mode-line-filename-face)
+   ; narrow [default -- keep?]
+   " %n "
+   ; mode indicators: vc, recursive edit, major mode, minor modes, process, global
+   (vc-mode vc-mode)
+   "  %["
+   (:propertize mode-name
+                face mode-line-mode-face)
+   "%] "
+   (:eval (propertize (format-mode-line minor-mode-alist)
+                      'face 'mode-line-minor-mode-face))
+   (:propertize mode-line-process
+                face mode-line-process-face)
+   (global-mode-string global-mode-string)
+   "    "
+   ; nyan-mode uses nyan cat as an alternative to %p
+   ;;(:eval (when nyan-mode (list (nyan-create))))
+   ))
+
+;; Extra mode line faces
+(make-face 'mode-line-read-only-face)
+(make-face 'mode-line-modified-face)
+(make-face 'mode-line-folder-face)
+(make-face 'mode-line-filename-face)
+(make-face 'mode-line-position-face)
+(make-face 'mode-line-mode-face)
+(make-face 'mode-line-minor-mode-face)
+(make-face 'mode-line-process-face)
+(make-face 'mode-line-80col-face)
+
+(set-face-attribute 'mode-line nil
+    :foreground "gray60" :background "gray20"
+    :inverse-video nil
+    :box '(:line-width 6 :color "gray20" :style nil))
+(set-face-attribute 'mode-line-inactive nil
+    :foreground "gray80" :background "gray40"
+    :inverse-video nil
+    :box '(:line-width 6 :color "gray40" :style nil))
+
+(set-face-attribute 'mode-line-read-only-face nil
+    :inherit 'mode-line-face
+    :foreground "#4271ae"
+    :box '(:line-width 2 :color "#4271ae"))
+(set-face-attribute 'mode-line-modified-face nil
+    :inherit 'mode-line-face
+    :foreground "#c82829"
+    :background "#ffffff"
+    :box '(:line-width 2 :color "#c82829"))
+(set-face-attribute 'mode-line-folder-face nil
+    :inherit 'mode-line-face
+    :foreground "gray60")
+(set-face-attribute 'mode-line-filename-face nil
+    :inherit 'mode-line-face
+    :foreground "#eab700"
+    :weight 'bold)
+(set-face-attribute 'mode-line-position-face nil
+    :inherit 'mode-line-face
+    :family "Menlo" :height 100)
+(set-face-attribute 'mode-line-mode-face nil
+    :inherit 'mode-line-face
+    :foreground "gray80")
+(set-face-attribute 'mode-line-minor-mode-face nil
+    :inherit 'mode-line-mode-face
+    :foreground "gray40"
+    :height 110)
+(set-face-attribute 'mode-line-process-face nil
+    :inherit 'mode-line-face
+    :foreground "#718c00")
+(set-face-attribute 'mode-line-80col-face nil
+    :inherit 'mode-line-position-face
+    :foreground "black" :background "#eab700")
