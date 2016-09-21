@@ -5,4 +5,6 @@ user
 eshell
 smex-items
 .*
+!/.spacemacs
+!/.zshrc
 !/.gitignore
