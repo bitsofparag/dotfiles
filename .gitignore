@@ -8,3 +8,4 @@ smex-items
 !/.spacemacs
 !/.zshrc
 !/.gitignore
+!/.tmux*
