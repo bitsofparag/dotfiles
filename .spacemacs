@@ -1,3 +1,4 @@
+;; FROM: git@github.com:designgeef/dotfiles.git
 ;; -*- mode: emacs-lisp -*-
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
