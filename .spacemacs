@@ -27,15 +27,16 @@ values."
      (colors :variables
              colors-enable-nyan-cat-progress-bar t)
      ;; better-defaults
+     dockerfile
      emacs-lisp
      git
-     yaml
-     markdown
-     dockerfile
      html
-     (syntax-checking :variables syntax-checking-enable-by-default nil)
      ;; org
-     (ruby :variables ruby-enable-enh-ruby-mode t)
+     javascript
+     markdown
+     (ruby :variables
+           ruby-enable-enh-ruby-mode t
+           ruby-test-runner 'rspec)
      ruby-on-rails
      shell-scripts
      (shell :variables
@@ -43,8 +44,9 @@ values."
              shell-default-height 30
              shell-default-position 'bottom)
      ;; spell-checking
-     ;; syntax-checking
+     (syntax-checking :variables syntax-checking-enable-by-default nil)
      version-control
+     yaml
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -261,6 +263,10 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+  ;; Show 80-column marker
+  (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+  (global-fci-mode 1)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -272,6 +278,8 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(flycheck-eslintrc "~/.eslintrc")
  '(global-flycheck-mode t)
+ '(indent-guide-delay 0.3)
+ '(indent-guide-global-mode t)
  '(js2-basic-offset 2)
  '(js2-bounce-indent-p t)
  '(js2-indent-level 2))
@@ -283,4 +291,5 @@ you should place your code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
+ '(indent-guide-face ((t (:foreground "Brown")))))
