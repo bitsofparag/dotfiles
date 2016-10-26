@@ -19,6 +19,7 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     php
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -34,6 +35,7 @@ values."
      html
      ;; org
      javascript
+     react
      markdown
      (ruby :variables
            ruby-enable-enh-ruby-mode t
@@ -277,13 +279,22 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(css-indent-offset 2)
  '(flycheck-eslintrc "~/.eslintrc")
  '(global-flycheck-mode t)
- '(indent-guide-delay 0.3)
+ '(indent-guide-delay 0.3 t)
  '(indent-guide-global-mode t)
+ '(js-indent-level 2)
  '(js2-basic-offset 2)
  '(js2-bounce-indent-p t)
- '(js2-indent-level 2))
+ '(js2-indent-level 2)
+ '(package-selected-packages
+   (quote
+    (phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode pug-mode zenburn-theme yaml-mode xterm-color ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spacemacs-theme spaceline smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restart-emacs rbenv rainbow-mode rainbow-identifiers rainbow-delimiters quelpa projectile-rails popwin persp-mode paradox orgit org-plus-contrib org-bullets open-junk-file neotree multi-term move-text monokai-theme mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode json-mode js2-refactor js-doc jade-mode info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md flycheck-pos-tip flx-ido fish-mode fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help enh-ruby-mode emmet-mode elisp-slime-nav dumb-jump diff-hl define-word company-web company-tern company-statistics company-shell column-enforce-mode color-identifiers-mode coffee-mode clean-aindent-mode chruby bundler auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+ '(web-mode-auto-quote-style 2)
+ '(web-mode-code-indent-offset 2)
+ '(web-mode-css-indent-offset 0)
+ '(web-mode-markup-indent-offset 2))
 
 
 (custom-set-faces
@@ -293,4 +304,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
  '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
- '(indent-guide-face ((t (:foreground "Brown")))))
+ '(indent-guide-face ((t (:foreground "Brown"))))
+ '(js2-external-variable ((t (:foreground "gold2"))))
+ '(js2-function-param ((t (:foreground "DarkOrchid2"))))
+ '(js2-instance-member ((t (:foreground "DeepPink3")))))
