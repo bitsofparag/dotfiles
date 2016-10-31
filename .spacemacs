@@ -29,7 +29,6 @@ values."
      (colors :variables
              colors-enable-nyan-cat-progress-bar t)
      ;; better-defaults
-     dockerfile
      emacs-lisp
      git
      html
