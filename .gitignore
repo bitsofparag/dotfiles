@@ -6,6 +6,6 @@ eshell
 smex-items
 .*
 !/.spacemacs
-!/.zshrc
+!/.zsh*
 !/.gitignore
 !/.tmux*
