@@ -7,5 +7,5 @@ smex-items
 .*
 !/.spacemacs
 !/.zsh*
-!/.gitignore
+!/.gitignore*
 !/.tmux*
