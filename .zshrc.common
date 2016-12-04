@@ -49,7 +49,7 @@ source $ZSH/oh-my-zsh.sh
 plugins=(brew cake colorize coffee docker web-search encode64 gem git osx rails rvm ruby github node npm zsh-syntax-highlighting vagrant colored-man)
 
 # Aliases
-alias elm='docker run -it --rm -v "$(pwd):/code" -w "/code"
+alias elm='docker run -it --rm -v "$(pwd):/code" -w "/code" \
   -e "HOME=/tmp" -u $UID:$GID -p 8000:8000 codesimple/elm:0.17'
 alias zconfig="nano ~/.zshrc"
 alias ohmyzsh="nano ~/.oh-my-zsh"
