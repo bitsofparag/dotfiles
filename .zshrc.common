@@ -27,7 +27,7 @@
 # COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
+# under VCS as dirty. Taws_security_group is makes repository status check for large repositories
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
@@ -60,7 +60,7 @@ alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO;
   killall Finder /System/Library/CoreServices/Finder.app'
 
 # Emacs linking for Dash
-if [ -L ${my_link} ] && [ -e ${my_link} ]; then
+if [ ! -L ~/.docsets ] && [ ! -e ~/.docsets ]; then
   ln -s ~/Library/Application\ Support/Dash/DocSets/ ~/.docsets
   ln -s ~/Library/Application\ Support/Dash/User\ Contributed/* ~/.docsets
 fi
