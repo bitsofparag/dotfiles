@@ -59,6 +59,12 @@ alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES;
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO;
   killall Finder /System/Library/CoreServices/Finder.app'
 
+# Emacs linking for Dash
+if [ -L ${my_link} ] && [ -e ${my_link} ]; then
+  ln -s ~/Library/Application\ Support/Dash/DocSets/ ~/.docsets
+  ln -s ~/Library/Application\ Support/Dash/User\ Contributed/* ~/.docsets
+fi
+
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
