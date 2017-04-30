@@ -39,7 +39,8 @@ values."
      git
      html
      org
-     javascript
+     (javascript :variables
+                 javascript-disable-tern-port-files nil)
      react
      markdown
      (ruby :variables
