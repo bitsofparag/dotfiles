@@ -1,4 +1,5 @@
 .tern-port
+.tern-project
 .DS_Store
 .tmp
 \#*
