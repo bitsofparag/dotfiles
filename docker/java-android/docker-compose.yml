@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  java:
+    build:
+      context: ./
+      args:
+        project: ${HOST_PROJECT}
+        sdk_path: ${CONTAINER_SDK}
+    tty: true
+    container_name: android-java
+    volumes:
+      - ${HOST_PROJECT}:/home
+      - ~/Library/Android/sdk:${CONTAINER_SDK}
