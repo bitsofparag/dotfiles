@@ -1,0 +1,18 @@
+
+[includeIf "gitdir:~/Workspace/play/"]
+	path = "~/.gitconfig-play"
+
+[includeIf "gitdir:~/Workspace/nbt/"]
+	path = "~/.gitconfig-nbt"
+
+[core]
+	excludesfile = /Users/parag-nbt/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/parag-nbt/.stCommitMsg
+
