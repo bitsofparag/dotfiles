@@ -18,8 +18,7 @@ values."
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
    ;; A layer is a unit of configuration that you can turn on or off
-   dotspacemacs-configuration-layers
-   '(
+   dotspacemacs-configuration-layers '(
      (auto-completion :variables
                       auto-completion-enable-sort-by-usage t
                       auto-completion-enable-snippets-in-popup t
@@ -32,37 +31,30 @@ values."
      csv
      dash
      docker
-     emacs-lisp
      extra-langs
      git
-     haskell
-     rust
-     sql
-     php
-     python
      html
-     org
-     (javascript :variables
-                 javascript-disable-tern-port-files nil)
-     react
-     spacemacs-prettier
+     (javascript :variables javascript-disable-tern-port-files nil)
      markdown
+     org
+     php
      ranger
-     (ruby :variables
-           ruby-enable-enh-ruby-mode t
-           ruby-test-runner 'rspec)
-     ruby-on-rails
+     react
+     rust
      shell-scripts
      (shell :variables
              shell-default-shell 'eshell
              shell-default-height 30
              shell-default-position 'bottom)
      ;; spell-checking
+     spacemacs-prettier
+     sql
      (syntax-checking :variables syntax-checking-enable-by-default nil)
      terraform
      version-control
      yaml
      )
+
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
@@ -77,8 +69,8 @@ values."
 
 ;; Configurations that are common to make
 (defun dotspacemacs/init ()
-  "Initialization function.
-This function is called at the very startup of Spacemacs initialization
+  "InitialImportError: No module named pkg_resourcesization function.
+This function is called at the very startup of SpacemacImportError: No module named pkg_resourcess initialization
 before layers configuration.
 You should not put any user code in there besides modifying the variable
 values."
@@ -310,6 +302,8 @@ you should place your code here."
    ["#d2ceda" "#f2241f" "#67b11d" "#b1951d" "#3a81c3" "#a31db1" "#21b8c7" "#655370"])
  '(css-indent-offset 2)
  '(evil-want-Y-yank-to-eol t)
+ '(exec-path-from-shell-check-startup-files nil)
+ '(exec-path-from-shell-shell-name nil)
  '(flycheck-eslintrc "~/.eslintrc")
  '(global-flycheck-mode t)
  '(global-whitespace-mode nil)
@@ -322,8 +316,10 @@ you should place your code here."
  '(js2-indent-level 2)
  '(package-selected-packages
    (quote
-    (yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic ranger wolfram-mode thrift stan-mode scad-mode qml-mode matlab-mode julia-mode arduino-mode evil-avy rake inflections markdown-mode skewer-mode simple-httpd multiple-cursors js2-mode haml-mode gitignore-mode fringe-helper git-gutter+ git-gutter fuzzy pos-tip flycheck magit git-commit with-editor magit-popup json-snatcher json-reformat web-completion-data dash-functional tern company inf-ruby yasnippet auto-complete solarized-theme company-quickhelp js3-mode helm-dash dash-at-point org-projectile org-present org-pomodoro alert log4e gntp org-download htmlize gnuplot terraform-mode hcl-mode dockerfile-mode docker tablist docker-tramp dash async intero hlint-refactor hindent helm-hoogle haskell-snippets flycheck-haskell company-ghci company-ghc ghc haskell-mode company-cabal cmm-mode toml-mode racer flycheck-rust seq csv-mode cargo rust-mode minitest insert-shebang hide-comnt sql-indent phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode pug-mode zenburn-theme yaml-mode xterm-color ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spacemacs-theme spaceline smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restart-emacs rbenv rainbow-mode rainbow-identifiers rainbow-delimiters quelpa projectile-rails popwin persp-mode paradox orgit org-plus-contrib org-bullets open-junk-file neotree multi-term move-text monokai-theme mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode json-mode js2-refactor js-doc jade-mode info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md flycheck-pos-tip flx-ido fish-mode fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help enh-ruby-mode emmet-mode elisp-slime-nav dumb-jump diff-hl define-word company-web company-tern company-statistics company-shell column-enforce-mode color-identifiers-mode coffee-mode clean-aindent-mode chruby bundler auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+    (winum powerline pcre2el spinner hydra parent-mode projectile request pkg-info epl flx smartparens iedit anzu evil goto-chg undo-tree highlight diminish bind-map bind-key packed f s helm avy helm-core popup yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic ranger wolfram-mode thrift stan-mode scad-mode qml-mode matlab-mode julia-mode arduino-mode evil-avy rake inflections markdown-mode skewer-mode simple-httpd multiple-cursors js2-mode haml-mode gitignore-mode fringe-helper git-gutter+ git-gutter fuzzy pos-tip flycheck magit git-commit with-editor magit-popup json-snatcher json-reformat web-completion-data dash-functional tern company inf-ruby yasnippet auto-complete solarized-theme company-quickhelp js3-mode helm-dash dash-at-point org-projectile org-present org-pomodoro alert log4e gntp org-download htmlize gnuplot terraform-mode hcl-mode dockerfile-mode docker tablist docker-tramp dash async intero hlint-refactor hindent helm-hoogle haskell-snippets flycheck-haskell company-ghci company-ghc ghc haskell-mode company-cabal cmm-mode toml-mode racer flycheck-rust seq csv-mode cargo rust-mode minitest insert-shebang hide-comnt sql-indent phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode pug-mode zenburn-theme yaml-mode xterm-color ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spacemacs-theme spaceline smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restart-emacs rbenv rainbow-mode rainbow-identifiers rainbow-delimiters quelpa projectile-rails popwin persp-mode paradox orgit org-plus-contrib org-bullets open-junk-file neotree multi-term move-text monokai-theme mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode json-mode js2-refactor js-doc jade-mode info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md flycheck-pos-tip flx-ido fish-mode fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help enh-ruby-mode emmet-mode elisp-slime-nav dumb-jump diff-hl define-word company-web company-tern company-statistics company-shell column-enforce-mode color-identifiers-mode coffee-mode clean-aindent-mode chruby bundler auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(prettier-args (quote ("--trailing-comma" "all")))
+ '(python-shell-interpreter "python3")
+ '(shell-file-name "/bin/zsh")
  '(show-trailing-whitespace t)
  '(vc-follow-symlinks t)
  '(web-mode-auto-quote-style 2)
