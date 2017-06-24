@@ -5,7 +5,6 @@ alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES;
   killall Finder /System/Library/CoreServices/Finder.app'
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO;
   killall Finder /System/Library/CoreServices/Finder.app'
-alias python='python3'
 
 # Emacs linking for Dash
 if [ ! -L ~/.docsets ] && [ ! -e ~/.docsets ]; then
@@ -16,4 +15,4 @@ fi
 # Preferred editor for local and remote sessions
 # (see .zshenv.common)
 
-plugins=(docker docker-compose git nmap node npm nvm osx python rust tmuxinator yarn)
+plugins=(docker docker-compose git nmap node npm nvm osx python rust tmuxinator yarn zsh-completions)
