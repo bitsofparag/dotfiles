@@ -1,0 +1,11 @@
+Host            work
+Hostname        bitbucket.org
+IdentityFile    ~/.ssh/id_rsa
+User            parag_nbt
+IdentitiesOnly  yes
+
+Host            play
+Hostname        bitbucket.org
+IdentityFile    ~/.ssh/id_rsa_pers
+User            parag_m
+IdentitiesOnly  yes

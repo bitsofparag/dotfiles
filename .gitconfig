@@ -13,6 +13,5 @@
 	trustExitCode = true
 [commit]
 	template = ~/.stCommitMsg
-
 [alias]
 	praise = blame
