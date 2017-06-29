@@ -10,3 +10,4 @@ smex-items
 !/.gitignore*
 !/.gitconfig*
 !/.tmux*
+org-files/*.sh
