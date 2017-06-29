@@ -1,0 +1,163 @@
+#+TITLE: Python project setup
+#+OPTIONS: toc:nil
+
+* About
+
+This document describes setting up a base python project with django as the
+framework of choice and other commonly used dependencies
+
+* Installation of pre-requirements
+:PROPERTIES:
+:header-args: :noweb-ref setup-python
+:END:
+
+1. Install python as follows (the binaries can be found [[https://www.python.org/downloads/release/python-361/][here]]):
+    + To install on Linux/OSX
+      #+BEGIN_SRC shell :results silent
+      if [ "$(uname)" == "Darwin" ]; then
+        brew install python3
+      elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+        PYTHON_SRC="Python-3.6.1"
+        curl -O https://www.python.org/ftp/python/3.6.1/$PYTHON_SRC.tgz
+        tar -xf $PYTHON_SRC.tgz && cd $PYTHON_SRC
+        which python3 || ./install.sh
+      fi
+      #+END_SRC
+
+    + Verify that the installation was successful:
+      #+BEGIN_SRC shell
+      python3 --version
+      #+END_SRC
+      #+RESULTS:
+      : Python 3.6.1
+
+    + (Optional) Alias /python3/ to /python/ by running the script below:
+      #+BEGIN_SRC shell
+      PYTHON_ALIAS="alias python=python3"
+      if [ -f ~/.bashrc ]; then
+        echo $PYTHON_ALIAS >> ~/.bashrc
+        source ~/.bashrc
+      elif [ -f ~/.zshrc ]; then
+        echo $PYTHON_ALIAS >> ~/.zshrc
+        source ~/.zshrc
+      fi
+      #+END_SRC
+      #+RESULTS:
+
+2. Set up virtual environment for python3
+    + Install virtual environment wrapper
+      #+BEGIN_SRC shell :results silent
+      pip3 install virtualenv
+      pip3 install virtualenvwrapper
+      #+END_SRC
+
+    + Create a folder that will contain all your virtual environments:
+      #+BEGIN_SRC shell
+      mkdir ~/.virtualenvs
+      #+END_SRC
+
+      #+RESULTS:
+   
+    + Add relevant environment variables to your shell profile:
+      #+BEGIN_SRC shell
+      add_env_vars="export WORKON_HOME=~/.virtualenvs \n
+      export VIRTUALENVWRAPPER_PYTHON=$(which python3) \n
+      export VIRTUALENVWRAPPER_VIRTUALENV=$(which virtualenv) \n
+      source $(which virtualenvwrapper.sh)"
+      
+      if [ -f $HOME/.bashrc ]; then
+        echo $add_env_vars >> $HOME/.bashrc
+        tail -n10 $HOME/.bashrc
+      elif [ -f $HOME/.zshrc ]; then
+        echo $add_env_vars >> $HOME/.zshrc
+        tail -n10 $HOME/.zshrc
+      fi
+      #+END_SRC
+      #+RESULTS:
+
+* Project setup
+:PROPERTIES:
+:header-args: :noweb-ref setup-python-project
+:END:
+
+1. Now that =python= and =virtualenv= are set up, one can start working on
+   the project. First create a development environment using =mkvirtualenv=.
+   What this essentially does is create a sandboxed environment within which one
+   can install project-specific dependencies. Let's create a virtual environment
+   for this project:
+   #+BEGIN_SRC shell :results silent
+   source $(which virtualenvwrapper.sh)
+   echo "Enter absolute path to your workspace folder: "
+   read WORKSPACE
+   echo "Enter project name: "
+   read PROJECT
+   cd $WORKSPACE
+   mkvirtualenv $PROJECT
+   #+END_SRC
+
+2. Then switch to this newly-created virtual environment like so:
+   #+BEGIN_SRC shell
+   workon $PROJECT
+   #+END_SRC
+
+3. Install `django` within this new environment: 
+   #+BEGIN_SRC shell
+   pip3 install django
+   #+END_SRC
+
+4. Bootstrap a new django project like so:
+   #+BEGIN_SRC shell
+   django-admin startproject $PROJECT
+   cd $PROJECT
+   #+END_SRC
+   This will create a new folder with the same name in your workspace. This
+   folder contains project settings (configuration files, task runners etc). 
+   
+   One can manage the project via the =manage.py= file. To see a list of 
+   available commands to run for the project:
+   #+BEGIN_SRC shell
+   python manage.py
+   #+END_SRC
+
+5. Finally, bootstrap a new app within this project where the application
+   codebase (models, views, controllers, templates et al) will lie:
+   #+BEGIN_SRC shell
+   echo "Enter the name of the app for $PROJECT: "
+   read APP
+   python manage.py startapp $APP
+   #+END_SRC
+
+6. That's it! Your project is ready to start work on. 
+    + One can see the files that were created:
+      #+BEGIN_SRC shell
+      tree $PROJECT
+      #+END_SRC
+    
+    + One can check the current list of project dependencies like so:
+      #+BEGIN_SRC shell
+      pip3 freeze
+      #+END_SRC
+
+* Project first run
+
+1. The project settings (configuration files, task runners etc) are kept in
+    folder.
+   #+BEGIN_SRC shell
+   cd $WORKSPACE/$PROJECT
+   #+END_SRC
+
+3. To launch the project, call the =runserver= task as follows:
+   #+BEGIN_SRC shell
+   python manage.py runserver
+   #+END_SRC
+
+* Appendix
+  1. Generated script for python setup:
+    #+BEGIN_SRC shell :tangle setup-python.sh :noweb yes :shebang #!/bin/sh
+    <<setup-python>>
+    #+END_SRC
+
+  2. Generated script for python project setup:
+    #+BEGIN_SRC shell :tangle setup-python-project.sh :noweb yes :shebang #!/bin/sh
+    <<setup-python-project>>
+    #+END_SRC
