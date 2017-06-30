@@ -6,10 +6,12 @@
 This document describes setting up a base python project with django as the
 framework of choice and other commonly used dependencies
 
-* Installation of pre-requirements
+* Pre-requirements
 :PROPERTIES:
-:header-args: :noweb-ref setup-python
+:header-args: :noweb-ref pre-requirements
 :END:
+
+*This section walks us through the installation of python and virtualenv*
 
 1. Install python as follows (the binaries can be found [[https://www.python.org/downloads/release/python-361/][here]]):
     + To install on Linux/OSX
@@ -75,10 +77,13 @@ framework of choice and other commonly used dependencies
       #+END_SRC
       #+RESULTS:
 
-* Project setup
+* Setup
 :PROPERTIES:
-:header-args: :noweb-ref setup-python-project
+:header-args: :noweb-ref setup
 :END:
+
+*This section walks us through setting up a new development virtual environment
+ and starting a new python project within it*
 
 1. Now that =python= and =virtualenv= are set up, one can start working on
    the project. First create a development environment using =mkvirtualenv=.
@@ -99,7 +104,7 @@ framework of choice and other commonly used dependencies
    workon $PROJECT
    #+END_SRC
 
-3. Install `django` within this new environment: 
+3. Install =django= within this new environment: 
    #+BEGIN_SRC shell
    pip install django
    #+END_SRC
@@ -142,26 +147,42 @@ framework of choice and other commonly used dependencies
       pip3 freeze
       #+END_SRC
 
-* Project first run
+* Run
+
+*This section shows the different options to run a python project*
 
 1. The project settings (configuration files, task runners etc) are kept in
     folder.
-   #+BEGIN_SRC shell
-   cd $WORKSPACE/$PROJECT
-   #+END_SRC
 
-3. To launch the project, call the =runserver= task as follows:
+2. To launch the project, call the =runserver= task as follows:
    #+BEGIN_SRC shell
    python manage.py runserver
    #+END_SRC
 
+* Tools
+
+*This section discusses installation of project addons such as unit testing,
+ code coverage, linting, collaborative tools etc*
+
+1. Set up linting for python:
+   #+BEGIN_SRC shell
+   pip3 install pycodestyle
+   #+END_SRC
+   One can call the linter by running:
+   #+BEGIN_SRC shell
+   pycodestyle --first example.py
+   #+END_SRC
+   More documentation on this linter can be found [[https://pycodestyle.readthedocs.io/en/latest/][here]]
+
+2. Set up a testing framework: 
+
 * Appendix
-  1. Generated script for python setup:
-    #+BEGIN_SRC shell :tangle setup-python.sh :noweb yes :shebang #!/bin/sh
-    <<setup-python>>
+  1. Generated script for installation of pre-requirements:
+    #+BEGIN_SRC shell :tangle pre-requirements.sh :noweb yes :shebang #!/bin/sh
+    <<pre-requirements>>
     #+END_SRC
 
-  2. Generated script for python project setup:
-    #+BEGIN_SRC shell :tangle setup-python-project.sh :noweb yes :shebang #!/bin/sh
-    <<setup-python-project>>
+  2. Generated script for setup of python project and development environment:
+    #+BEGIN_SRC shell :tangle setup.sh :noweb yes :shebang #!/bin/sh
+    <<setup>>
     #+END_SRC
