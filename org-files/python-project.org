@@ -36,11 +36,10 @@ framework of choice and other commonly used dependencies
       PYTHON_ALIAS="alias python=python3"
       if [ -f ~/.bashrc ]; then
         echo $PYTHON_ALIAS >> ~/.bashrc
-        source ~/.bashrc
       elif [ -f ~/.zshrc ]; then
         echo $PYTHON_ALIAS >> ~/.zshrc
-        source ~/.zshrc
       fi
+      reset
       #+END_SRC
       #+RESULTS:
 
@@ -55,6 +54,8 @@ framework of choice and other commonly used dependencies
       #+BEGIN_SRC shell
       mkdir ~/.virtualenvs
       #+END_SRC
+      If you are looking for python binaries and other installed dependencies,
+      they will be found in this folder.
 
       #+RESULTS:
    
@@ -67,11 +68,10 @@ framework of choice and other commonly used dependencies
       
       if [ -f $HOME/.bashrc ]; then
         echo $add_env_vars >> $HOME/.bashrc
-        tail -n10 $HOME/.bashrc
       elif [ -f $HOME/.zshrc ]; then
         echo $add_env_vars >> $HOME/.zshrc
-        tail -n10 $HOME/.zshrc
       fi
+      reset
       #+END_SRC
       #+RESULTS:
 
@@ -86,27 +86,29 @@ framework of choice and other commonly used dependencies
    can install project-specific dependencies. Let's create a virtual environment
    for this project:
    #+BEGIN_SRC shell :results silent
+   # First we source the virtualenv helper script
    source $(which virtualenvwrapper.sh)
-   echo "Enter absolute path to your workspace folder: "
-   read WORKSPACE
-   echo "Enter project name: "
+   echo "Enter name for the new development virtual environment: "
    read PROJECT
-   cd $WORKSPACE
    mkvirtualenv $PROJECT
    #+END_SRC
 
 2. Then switch to this newly-created virtual environment like so:
    #+BEGIN_SRC shell
+   echo "Switching to this new environment..."
    workon $PROJECT
    #+END_SRC
 
 3. Install `django` within this new environment: 
    #+BEGIN_SRC shell
-   pip3 install django
+   pip install django
    #+END_SRC
 
 4. Bootstrap a new django project like so:
    #+BEGIN_SRC shell
+   echo "Enter absolute path to your workspace folder where the new project will lie: "
+   read WORKSPACE
+   cd $WORKSPACE
    django-admin startproject $PROJECT
    cd $PROJECT
    #+END_SRC
@@ -122,7 +124,7 @@ framework of choice and other commonly used dependencies
 5. Finally, bootstrap a new app within this project where the application
    codebase (models, views, controllers, templates et al) will lie:
    #+BEGIN_SRC shell
-   echo "Enter the name of the app for $PROJECT: "
+   echo "Enter the name of the app for `$PROJECT`: "
    read APP
    python manage.py startapp $APP
    #+END_SRC
@@ -130,11 +132,13 @@ framework of choice and other commonly used dependencies
 6. That's it! Your project is ready to start work on. 
     + One can see the files that were created:
       #+BEGIN_SRC shell
+      echo "Project structure: "
       tree $PROJECT
       #+END_SRC
     
     + One can check the current list of project dependencies like so:
       #+BEGIN_SRC shell
+      echo "Dependencies: "
       pip3 freeze
       #+END_SRC
 
