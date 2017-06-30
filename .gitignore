@@ -11,3 +11,5 @@ smex-items
 !/.gitconfig*
 !/.tmux*
 org-files/*.sh
+org-files/*.tex
+org-files/*.pdf
