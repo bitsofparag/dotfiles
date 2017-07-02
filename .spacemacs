@@ -326,6 +326,8 @@ you should place your code here."
  '(exec-path-from-shell-check-startup-files t)
  '(exec-path-from-shell-shell-name nil)
  '(flycheck-eslintrc "~/.eslintrc")
+ '(flycheck-python-flake8-executable nil)
+ '(flycheck-python-pylint-executable nil)
  '(global-flycheck-mode t)
  '(global-whitespace-mode nil)
  '(global-whitespace-newline-mode nil)
