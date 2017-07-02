@@ -323,7 +323,7 @@ you should place your code here."
    ["#d2ceda" "#f2241f" "#67b11d" "#b1951d" "#3a81c3" "#a31db1" "#21b8c7" "#655370"])
  '(css-indent-offset 2)
  '(evil-want-Y-yank-to-eol t)
- '(exec-path-from-shell-check-startup-files nil)
+ '(exec-path-from-shell-check-startup-files t)
  '(exec-path-from-shell-shell-name nil)
  '(flycheck-eslintrc "~/.eslintrc")
  '(global-flycheck-mode t)
