@@ -37,7 +37,7 @@ values."
      (javascript :variables javascript-disable-tern-port-files nil)
      markdown
      php
-     python
+     (python :variables python-sort-imports-on-save t)
      ranger
      react
      rust
