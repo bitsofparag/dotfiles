@@ -26,8 +26,7 @@ values."
                       auto-completion-complete-with-key-sequence-delay 0.1
                       :disabled-for erc)
      ;; better-defaults
-     (colors :variables
-             colors-enable-nyan-cat-progress-bar t)
+     colors
      csv
      dash
      docker
