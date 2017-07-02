@@ -29,6 +29,7 @@ values."
      colors
      csv
      dash
+     django
      docker
      extra-langs
      git
