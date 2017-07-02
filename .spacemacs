@@ -61,7 +61,8 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(org-autolist
+                                      )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -285,6 +286,10 @@ you should place your code here."
   (add-hook 'text-mode-hook 'auto-fill-mode)
 
   (add-hook 'dired-mode-hook 'deer)
+
+  ;; add autolist to org mode
+  (add-hook 'org-mode-hook (lambda ()(org-autolist-mode) )
+            )
 
   ;; Highlighting
   (add-hook 'after-init-hook #'toggle-crosshairs-when-idle 1)
