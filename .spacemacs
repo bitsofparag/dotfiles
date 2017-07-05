@@ -296,6 +296,13 @@ you should place your code here."
   (setq col-highlight-vline-face-flag t
         col-highlight-face hl-line-face)
 
+  ;; org highlighting
+  (setq org-latex-listings 'minted
+        org-latex-packages-alist '(("" "minted"))
+        org-latex-pdf-process
+        '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
   ;; org eval of code blocks
   (with-eval-after-load 'org
     (org-babel-do-load-languages
