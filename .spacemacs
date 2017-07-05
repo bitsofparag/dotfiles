@@ -72,8 +72,8 @@ values."
 
 ;; Configurations that are common to make
 (defun dotspacemacs/init ()
-  "InitialImportError: No module named pkg_resourcesization function.
-This function is called at the very startup of SpacemacImportError: No module named pkg_resourcess initialization
+  "Initialization function.
+This function is called at the very startup of Spacemacs initialization
 before layers configuration.
 You should not put any user code in there besides modifying the variable
 values."
@@ -267,7 +267,6 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-
 )
 
 (defun dotspacemacs/user-config ()
@@ -328,14 +327,19 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["#d2ceda" "#f2241f" "#67b11d" "#b1951d" "#3a81c3" "#a31db1" "#21b8c7" "#655370"])
+ '(Info-fontify-angle-bracketed-flag nil)
  '(blink-cursor-mode nil)
  '(column-number-mode t)
  '(css-indent-offset 2)
+ '(eshell-highlight-prompt nil t)
+ '(eshell-hist-ignoredups t t)
+ '(eshell-history-size 350 t)
+ '(eshell-plain-echo-behavior t t)
+ '(eshell-prompt-function (quote epe-theme-lambda) t)
  '(evil-want-Y-yank-to-eol t)
- '(exec-path-from-shell-check-startup-files t)
- '(exec-path-from-shell-shell-name nil)
+ '(exec-path-from-shell-check-startup-files nil)
+ '(exec-path-from-shell-variables (quote ("PATH")))
+ '(explicit-shell-file-name "/bin/zsh")
  '(flycheck-eslintrc "~/.eslintrc")
  '(global-flycheck-mode t)
  '(global-whitespace-mode nil)
@@ -371,15 +375,14 @@ you should place your code here."
  '(org-support-shift-select t)
  '(prettier-mode t t)
  '(prettier-show-errors (quote echo))
- '(pyenv-mode t)
- '(python-check-command "yapf -i --style pep8")
+ '(python-check-command "flake8")
  '(python-shell-interpreter "ipython")
  '(python-shell-interpreter-args "--simple-prompt -i")
- '(python-shell-virtualenv-root "~/.virtualenvs/common")
- '(pyvenv-virtualenvwrapper-python "/usr/local/bin/python")
+ '(python-shell-virtualenv-root "/Users/parag-nbt/.virtualenvs/orgnote")
+ '(pyvenv-virtualenvwrapper-python "/usr/local/bin/python3")
  '(shell-file-name "/bin/zsh")
- '(show-trailing-whitespace t)
- '(tool-bar-mode nil)
+ '(show-trailing-whitespace nil)
+ '(toc-org-max-depth 10)
  '(vc-follow-symlinks t)
  '(web-mode-auto-quote-style 2)
  '(web-mode-code-indent-offset 2)
@@ -394,12 +397,5 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((((class color) (min-colors 89)) (:foreground "#ffffff" :background "#263238" :family "Source Code Pro" :foundry "nil" :slant normal :weight normal :height 130 :width normal))))
- '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
- '(indent-guide-face ((t (:foreground "Brown"))))
- '(js2-external-variable ((t (:foreground "gold2"))))
- '(js2-function-param ((t (:foreground "DarkOrchid2"))))
- '(js2-instance-member ((t (:foreground "DeepPink3"))))
- '(trailing-whitespace ((t (:background "#b0bec5" :foreground "#f36c60" :inverse-video t :underline nil))))
- '(whitespace-empty ((t (:foreground "#f36c60" :inverse-video nil :underline nil)))))
+ '(default ((((class color) (min-colors 4096)) (:foreground "#c6c6c6" :background "#303030")) (((class color) (min-colors 256)) (:foreground "#c6c6c6" :background "#303030")) (((class color) (min-colors 89)) (:foreground "#c6c6c6" :background "#303030"))))
+ '(org-block ((t (:background "gray6" :foreground "gray79")))))
