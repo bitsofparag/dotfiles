@@ -386,6 +386,8 @@ you should place your code here."
      (shell "bash")
      (ipython "python"))))
  '(org-link-translation-function (quote toc-org-unhrefify))
+ '(org-src-block-faces (quote (("python" nil))))
+ '(org-src-preserve-indentation t)
  '(org-src-tab-acts-natively t)
  '(org-startup-with-inline-images t)
  '(org-support-shift-select t)
