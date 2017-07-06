@@ -283,8 +283,6 @@ you should place your code here."
 
   (add-hook 'text-mode-hook 'auto-fill-mode)
 
-  (add-hook 'dired-mode-hook 'deer)
-
   ;; add autolist to org mode
   (add-hook 'org-mode-hook (lambda ()(org-autolist-mode) )
             )
