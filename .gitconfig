@@ -1,5 +1,6 @@
-
 [includeIf "gitdir:~/Workspace/play/"]
+	path = "~/.gitconfig-play"
+[includeIf "gitdir:~/Workspace/_/"]
 	path = "~/.gitconfig-play"
 [includeIf "gitdir:~/Workspace/work/"]
 	path = "~/.gitconfig-work"

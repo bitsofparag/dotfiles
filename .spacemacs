@@ -366,6 +366,9 @@ you should place your code here."
  '(js2-indent-level 2)
  '(magit-repository-directories (quote (("~/Workspace/" . 2))))
  '(magit-revision-show-gravatars (quote ("^Author:     " . "^Commit:     ")))
+ '(org-agenda-files
+   (quote
+    ("~/Workspace/_/notebooks/personal/" "~/Workspace/_/notebooks/nbt/")))
  '(org-export-backends
    (quote
     (ascii beamer html icalendar latex md odt confluence)))
@@ -392,8 +395,8 @@ you should place your code here."
  '(prettier-mode t t)
  '(prettier-show-errors (quote echo))
  '(python-check-command "flake8")
- '(python-shell-interpreter "ipython")
- '(python-shell-interpreter-args "--simple-prompt -i")
+ '(python-shell-interpreter "ipython" t)
+ '(python-shell-interpreter-args "--simple-prompt -i" t)
  '(python-shell-virtualenv-root "/Users/parag-nbt/.virtualenvs/orgnote")
  '(pyvenv-virtualenvwrapper-python "/usr/local/bin/python3")
  '(shell-file-name "/bin/zsh")
