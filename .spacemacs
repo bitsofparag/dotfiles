@@ -316,6 +316,11 @@ you should place your code here."
         '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
           "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
+  ;; org remove bindings to auto-create agenda files as it mangles
+  ;; my preferred directory structure
+  '(define-key org-agenda-files (kbd "C-[") nil)
+  '(define-key org-agenda-files (kbd "C-]") nil)
+
   ;; org eval of code blocks
   (with-eval-after-load 'org
     (org-babel-do-load-languages
