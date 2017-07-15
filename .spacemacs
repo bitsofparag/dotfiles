@@ -33,6 +33,7 @@ values."
      docker
      extra-langs
      git
+     gnus
      html
      (javascript :variables javascript-disable-tern-port-files nil)
      markdown
@@ -293,6 +294,7 @@ you should place your code here."
   (setq col-highlight-vline-face-flag t
         col-highlight-face hl-line-face)
 
+  ;; ------------------ Artist Mode -----------------------------
   ;; artist mode hooks
   (add-hook 'artist-mode-hook
             (lambda ()
@@ -309,19 +311,73 @@ you should place your code here."
                                    (show-all)
                                    (artist-mode)))
 
-  ;; org highlighting
+  ;; ----------------------- Gmail -----------------------------------
+
+  ;; ------------------------ ORG Mode ------------------------------
+  ;;         Following are settings for ORG mode
+  ;;-----------------------------------------------------------------
+
+  ;;; Org task state management
+  (setq org-todo-keywords
+        (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+                (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING"))))
+  (setq org-todo-keyword-faces
+        (quote (("TODO" :foreground "red" :weight bold)
+                ("NEXT" :foreground "blue" :weight bold)
+                ("DONE" :foreground "forest green" :weight bold)
+                ("WAITING" :foreground "orange" :weight bold)
+                ("HOLD" :foreground "magenta" :weight bold)
+                ("CANCELLED" :foreground "forest green" :weight bold)
+                ("MEETING" :foreground "forest green" :weight bold)
+                ("PHONE" :foreground "forest green" :weight bold))))
+  (setq org-todo-state-tags-triggers
+        (quote (("CANCELLED" ("CANCELLED" . t))
+                ("WAITING" ("WAITING" . t))
+                ("HOLD" ("WAITING") ("HOLD" . t))
+                (done ("WAITING") ("HOLD"))
+                ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
+                ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
+                ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
+
+  ;;; org capture mode settings
+  (global-set-key (kbd "C-c c") 'org-capture)
+
+  ;;; org mode fast todo selection settings
+  (setq org-use-fast-todo-selection t)
+  (setq org-treat-S-cursor-todo-selection-as-state-change nil)
+
+  ;;; some capture mode templates
+  (setq org-capture-templates
+      (quote (("t" "todo" entry (file "~/Workspace/_/notebooks/personal/refile.org")
+               "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
+              ("r" "respond" entry (file "~/Workspace/_/notebooks/personal/refile.org")
+               "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
+              ("n" "note" entry (file "~/Workspace/_/notebooks/personal/refile.org")
+               "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
+              ("j" "Journal" entry (file+datetree "~/Workspace/_/notebooks/personal/diary.org")
+               "* %?\n%U\n" :clock-in t :clock-resume t)
+              ("w" "org-protocol" entry (file "~/Workspace/_/notebooks/personal/refile.org")
+               "* TODO Review %c\n%U\n" :immediate-finish t)
+              ("m" "Meeting" entry (file "~/Workspace/_/notebooks/personal/refile.org")
+               "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
+              ("p" "Phone call" entry (file "~/Workspace/_/notebooks/personal/refile.org")
+               "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
+              ("h" "Habit" entry (file "~/Workspace/_/notebooks/personal/refile.org")
+               "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
+
+  ;;; org highlighting
   (setq org-latex-listings 'minted
         org-latex-packages-alist '(("" "minted"))
         org-latex-pdf-process
         '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
           "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
-  ;; org remove bindings to auto-create agenda files as it mangles
-  ;; my preferred directory structure
+  ;;; org remove bindings to auto-create agenda files as it mangles
+  ;;; my preferred directory structure
   '(define-key org-agenda-files (kbd "C-[") nil)
   '(define-key org-agenda-files (kbd "C-]") nil)
 
-  ;; org eval of code blocks
+  ;;; org eval of code blocks
   (with-eval-after-load 'org
     (org-babel-do-load-languages
      'org-babel-load-languages
@@ -374,6 +430,8 @@ you should place your code here."
  '(org-agenda-files
    (quote
     ("~/Workspace/_/notebooks/personal/" "~/Workspace/_/notebooks/nbt/")))
+ '(org-default-notes-file "~/Workspace/_/notebooks/personal/refile.org")
+ '(org-directory "~/Workspace/_/notebooks")
  '(org-export-backends
    (quote
     (ascii beamer html icalendar latex md odt confluence)))
@@ -397,6 +455,10 @@ you should place your code here."
  '(org-src-tab-acts-natively t)
  '(org-startup-with-inline-images t)
  '(org-support-shift-select t)
+ '(org-todo-keywords
+   (quote
+    ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+     (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING"))))
  '(prettier-mode t t)
  '(prettier-show-errors (quote echo))
  '(python-check-command "flake8")

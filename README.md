@@ -17,3 +17,6 @@ TODO make org files
 
 ### Files that may or may not be symlinked
 * .tmux and .tmuxinator/
+
+### Vendor bash scripts installed:
+* https://github.com/alexanderepstein/Bash-Snippets
