@@ -28,7 +28,7 @@ export PATH="$PATH:/Library/TeX/texbin"
 export COMPLETION_WAITING_DOTS="true"
 
 # Needed for Tmuxinator
-export EDITOR=nano
+export EDITOR=em
 
 # enable command auto-correction
 # export ENABLE_CORRECTION="true"

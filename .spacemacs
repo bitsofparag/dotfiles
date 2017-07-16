@@ -426,7 +426,7 @@ you should place your code here."
  '(js2-bounce-indent-p t)
  '(js2-indent-level 2)
  '(magit-repository-directories (quote (("~/Workspace/" . 2))))
- '(magit-revision-show-gravatars (quote ("^Author:     " . "^Commit:     ")))
+ '(magit-revision-show-gravatars (quote ("^Author:     " . "^Commit:     ")) t)
  '(org-agenda-files
    (quote
     ("~/Workspace/_/notebooks/personal/" "~/Workspace/_/notebooks/nbt/")))
@@ -439,7 +439,7 @@ you should place your code here."
  '(org-fontify-quote-and-verse-blocks t)
  '(org-fontify-whole-heading-line t)
  '(org-highlight-latex-and-related (quote (latex script entities)))
- '(org-imenu-depth 8)
+ '(org-imenu-depth 8 t)
  '(org-latex-minted-langs
    (quote
     ((emacs-lisp "common-lisp")
@@ -453,22 +453,21 @@ you should place your code here."
  '(org-src-block-faces (quote (("python" nil))))
  '(org-src-preserve-indentation t)
  '(org-src-tab-acts-natively t)
- '(org-startup-with-inline-images t)
+ '(org-startup-with-inline-images t t)
  '(org-support-shift-select t)
  '(org-todo-keywords
    (quote
     ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
-     (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING"))))
+     (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING"))) t)
+ '(package-selected-packages
+   (quote
+    (yapfify xkcd selectric-mode pyvenv pytest pyenv-mode py-isort pony-mode pip-requirements org-autolist live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic zenburn-theme yaml-mode xterm-color ws-butler wolfram-mode window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org thrift terraform-mode tagedit stan-mode sql-indent spacemacs-theme spaceline solarized-theme smeargle slim-mode shell-pop scss-mode scad-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restart-emacs rbenv ranger rainbow-mode rainbow-identifiers rainbow-delimiters racer quelpa qml-mode pug-mode projectile-rails popwin phpunit phpcbf php-extras php-auto-yasnippets persp-mode paradox orgit org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file neotree multi-term move-text monokai-theme mmm-mode minitest matlab-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode julia-mode js2-refactor js-doc intero insert-shebang info+ indent-guide ido-vertical-mode hungry-delete htmlize hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-hoogle helm-gitignore helm-flx helm-descbinds helm-dash helm-css-scss helm-company helm-c-yasnippet helm-ag haskell-snippets google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md flycheck-rust flycheck-pos-tip flycheck-haskell flx-ido fish-mode fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help enh-ruby-mode emmet-mode elisp-slime-nav dumb-jump drupal-mode dockerfile-mode docker diff-hl define-word dash-at-point csv-mode company-web company-tern company-statistics company-shell company-ghci company-ghc company-cabal column-enforce-mode color-identifiers-mode coffee-mode cmm-mode clean-aindent-mode chruby cargo bundler auto-yasnippet auto-highlight-symbol auto-compile arduino-mode aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(prettier-mode t t)
  '(prettier-show-errors (quote echo))
  '(python-check-command "flake8")
- '(python-shell-interpreter "ipython" t)
- '(python-shell-interpreter-args "--simple-prompt -i" t)
- '(python-shell-virtualenv-root "/Users/parag-nbt/.virtualenvs/orgnote")
- '(pyvenv-virtualenvwrapper-python "/usr/local/bin/python3")
  '(shell-file-name "/bin/zsh")
  '(show-trailing-whitespace nil)
- '(toc-org-max-depth 10)
+ '(toc-org-max-depth 10 t)
  '(vc-follow-symlinks t)
  '(web-mode-auto-quote-style 2)
  '(web-mode-code-indent-offset 2)
