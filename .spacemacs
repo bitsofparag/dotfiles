@@ -26,7 +26,9 @@ values."
                       auto-completion-complete-with-key-sequence-delay 0.1
                       :disabled-for erc)
      ;; better-defaults
+     (c-c++ :variables c-c++-enable-clang-support t)
      colors
+     cscope
      csv
      dash
      django
@@ -405,6 +407,7 @@ you should place your code here."
  '(Info-fontify-angle-bracketed-flag nil)
  '(blink-cursor-mode nil)
  '(column-number-mode t)
+ '(company-clang-prefix-guesser (quote company-mode/more-than-prefix-guesser))
  '(css-indent-offset 2)
  '(eshell-highlight-prompt nil t)
  '(eshell-hist-ignoredups t t)
