@@ -66,6 +66,7 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(org-autolist
+                                      ox-gfm
                                       )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -382,6 +383,7 @@ you should place your code here."
 
   ;;; org eval of code blocks
   (with-eval-after-load 'org
+    '(require 'ox-gfm nil t)
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((python . t)
