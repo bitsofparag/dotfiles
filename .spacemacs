@@ -40,6 +40,7 @@ values."
      (javascript :variables javascript-disable-tern-port-files nil)
      markdown
      php
+     plantuml
      python
      ranger
      react
