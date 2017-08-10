@@ -434,6 +434,18 @@ you should place your code here."
  '(org-agenda-files
    (quote
     ("~/Workspace/_/notebooks/personal/" "~/Workspace/_/notebooks/nbt/")))
+ '(org-babel-load-languages
+   (quote
+    ((python . t)
+     (emacs-lisp)
+     (shell . t)
+     (js . t)
+     (sql . t)
+     (org . t)
+     (dot . t)
+     (awk . t)
+     (haskell . t)
+     (plantuml . t))))
  '(org-default-notes-file "~/Workspace/_/notebooks/personal/refile.org")
  '(org-directory "~/Workspace/_/notebooks")
  '(org-export-backends
