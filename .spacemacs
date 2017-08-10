@@ -468,6 +468,7 @@ you should place your code here."
      (shell "bash")
      (ipython "python"))))
  '(org-link-translation-function (quote toc-org-unhrefify))
+ '(org-plantuml-jar-path "/usr/local/opt/plantuml/libexec/plantuml.jar")
  '(org-src-block-faces (quote (("python" nil))))
  '(org-src-preserve-indentation t)
  '(org-src-tab-acts-natively t)
