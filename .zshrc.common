@@ -16,3 +16,10 @@ fi
 # (see .zshenv.common)
 
 plugins=(git zsh-completions)
+
+# exa:
+alias la="exa -abghl --git --color=automatic"
+
+# cat with beautiful colors
+alias c='pygmentize -O style=borland -f console256 -g'
+
