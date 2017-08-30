@@ -6,10 +6,11 @@ eshell
 smex-items
 .*
 !/.spacemacs
-!/.zsh*
+!/*.zsh*
 !/.gitignore*
 !/.gitconfig*
 !/.tmux*
+
 org-files/*.sh
 org-files/*.tex
 org-files/*.pdf

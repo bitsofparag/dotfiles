@@ -10,7 +10,7 @@ TODO make org files
 * .zshrc.powerlevel (common zshenv config for powerlevel theme, sourced in .zshenv.common)
 * .zshrc.common (common zshrc file, sourced in a user's .zshrc)
 * .docsets -> /Users/<user>/Library/Application Support/Dash/DocSets/
-* .profile -> /Users//Workspace/play/dotfiles/.zshenv.common
+* .fzf.zsh
 
 ### Files not symlinked
 * gitconfig-work (git config for work projects)
