@@ -69,6 +69,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(org-autolist
                                       ox-gfm
+                                      htmlize
                                       )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -389,19 +390,19 @@ you should place your code here."
   ;;; org mode publishing files
   (setq org-publish-project-alist
         '(("mgatebackend_markdown"
-           :base-directory "~/Workspace/_/notebooks/nbt/metr/mgate_backend/"
+           :base-directory "~/Workspace/_/notebooks/metr/mgate_backend/"
            :base-extension "org"
            :publishing-directory "~/Workspace/work/mgate_backend/docs/"
            :publishing-function org-md-publish-to-md)
 
           ("mgatebackend_images"
-           :base-directory "~/Workspace/_/notebooks/nbt/metr/mgate_backend/"
+           :base-directory "~/Workspace/_/notebooks/metr/mgate_backend/"
            :base-extension "jpg\\|gif\\|png"
            :publishing-directory  "~/Workspace/work/mgate_backend/docs/"
            :publishing-function org-publish-attachment)
 
           ("mgate_md"
-           :base-directory "~/Workspace/_/notebooks/nbt/metr/mgate/"
+           :base-directory "~/Workspace/_/notebooks/metr/mgate/"
            :base-extension "org"
            :publishing-directory "~/Workspace/work/mgate/docs/"
            :publishing-function org-md-publish-to-md)
