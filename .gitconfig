@@ -16,3 +16,4 @@
 	template = ~/.stCommitMsg
 [alias]
 	praise = blame
+	git = !exec git
