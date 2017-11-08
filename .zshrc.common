@@ -1,16 +1,8 @@
 # Aliases
-alias elm='docker run -it --rm -v "$(pwd):/code" -w "/code" \
-  -e "HOME=/tmp" -u $UID:$GID -p 8000:8000 codesimple/elm:0.17'
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES;
   killall Finder /System/Library/CoreServices/Finder.app'
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO;
   killall Finder /System/Library/CoreServices/Finder.app'
-
-# Emacs linking for Dash
-if [ ! -L ~/.docsets ] && [ ! -e ~/.docsets ]; then
-  ln -s ~/Library/Application\ Support/Dash/DocSets/ ~/.docsets
-  ln -s ~/Library/Application\ Support/Dash/User\ Contributed/* ~/.docsets
-fi
 
 # Preferred editor for local and remote sessions
 # (see .zshenv.common)
