@@ -63,8 +63,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(org-autolist
-                                      )
+   dotspacemacs-additional-packages '()
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -397,91 +396,23 @@ you should place your code here."
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(Info-fontify-angle-bracketed-flag nil)
- '(blink-cursor-mode nil)
- '(column-number-mode t)
- '(company-clang-prefix-guesser (quote company-mode/more-than-prefix-guesser))
- '(css-indent-offset 2)
- '(eshell-highlight-prompt nil t)
- '(eshell-hist-ignoredups t t)
- '(eshell-history-size 350 t)
- '(eshell-plain-echo-behavior t t)
- '(eshell-prompt-function (quote epe-theme-lambda) t)
- '(evil-want-Y-yank-to-eol t)
- '(exec-path-from-shell-check-startup-files nil)
- '(exec-path-from-shell-variables (quote ("PATH")))
- '(explicit-shell-file-name "/bin/zsh")
- '(flycheck-eslintrc "~/.eslintrc")
- '(global-flycheck-mode t)
- '(global-whitespace-mode nil)
- '(global-whitespace-newline-mode nil)
- '(indent-guide-delay 0.3 t)
- '(indent-guide-global-mode t)
- '(js-indent-level 2)
- '(js2-basic-offset 2)
- '(js2-bounce-indent-p t)
- '(js2-indent-level 2)
- '(magit-repository-directories (quote (("~/Workspace/" . 2))))
- '(magit-revision-show-gravatars (quote ("^Author:     " . "^Commit:     ")) t)
- '(org-agenda-files
-   (quote
-    ("~/Workspace/_/notebooks/personal/" "~/Workspace/_/notebooks/nbt/")))
- '(org-default-notes-file "~/Workspace/_/notebooks/personal/refile.org")
- '(org-directory "~/Workspace/_/notebooks")
- '(org-export-backends
-   (quote
-    (ascii beamer html icalendar latex md odt confluence)))
- '(org-fontify-done-headline t)
- '(org-fontify-quote-and-verse-blocks t)
- '(org-fontify-whole-heading-line t)
- '(org-highlight-latex-and-related (quote (latex script entities)))
- '(org-imenu-depth 8 t)
- '(org-latex-minted-langs
-   (quote
-    ((emacs-lisp "common-lisp")
-     (cc "c++")
-     (cperl "perl")
-     (shell-script "bash")
-     (caml "ocaml")
-     (shell "bash")
-     (ipython "python"))))
- '(org-link-translation-function (quote toc-org-unhrefify))
- '(org-src-block-faces (quote (("python" nil))))
- '(org-src-preserve-indentation t)
- '(org-src-tab-acts-natively t)
- '(org-startup-with-inline-images t t)
- '(org-support-shift-select t)
- '(org-todo-keywords
-   (quote
-    ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
-     (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING"))) t)
  '(package-selected-packages
    (quote
-    (yapfify xkcd selectric-mode pyvenv pytest pyenv-mode py-isort pony-mode pip-requirements org-autolist live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic zenburn-theme yaml-mode xterm-color ws-butler wolfram-mode window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org thrift terraform-mode tagedit stan-mode sql-indent spacemacs-theme spaceline solarized-theme smeargle slim-mode shell-pop scss-mode scad-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restart-emacs rbenv ranger rainbow-mode rainbow-identifiers rainbow-delimiters racer quelpa qml-mode pug-mode projectile-rails popwin phpunit phpcbf php-extras php-auto-yasnippets persp-mode paradox orgit org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file neotree multi-term move-text monokai-theme mmm-mode minitest matlab-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode julia-mode js2-refactor js-doc intero insert-shebang info+ indent-guide ido-vertical-mode hungry-delete htmlize hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-hoogle helm-gitignore helm-flx helm-descbinds helm-dash helm-css-scss helm-company helm-c-yasnippet helm-ag haskell-snippets google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md flycheck-rust flycheck-pos-tip flycheck-haskell flx-ido fish-mode fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help enh-ruby-mode emmet-mode elisp-slime-nav dumb-jump drupal-mode dockerfile-mode docker diff-hl define-word dash-at-point csv-mode company-web company-tern company-statistics company-shell company-ghci company-ghc company-cabal column-enforce-mode color-identifiers-mode coffee-mode cmm-mode clean-aindent-mode chruby cargo bundler auto-yasnippet auto-highlight-symbol auto-compile arduino-mode aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
- '(prettier-mode t t)
- '(prettier-show-errors (quote echo))
- '(python-check-command "flake8")
- '(shell-file-name "/bin/zsh")
- '(show-trailing-whitespace nil)
- '(toc-org-max-depth 10 t)
- '(vc-follow-symlinks t)
- '(web-mode-auto-quote-style 2)
- '(web-mode-code-indent-offset 2)
- '(web-mode-css-indent-offset 2)
- '(web-mode-markup-indent-offset 2)
- '(whitespace-action (quote (auto-cleanup))))
-
-
-
+    (zenburn-theme yapfify yaml-mode xterm-color xkcd ws-butler winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org terraform-mode hcl-mode tagedit symon string-inflection sql-indent spaceline powerline solarized-theme smeargle slim-mode shell-pop selectric-mode scss-mode sass-mode restart-emacs realgud test-simple loc-changes load-relative rainbow-mode rainbow-identifiers rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode prettier-js popwin pony-mode plantuml-mode pip-requirements phpunit phpcbf php-extras php-auto-yasnippets persp-mode pcre2el password-generator paradox spinner org-plus-contrib org-bullets org-autolist open-junk-file neotree multi-term move-text monokai-theme mmm-mode material-theme markdown-toc markdown-mode magit-gitflow lorem-ipsum livid-mode skewer-mode live-py-mode linum-relative link-hint less-css-mode js2-refactor multiple-cursors js2-mode js-doc insert-shebang info+ indent-guide impatient-mode htmlize simple-httpd hydra hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-purpose window-purpose imenu-list helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-dash helm-css-scss helm-cscope helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flycheck-rust seq flycheck-pos-tip pos-tip flycheck-bashate flycheck pkg-info epl flx-ido flx fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit git-commit with-editor evil-lisp-state smartparens evil-lion evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode editorconfig dumb-jump drupal-mode dockerfile-mode docker json-mode tablist magit-popup docker-tramp json-snatcher json-reformat disaster diminish diff-hl define-word dash-at-point cython-mode csv-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-php ac-php-core xcscope php-mode company-c-headers company-anaconda company column-enforce-mode color-theme-sanityinc-solarized color-identifiers-mode coffee-mode cmake-mode cmake-ide levenshtein clean-aindent-mode clang-format cargo rust-mode browse-at-remote bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((((class color) (min-colors 4096)) (:foreground "#c6c6c6" :background "#303030")) (((class color) (min-colors 256)) (:foreground "#c6c6c6" :background "#303030")) (((class color) (min-colors 89)) (:foreground "#c6c6c6" :background "#303030"))))
- '(org-block ((t (:background "gray6" :foreground "gray79")))))
+ )
+)
