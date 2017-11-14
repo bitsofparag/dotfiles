@@ -38,7 +38,9 @@ values."
      html
      (javascript :variables javascript-disable-tern-port-files nil)
      markdown
-     php
+     (org :variables
+          org-enable-github-support t
+          org-enable-reveal-js-support t)
      plantuml
      python
      react
@@ -284,8 +286,8 @@ you should place your code here."
   (add-hook 'text-mode-hook 'auto-fill-mode)
 
   ;; add autolist to org mode
-  (add-hook 'org-mode-hook (lambda ()(org-autolist-mode) )
-            )
+  ;;(add-hook 'org-mode-hook (lambda ()(org-autolist-mode) )
+  ;;          )
 
   ;; Highlighting
   (add-hook 'after-init-hook #'toggle-crosshairs-when-idle 1)
@@ -407,14 +409,26 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(css-indent-offset 2)
+ '(helm-ag-base-command
+   "ag --nocolor --nogroup --ignore=node_modules/* --ignore=*.pyc --ignore=*.lock --ignore=*.tmp")
+ '(helm-ag-show-status-function (quote spaceline--helm-ag-update) t)
+ '(helm-ag-use-grep-ignore-list t)
  '(js-indent-level 2)
+ '(json-reformat:indent-width 2)
  '(package-selected-packages
    (quote
-    (zenburn-theme yapfify yaml-mode xterm-color xkcd ws-butler winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org terraform-mode hcl-mode tagedit symon string-inflection sql-indent spaceline powerline solarized-theme smeargle slim-mode shell-pop selectric-mode scss-mode sass-mode restart-emacs realgud test-simple loc-changes load-relative rainbow-mode rainbow-identifiers rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode prettier-js popwin pony-mode plantuml-mode pip-requirements phpunit phpcbf php-extras php-auto-yasnippets persp-mode pcre2el password-generator paradox spinner org-plus-contrib org-bullets org-autolist open-junk-file neotree multi-term move-text monokai-theme mmm-mode material-theme markdown-toc markdown-mode magit-gitflow lorem-ipsum livid-mode skewer-mode live-py-mode linum-relative link-hint less-css-mode js2-refactor multiple-cursors js2-mode js-doc insert-shebang info+ indent-guide impatient-mode htmlize simple-httpd hydra hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-purpose window-purpose imenu-list helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-dash helm-css-scss helm-cscope helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flycheck-rust seq flycheck-pos-tip pos-tip flycheck-bashate flycheck pkg-info epl flx-ido flx fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit git-commit with-editor evil-lisp-state smartparens evil-lion evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode editorconfig dumb-jump drupal-mode dockerfile-mode docker json-mode tablist magit-popup docker-tramp json-snatcher json-reformat disaster diminish diff-hl define-word dash-at-point cython-mode csv-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-php ac-php-core xcscope php-mode company-c-headers company-anaconda company column-enforce-mode color-theme-sanityinc-solarized color-identifiers-mode coffee-mode cmake-mode cmake-ide levenshtein clean-aindent-mode clang-format cargo rust-mode browse-at-remote bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup))))
+    (zenburn-theme yapfify yaml-mode xterm-color xkcd ws-butler winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org terraform-mode hcl-mode tagedit symon string-inflection sql-indent spaceline powerline solarized-theme smeargle slim-mode shell-pop selectric-mode scss-mode sass-mode restart-emacs realgud test-simple loc-changes load-relative rainbow-mode rainbow-identifiers rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode popwin pony-mode plantuml-mode pip-requirements phpunit phpcbf php-auto-yasnippets persp-mode pcre2el password-generator paradox spinner org-plus-contrib org-bullets open-junk-file neotree multi-term move-text monokai-theme mmm-mode material-theme markdown-toc markdown-mode magit-gitflow lorem-ipsum livid-mode skewer-mode live-py-mode linum-relative link-hint less-css-mode js2-refactor multiple-cursors js2-mode js-doc insert-shebang info+ indent-guide impatient-mode htmlize simple-httpd hydra hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-purpose window-purpose imenu-list helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-dash helm-css-scss helm-cscope helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flycheck-rust seq flycheck-pos-tip pos-tip flycheck-bashate flycheck pkg-info epl flx-ido flx fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit git-commit with-editor evil-lisp-state smartparens evil-lion evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode editorconfig dumb-jump drupal-mode dockerfile-mode docker json-mode tablist magit-popup docker-tramp json-snatcher json-reformat disaster diminish diff-hl define-word dash-at-point cython-mode csv-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-php ac-php-core xcscope php-mode company-c-headers company-anaconda company column-enforce-mode color-theme-sanityinc-solarized color-identifiers-mode coffee-mode cmake-mode cmake-ide levenshtein clean-aindent-mode clang-format cargo rust-mode browse-at-remote bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup)))
+ '(web-mode-block-padding 2)
+ '(web-mode-code-indent-offset 2)
+ '(web-mode-css-indent-offset 2)
+ '(web-mode-enable-auto-expanding t)
+ '(web-mode-enable-block-face t)
+ '(web-mode-enable-current-column-highlight t)
+ '(web-mode-markup-indent-offset 2))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(js2-external-variable ((t (:foreground "brown3")))))
 )
