@@ -408,12 +408,10 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(css-indent-offset 2)
  '(helm-ag-base-command
    "ag --nocolor --nogroup --ignore=node_modules/* --ignore=*.pyc --ignore=*.lock --ignore=*.tmp")
  '(helm-ag-show-status-function (quote spaceline--helm-ag-update) t)
  '(helm-ag-use-grep-ignore-list t)
- '(js-indent-level 2)
  '(json-reformat:indent-width 2)
  '(package-selected-packages
    (quote
@@ -424,7 +422,9 @@ This function is called at the very end of Spacemacs initialization."
  '(web-mode-enable-auto-expanding t)
  '(web-mode-enable-block-face t)
  '(web-mode-enable-current-column-highlight t)
- '(web-mode-markup-indent-offset 2))
+ '(web-mode-markup-indent-offset 2)
+ '(css-indent-offset 2)
+ '(js-indent-level 2))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
