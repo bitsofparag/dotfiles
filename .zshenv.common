@@ -46,3 +46,7 @@ export WORKON_HOME=$HOME/.virtualenvs && source /usr/local/bin/virtualenvwrapper
 
 # command line fuzzy finder
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# add go to PATH
+export GOPATH=/Users/parag-nbt/Workspace/go
+export PATH="$PATH:$GOPATH/bin"

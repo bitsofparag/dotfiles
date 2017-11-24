@@ -27,6 +27,7 @@ values."
                       :disabled-for erc)
      ;; better-defaults
      (c-c++ :variables c-c++-enable-clang-support t)
+     (clojure :variables clojure-enable-fancify-symbols t)
      colors
      cscope
      csv
