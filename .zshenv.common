@@ -48,5 +48,5 @@ export WORKON_HOME=$HOME/.virtualenvs && source /usr/local/bin/virtualenvwrapper
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # add go to PATH
-export GOPATH=/Users/parag-nbt/Workspace/go
+export GOPATH=$HOME/Workspace/go
 export PATH="$PATH:$GOPATH/bin"
