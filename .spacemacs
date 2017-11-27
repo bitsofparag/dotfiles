@@ -36,6 +36,7 @@ values."
      docker
      git
      gnus
+     (go :variables go-use-gometalinter t)
      html
      (javascript :variables javascript-disable-tern-port-files nil)
      latex
