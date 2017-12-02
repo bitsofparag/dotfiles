@@ -351,7 +351,17 @@ you should place your code here."
   ;;-----------------------------------------------------------------
   (with-eval-after-load 'org
     ;;; org capture mode settings
-    (global-set-key (kbd "C-c c") 'org-capture)
+    ;; (global-set-key (kbd "C-c c") 'org-capture)
+
+    ;;; Standard key bindings
+    (global-set-key "\C-cl" 'org-store-link)
+    (global-set-key "\C-ca" 'org-agenda)
+    (global-set-key "\C-cb" 'org-iswitchb)
+
+    ;;; set org agenda files
+    (setq org-agenda-files (list "~/Dropbox/org/work.org"
+                                 "~/Dropbox/org/personal.org"
+                                 "~/Dropbox/org/learning.org"))
 
     ;;; org remove bindings to auto-create agenda files as it mangles
     ;;; my preferred directory structure
@@ -385,23 +395,7 @@ you should place your code here."
                   ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
 
     ;;; some capture mode templates
-    (setq org-capture-templates
-          (quote (("t" "todo" entry (file "~/Workspace/_/notebooks/personal/refile.org")
-                   "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
-                  ("r" "respond" entry (file "~/Workspace/_/notebooks/personal/refile.org")
-                   "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
-                  ("n" "note" entry (file "~/Workspace/_/notebooks/personal/refile.org")
-                   "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-                  ("j" "Journal" entry (file+datetree "~/Workspace/_/notebooks/personal/diary.org")
-                   "* %?\n%U\n" :clock-in t :clock-resume t)
-                  ("w" "org-protocol" entry (file "~/Workspace/_/notebooks/personal/refile.org")
-                   "* TODO Review %c\n%U\n" :immediate-finish t)
-                  ("m" "Meeting" entry (file "~/Workspace/_/notebooks/personal/refile.org")
-                   "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
-                  ("p" "Phone call" entry (file "~/Workspace/_/notebooks/personal/refile.org")
-                   "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
-                  ("h" "Habit" entry (file "~/Workspace/_/notebooks/personal/refile.org")
-                   "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
+    ;; <See here for ref: http://doc.norang.ca/org-mode.html#CaptureTemplates>
 
     ;;; Set latex process
     (setq org-latex-pdf-process
