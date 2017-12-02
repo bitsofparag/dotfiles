@@ -41,9 +41,9 @@ values."
      (javascript :variables javascript-disable-tern-port-files nil)
      latex
      markdown
-     (org :variables
-          org-enable-github-support t
-          org-enable-reveal-js-support t)
+     ;; (org :variables
+     ;;      org-enable-github-support t
+     ;;      org-enable-reveal-js-support t)
      plantuml
      python
      react
