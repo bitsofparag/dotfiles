@@ -349,19 +349,20 @@ you should place your code here."
   ;; ------------------------ ORG Mode ------------------------------
   ;;         Following are settings for ORG mode
   ;;-----------------------------------------------------------------
+
   (with-eval-after-load 'org
     ;;; org capture mode settings
     ;; (global-set-key (kbd "C-c c") 'org-capture)
+    (add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
+
+    ;;; set org agenda files
+    (setq org-agenda-files (quote ("~/Workspace/_/notebooks/agenda")))
+    (setq org-refile-targets '((org-agenda-files . (:maxlevel . 6))))
 
     ;;; Standard key bindings
     (global-set-key "\C-cl" 'org-store-link)
     (global-set-key "\C-ca" 'org-agenda)
     (global-set-key "\C-cb" 'org-iswitchb)
-
-    ;;; set org agenda files
-    (setq org-agenda-files (list "~/Dropbox/org/work.org"
-                                 "~/Dropbox/org/personal.org"
-                                 "~/Dropbox/org/learning.org"))
 
     ;;; org remove bindings to auto-create agenda files as it mangles
     ;;; my preferred directory structure
