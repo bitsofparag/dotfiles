@@ -14,7 +14,3 @@ alias la="exa -abghl --git --color=automatic"
 
 # cat with beautiful colors
 alias c='pygmentize -O style=borland -f console256 -g'
-
-if [ -z $BPBLOG ]
-then echo "Please set BPBLOG and BPKNOW variables in your .zshrc file"
-fi
