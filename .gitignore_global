@@ -17,3 +17,4 @@ npm-debug.log
 .Spotlight-V100
 *.pyc
 xcuserdata
+.#*.*

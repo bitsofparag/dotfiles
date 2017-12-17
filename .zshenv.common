@@ -41,9 +41,6 @@ export MANPATH="/usr/local/man:$MANPATH"
 # zsh plugins
 export plugins=(git zsh-completions)
 
-# Python settings
-export WORKON_HOME=$HOME/.virtualenvs && source /usr/local/bin/virtualenvwrapper.sh
-
 # command line fuzzy finder
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
