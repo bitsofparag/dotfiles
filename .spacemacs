@@ -34,6 +34,7 @@ values."
      dash
      django
      docker
+     elixir
      git
      gnus
      (go :variables go-use-gometalinter t)
@@ -363,6 +364,9 @@ you should place your code here."
     (setq org-agenda-files (quote ("~/Workspace/_/notebooks/agenda")))
     (setq org-refile-targets '((org-agenda-files . (:maxlevel . 6))))
 
+    ;;; org use python3 for python mode
+    '(org-babel-python-mode (quote python3))
+
     ;;; Standard key bindings
     (global-set-key "\C-cl" 'org-store-link)
     (global-set-key "\C-ca" 'org-agenda)
@@ -417,7 +421,8 @@ you should place your code here."
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((python . t)
-       (emacs-lisp . nil)
+       (emacs-lisp . t)
+       (elixir . t)
        (shell . t)
        (js . t)
        (sql . t)
