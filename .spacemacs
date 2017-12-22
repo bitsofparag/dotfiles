@@ -68,7 +68,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(vue-mode)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -283,6 +283,10 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
   (add-hook 'text-mode-hook 'auto-fill-mode)
+
+  ;; function to add date format
+  (defvar current-date-format "%Y-%m-%d %a"
+    "See help of `format-time-string' for possible replacements")
 
   ;; ag search settings. Ignoring some folders
   (setq helm-ag-base-command
