@@ -42,9 +42,9 @@ values."
      (javascript :variables javascript-disable-tern-port-files nil)
      latex
      markdown
-     ;; (org :variables
-     ;;      org-enable-github-support t
-     ;;      org-enable-reveal-js-support t)
+     (org :variables
+          org-enable-github-support t
+          org-enable-reveal-js-support t)
      plantuml
      python
      react
@@ -356,10 +356,6 @@ you should place your code here."
   ;;-----------------------------------------------------------------
 
   (with-eval-after-load 'org
-    ;;; org capture mode settings
-    ;; (global-set-key (kbd "C-c c") 'org-capture)
-    (add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
-
     ;;; set org agenda files
     (setq org-agenda-files (quote ("~/Workspace/_/notebooks/agenda")))
     (setq org-refile-targets '((org-agenda-files . (:maxlevel . 6))))
@@ -371,6 +367,8 @@ you should place your code here."
     (global-set-key "\C-cl" 'org-store-link)
     (global-set-key "\C-ca" 'org-agenda)
     (global-set-key "\C-cb" 'org-iswitchb)
+    (define-key evil-insert-state-map (kbd "M-RET") 'org-meta-return)
+    (define-key evil-insert-state-map (kbd "<return>") 'org-return)
 
     ;;; org remove bindings to auto-create agenda files as it mangles
     ;;; my preferred directory structure
