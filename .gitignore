@@ -7,8 +7,7 @@ smex-items
 .*
 !/.spacemacs
 !/*.zsh*
-!/.gitignore*
-!/.gitconfig*
+!/.git*
 !/.tmux*
 
 org-files/*.sh
