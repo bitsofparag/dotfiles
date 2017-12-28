@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: xsrc
+# key: xsrc
+# --
+
+#+NAME: ${1:code-name-to-export}
+#+BEGIN_SRC ${2:lang} :session ${3:session-name} :var num=0 :results output :exports none
+  $0print(num*10)
+#+END_SRC
