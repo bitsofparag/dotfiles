@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: hbsif
+# key: hbsif
+# --
+{{#if ${1:condition}}}
+  {{> $1_module content=$1.data}}
+{{/if}}
+$0

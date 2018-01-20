@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: hbs404
+# key: hbs404
+# --
+{{#render404Unless ${1:name}-1}}
+  {{> $1_module content=$1-1.data $0}}
+{{/render404Unless}}
