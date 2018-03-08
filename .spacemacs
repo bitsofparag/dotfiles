@@ -35,6 +35,12 @@ values."
      django
      docker
      elixir
+     (elm :variables
+          elm-reactor-port "3003"
+          elm-reactor-address "0.0.0.0"
+          elm-sort-imports-on-save t
+          elm-format-on-save t
+          elm-format-command "elm-format-0.18")
      git
      gnus
      (go :variables go-use-gometalinter t)
@@ -42,7 +48,6 @@ values."
      (javascript :variables javascript-disable-tern-port-files nil)
      latex
      markdown
-     ocaml
      (org :variables
           org-enable-github-support t
           org-enable-reveal-js-support t)
