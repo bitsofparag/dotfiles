@@ -6,9 +6,3 @@
 #+SELECT_TAGS: export
 #+EXCLUDE_TAGS: noexport
 #+DESCRIPTION: Bitsofparag | Personal weblog of Parag M.
-#+HTML_MATHJAX:
-#+HTML_HEAD_EXTRA:
-#+SUBTITLE:
-#+INFOJS_OPT:
-#+CREATOR:
-#+LATEX_HEADER:
