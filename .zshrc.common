@@ -13,7 +13,7 @@ alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO;
 alias la="exa -abghl --git --color=automatic"
 
 # cat with beautiful colors
-alias c='pygmentize -O style=borland -f console256 -g'
+# alias c='pygmentize -O style=borland -f console256 -g'
 
 if [ -d "${PYENV_ROOT}" ]; then
     export PATH="${PYENV_ROOT}/bin:${PATH}"
