@@ -35,14 +35,14 @@ git log --pretty=format:"%h%x09%ad%x09%an%x09%s" --date=short | head -n 5
 
 #+MACRO: banner @@html:<div class="banner" style="background-image:url('/assets/images/@@$1@@html:');"></div>@@
 
-#+MACRO: begin_intro @@html:<p class="intro">$1@@
+#+MACRO: begin_intro @@html:<p class="intros">$1@@
 #+MACRO: end_intro @@html:</p>@@
+
+#+MACRO: begin_section @@html:<section>@@
+#+MACRO: end_section @@html:</section>@@
 
 #+MACRO: begin_info @@html:<div class="info"><p>@@
 #+MACRO: end_info @@html:</p></div>@@
-
-#+MACRO: BeginMiniPage @<div style="border:1px solid #aaaaaa;padding:10px;width:780px;margin-left:auto;margin-right:auto;">
-#+MACRO: EndMiniPage @</div>
 
 #+MACRO: begin_note @@html:<div class="note"><p>@@
 #+MACRO: end_note @@html:</p></div>@@
