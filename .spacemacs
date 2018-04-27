@@ -18,9 +18,8 @@ values."
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
    ;; A layer is a unit of configuration that you can turn on or off
-   dotspacemacs-configuration-layers '(purescript
-                                       nginx
-                                       (auto-completion :variables
+   dotspacemacs-configuration-layers '(
+     (auto-completion :variables
                       auto-completion-enable-sort-by-usage t
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-complete-with-key-sequence `"jk"
@@ -52,7 +51,9 @@ values."
      (org :variables
           org-enable-github-support t
           org-enable-reveal-js-support t)
+     nginx
      plantuml
+     purescript
      python
      react
      rust
