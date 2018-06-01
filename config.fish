@@ -27,3 +27,12 @@ set -x PATH /usr/local/opt/sqlite/bin $PATH
 set -g theme_display_nvm yes
 set -g theme_display_rust yes
 
+# emacs ansi-term support
+if test -n "$EMACS"
+    set -x TERM eterm-color
+end
+
+# this function may be required
+function fish_title
+    true
+end

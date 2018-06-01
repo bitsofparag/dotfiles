@@ -18,8 +18,8 @@ values."
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
    ;; A layer is a unit of configuration that you can turn on or off
-   dotspacemacs-configuration-layers '(
-     (auto-completion :variables
+   dotspacemacs-configuration-layers '(ansible
+                                       (auto-completion :variables
                       auto-completion-enable-sort-by-usage t
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-complete-with-key-sequence `"jk"
@@ -62,7 +62,8 @@ values."
      (shell :variables
              shell-default-shell 'eshell
              shell-default-height 30
-             shell-default-position 'bottom)
+             shell-default-position 'bottom
+             shell-enable-smart-eshell t)
      ;; spell-checking
      spacemacs-prettier
      sql
@@ -77,7 +78,9 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(vue-mode)
+   dotspacemacs-additional-packages '(vue-mode
+                                      yasnippet-snippets
+                                      editorconfig)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -292,6 +295,8 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
   (add-hook 'text-mode-hook 'auto-fill-mode)
+
+  (add-hook 'term-mode-hook 'toggle-truncate-lines)
 
   ;; function to add date format
   (defvar current-date-format "%Y-%m-%d %a"

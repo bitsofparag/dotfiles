@@ -12,5 +12,3 @@ fi
 # ------------
 source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 
-# Then include it in .zshrc as:
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
