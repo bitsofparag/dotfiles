@@ -18,8 +18,9 @@ values."
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
    ;; A layer is a unit of configuration that you can turn on or off
-   dotspacemacs-configuration-layers '(ansible
-                                       (auto-completion :variables
+   dotspacemacs-configuration-layers '(
+     ansible
+     (auto-completion :variables
                       auto-completion-enable-sort-by-usage t
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-complete-with-key-sequence `"jk"
@@ -80,7 +81,12 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(vue-mode
                                       yasnippet-snippets
-                                      editorconfig)
+                                      editorconfig
+                                      platformio-mode
+                                      irony
+                                      irony-eldoc
+                                      flycheck-irony
+                                      arduino-mode)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -298,6 +304,29 @@ you should place your code here."
 
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
 
+  ;;---------- Arduino settings -------------
+  (require 'platformio-mode)
+  (add-to-list 'auto-mode-alist '("\\.ino$" . arduino-mode))
+
+  ;; Enable irony for all c++ files, and platformio-mode only
+  ;; when needed (platformio.ini present in project root).
+  (add-hook 'c-mode-hook 'irony-mode)
+  (add-hook 'c++-mode-hook (lambda ()
+                             (irony-mode)
+                             (irony-eldoc)
+                             (platformio-conditionally-enable)))
+  ;; Use irony's completion functions.
+  (add-hook 'irony-mode-hook
+            (lambda ()
+              (define-key irony-mode-map
+                [remap completion-at-point] 'irony-completion-at-point-async)
+              (define-key irony-mode-map
+                [remap complete-symbol] 'irony-completion-at-point-async)
+              (irony-cdb-autosetup-compile-options)))
+  ;; Setup irony for flycheck
+  (add-hook 'flycheck-mode-hook 'flycheck-irony-setup)
+
+  ;;--------- Utils -------------
   ;; function to add date format
   (defvar current-date-format "%Y-%m-%d %a"
     "See help of `format-time-string' for possible replacements")
@@ -459,8 +488,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (company-auctex auctex zenburn-theme yapfify yaml-mode xterm-color xkcd ws-butler winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org terraform-mode tagedit symon string-inflection sql-indent spaceline solarized-theme smeargle slim-mode shell-pop selectric-mode scss-mode sass-mode restart-emacs realgud rainbow-mode rainbow-identifiers rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode prettier-js popwin pony-mode plantuml-mode pip-requirements persp-mode pcre2el password-generator paradox ox-reveal ox-gfm orgit org-projectile org-present org-pomodoro org-download org-bullets org-brain open-junk-file neotree multi-term move-text monokai-theme mmm-mode material-theme markdown-toc magit-gitflow lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode js2-refactor js-doc insert-shebang info+ indent-guide impatient-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-dash helm-css-scss helm-cscope helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flycheck-rust flycheck-pos-tip flycheck-bashate flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode editorconfig dumb-jump dockerfile-mode docker disaster diff-hl define-word dash-at-point cython-mode csv-mode company-web company-tern company-statistics company-shell company-c-headers company-anaconda column-enforce-mode color-theme-sanityinc-solarized color-identifiers-mode coffee-mode cmake-mode cmake-ide clean-aindent-mode clang-format cargo browse-at-remote auto-yasnippet auto-highlight-symbol aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
- '(pyenv-mode t))
+    (flycheck-irony yapfify yaml-mode xterm-color xkcd ws-butler winum which-key web-mode web-beautify vue-mode edit-indirect ssass-mode vue-html-mode volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org terraform-mode hcl-mode tagedit sql-indent spaceline powerline smeargle slim-mode shell-pop selectric-mode scss-mode sass-mode restart-emacs rainbow-mode rainbow-identifiers rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode psci purescript-mode psc-ide popwin pony-mode plantuml-mode pip-requirements persp-mode pcre2el paradox ox-reveal ox-gfm orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets open-junk-file ob-elixir org-plus-contrib nginx-mode neotree multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow lorem-ipsum livid-mode skewer-mode simple-httpd live-py-mode linum-relative link-hint less-css-mode js2-refactor js2-mode js-doc insert-shebang indent-guide hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-dash helm-css-scss helm-cscope xcscope helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flycheck-rust flycheck-pos-tip pos-tip flycheck-mix flycheck-gometalinter flycheck-elm flycheck-credo flycheck flx-ido flx fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit git-commit ghub let-alist with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eshell-z eshell-prompt-extras esh-help emmet-mode elm-mode dumb-jump dockerfile-mode docker json-mode tablist magit-popup docker-tramp json-snatcher json-reformat disaster diminish diff-hl define-word dash-at-point cython-mode csv-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-go go-mode company-c-headers company-auctex company-anaconda column-enforce-mode color-identifiers-mode coffee-mode cmake-mode clojure-snippets clj-refactor hydra inflections edn multiple-cursors paredit peg clean-aindent-mode clang-format cider-eval-sexp-fu eval-sexp-fu highlight cider seq spinner queue clojure-mode cargo rust-mode bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auctex-latexmk auctex anaconda-mode pythonic f alchemist s company dash elixir-mode pkg-info epl aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup zenburn-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

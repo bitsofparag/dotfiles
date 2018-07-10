@@ -43,3 +43,6 @@ set -gx PROJECT_HOME $HOME/Workspace
 set -gx PIPSI_HOME $HOME/.pipsi/virtualenvs
 set -gx PIPSI_BIN_DIR $HOME/.pipsi/bin
 set -gx PATH $PIPSI_BIN_DIR $PATH
+
+# llvm settings
+set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths
