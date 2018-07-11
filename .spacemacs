@@ -66,7 +66,6 @@ values."
              shell-default-position 'bottom
              shell-enable-smart-eshell t)
      ;; spell-checking
-     spacemacs-prettier
      sql
      (syntax-checking :variables syntax-checking-enable-by-default nil)
      terraform
@@ -80,6 +79,7 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(vue-mode
+                                      cheat-sh
                                       yasnippet-snippets
                                       editorconfig
                                       platformio-mode
