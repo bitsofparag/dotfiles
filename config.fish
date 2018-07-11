@@ -40,10 +40,11 @@ set -gx WORKON_HOME $PYENV_ROOT/versions
 set -gx PROJECT_HOME $HOME/Workspace
 
 # Pipsi settings
+# added by pipsi (https://github.com/mitsuhiko/pipsi)
+# set -x PATH $HOME/.pipsi/bin $PATH
 set -gx PIPSI_HOME $HOME/.pipsi/virtualenvs
 set -gx PIPSI_BIN_DIR $HOME/.pipsi/bin
 set -gx PATH $PIPSI_BIN_DIR $PATH
 
-# added by pipsi (https://github.com/mitsuhiko/pipsi)
-# set -x PATH /Users/parag-nbt/.pipsi/bin $PATH
-
+# llvm settings
+set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths
