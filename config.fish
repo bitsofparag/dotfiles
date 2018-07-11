@@ -12,7 +12,7 @@ set -gx LANG en_US.UTF-8
 # nvm installed via fisher
 
 # Golang path
-set -U GOPATH $HOME/Workspace/go
+set -gx GOPATH $HOME/Workspace/go
 
 # Rust path
 set -x PATH $HOME/.cargo/bin $PATH
@@ -43,3 +43,7 @@ set -gx PROJECT_HOME $HOME/Workspace
 set -gx PIPSI_HOME $HOME/.pipsi/virtualenvs
 set -gx PIPSI_BIN_DIR $HOME/.pipsi/bin
 set -gx PATH $PIPSI_BIN_DIR $PATH
+
+# added by pipsi (https://github.com/mitsuhiko/pipsi)
+# set -x PATH /Users/parag-nbt/.pipsi/bin $PATH
+
