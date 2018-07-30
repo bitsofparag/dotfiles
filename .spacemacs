@@ -57,7 +57,8 @@ values."
      purescript
      python
      react
-     rust
+     (rust :variables
+           rust-format-on-save t)
      selectric
      shell-scripts
      (shell :variables
