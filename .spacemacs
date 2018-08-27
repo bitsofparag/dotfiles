@@ -305,6 +305,23 @@ you should place your code here."
 
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
 
+  ;;--------- Helm (workaround) settings ----------
+  (with-eval-after-load 'helm
+    (defun helm-persistent-action-display-window (&optional split-onewindow)
+      "Return the window that will be used for persistent action.
+If SPLIT-ONEWINDOW is non-`nil' window is split in persistent action."
+      (with-helm-window
+        (setq helm-persistent-action-display-window
+              (cond ((and (window-live-p helm-persistent-action-display-window)
+                          (not (member helm-persistent-action-display-window
+                                       (get-buffer-window-list helm-buffer))))
+                     helm-persistent-action-display-window)
+                    ((and helm--buffer-in-new-frame-p helm-initial-frame)
+                     (with-selected-frame helm-initial-frame (selected-window)))
+                    (split-onewindow (split-window))
+                    ((get-mru-window))
+                    (t split-window (get-mru-window nil t)))))))
+
   ;;---------- Arduino settings -------------
   (require 'platformio-mode)
   (add-to-list 'auto-mode-alist '("\\.ino$" . arduino-mode))
