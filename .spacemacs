@@ -26,22 +26,15 @@ values."
                       auto-completion-complete-with-key-sequence `"jk"
                       auto-completion-complete-with-key-sequence-delay 0.1
                       :disabled-for erc)
+     (syntax-checking :variables syntax-checking-enable-by-default nil)
      ;; better-defaults
      (c-c++ :variables c-c++-enable-clang-support t)
      (clojure :variables clojure-enable-fancify-symbols t)
      colors
      cscope
      csv
-     dash
      django
      docker
-     elixir
-     (elm :variables
-          elm-reactor-port "3003"
-          elm-reactor-address "0.0.0.0"
-          elm-sort-imports-on-save t
-          elm-format-on-save t
-          elm-format-command "elm-format-0.18")
      git
      gnus
      (go :variables go-use-gometalinter t)
@@ -49,14 +42,15 @@ values."
      (javascript :variables javascript-disable-tern-port-files nil)
      latex
      (markdown :variables markdown-command "pandoc")
+     ocaml
      (org :variables
           org-enable-github-support t
           org-enable-reveal-js-support t)
      nginx
      plantuml
-     purescript
      python
      react
+     reason
      (rust :variables
            rust-format-on-save t)
      selectric
@@ -68,7 +62,6 @@ values."
              shell-enable-smart-eshell t)
      ;; spell-checking
      sql
-     (syntax-checking :variables syntax-checking-enable-by-default nil)
      terraform
      version-control
      xkcd
