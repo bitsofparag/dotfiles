@@ -473,7 +473,6 @@ If SPLIT-ONEWINDOW is non-`nil' window is split in persistent action."
      'org-babel-load-languages
      '((python . t)
        (emacs-lisp . t)
-       (elixir . t)
        (shell . t)
        (js . t)
        (sql . t)
