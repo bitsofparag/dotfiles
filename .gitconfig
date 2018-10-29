@@ -19,6 +19,12 @@
 	type = cat-file -t
 	dump = cat-file -p
 	hack = town hack
+	sync = town sync
+	kill = town kill
+	prune-branches = town prune-branches
+	repo = town repo
+	new-pull-request = town new-pull-request
+	rename-branch = town rename-branch
 [push]
 	default = current
 [branch]
