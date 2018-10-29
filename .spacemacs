@@ -47,6 +47,7 @@ values."
           org-enable-github-support t
           org-enable-reveal-js-support t)
      nginx
+     parinfer
      plantuml
      python
      react
