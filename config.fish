@@ -8,6 +8,10 @@ set -gx LC_ALL en_US.UTF-8
 set -gx LC_CTYPE en_US.UTF-8
 set -gx LANG en_US.UTF-8
 
+# Gitlab
+set -gx GITLAB_PROJECT_TOKEN pNdAKYN5jMZwbegFoiHn
+set -gx GITLAB_USERID 1486497
+
 # NVM
 # nvm installed via fisher
 
