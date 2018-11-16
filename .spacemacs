@@ -81,7 +81,8 @@ values."
                                       irony
                                       irony-eldoc
                                       flycheck-irony
-                                      arduino-mode)
+                                      arduino-mode
+                                      wsd-mode)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
