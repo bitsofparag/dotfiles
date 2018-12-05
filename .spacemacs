@@ -82,7 +82,8 @@ values."
                                       irony-eldoc
                                       flycheck-irony
                                       arduino-mode
-                                      wsd-mode)
+                                      wsd-mode
+                                      org-super-agenda)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -138,7 +139,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
+   dotspacemacs-themes '(birds-of-paradise-plus
+                         spacemacs-dark
                          zenburn
                          solarized-dark
                          material
@@ -299,6 +301,17 @@ you should place your code here."
   (add-hook 'text-mode-hook 'auto-fill-mode)
 
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
+
+  ;; Emacs macro to add a pomodoro item
+  (fset 'pomodoro
+        "[ ]")
+
+  ;; Emacs macro to add a pomodoro table
+  ;;
+  ;; | G | Organization | [ ] |
+  ;; |   |              |     |
+  (fset 'pomodoro-table
+        [?| ?  ?G ?  ?| ?  ?O ?r ?g ?a ?n ?i ?z ?a ?t ?i ?o ?n ?  ?| ?  ?\[ ?  ?\] ?  ?| tab])
 
   ;;--------- Helm (workaround) settings ----------
   (with-eval-after-load 'helm
