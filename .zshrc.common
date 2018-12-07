@@ -22,3 +22,4 @@ fi
 
 # ----- Load pyenv-virtualenv
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}

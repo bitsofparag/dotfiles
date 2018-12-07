@@ -25,6 +25,7 @@
 	repo = town repo
 	new-pull-request = town new-pull-request
 	rename-branch = town rename-branch
+	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
 [push]
 	default = current
 [branch]
