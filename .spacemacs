@@ -51,7 +51,6 @@ values."
      plantuml
      python
      react
-     reason
      (rust :variables
            rust-format-on-save t)
      selectric

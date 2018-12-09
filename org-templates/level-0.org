@@ -1,8 +1,7 @@
-#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t
+#+OPTIONS: ':nil *:t -:t ::nil <:t H:3 \n:nil ^:t arch:headline author:t
 #+OPTIONS: broken-links:nil c:nil creator:t d:(not "LOGBOOK") date:t e:t
 #+OPTIONS: email:admin@bitsofparag.com f:t inline:t num:t p:nil pri:nil prop:nil stat:t tags:t
-#+OPTIONS: tasks:t tex:t timestamp:t title:t toc:nil todo:nil |:t
+#+OPTIONS: tasks:t tex:t timestamp:t title:nil toc:nil todo:nil |:t
 
 #+SELECT_TAGS: export
 #+EXCLUDE_TAGS: noexport
-#+DESCRIPTION: Bitsofparag | Personal weblog of Parag M.
