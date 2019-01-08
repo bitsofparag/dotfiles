@@ -82,7 +82,8 @@ values."
                                       flycheck-irony
                                       arduino-mode
                                       wsd-mode
-                                      org-super-agenda)
+                                      org-super-agenda
+                                      sound-wav)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -152,8 +153,8 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 11
+   dotspacemacs-default-font '("Hack"
+                               :size 12
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
