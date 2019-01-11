@@ -1,0 +1,61 @@
+# -*- mode: snippet -*-
+# name: ec2
+# key: ec2
+# --
+data "aws_ami" "ami_${1:name}_private" {
+  filter {
+    name   = "state"
+    values = ["available"]
+  }
+  filter {
+    name   = "tag:Name"
+    values = ["aws-$1"]
+  }
+  most_recent = true
+}
+
+module "ec2_$1_${2:modulename}" {
+  source    = "terraform-aws-modules/ec2-instance/aws"
+  version   = "1.13.0"
+  subnet_id = "\$\{data.terraform_remote_state.aws_network_vpc.public_subnet_id\}"
+  name      = "\$\{var.project_short_name\}-vm-$1-$2-0"
+
+  instance_count         = 1
+  ami                    = "\$\{data.aws_ami.ami_$1_private.id\}"
+  instance_type          = "t2.micro"
+  key_name               = "\$\{data.terraform_remote_state.aws_network_vpc.core_deployer_key_name\}"
+  monitoring             = true
+
+  vpc_security_group_ids = [
+    "\$\{data.terraform_remote_state.aws_network_vpc.sg_all_this_public_id\}",
+    "\$\{data.terraform_remote_state.aws_network_vpc.sg_all_and_ping_subnets_id\}"
+  ]
+  associate_public_ip_address = true
+
+  tags = "\$\{var.tags\}"
+}
+
+resource "aws_ebs_volume" "volume_$1_$2" {
+  availability_zone = "\$\{element(module.ec2_$1_$2.availability_zone, 0)\}"
+  size              = 8
+  type              = "gp2"
+  tags = "\$\{var.tags\}"
+}
+
+resource "aws_volume_attachment" "disk_$1_$2" {
+  device_name = "/dev/sdh"
+  volume_id   = "\$\{aws_ebs_volume.volume_$1_$2.id\}"
+  instance_id = "\$\{element(module.ec2_$1_$2.id, 0)\}"
+}
+
+resource "aws_eip" "eip_$1_$2" {
+  vpc       = true
+  instance  = "\$\{element(module.ec2_$1_$2.id, 0)\}"
+  tags      = "\$\{var.tags\}"
+}
+
+resource "aws_eip_association" "eip_$1_assoc" {
+  instance_id   = "\$\{element(module.ec2_$1_$2.id, 0)\}"
+  allocation_id = "\$\{aws_eip.eip_$1_$2.id\}"
+}
+$0
