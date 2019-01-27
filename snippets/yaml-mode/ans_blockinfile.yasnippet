@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: ans_blockinfile
+# key: blockinfile
+# --
+
+- name: ${1:Type}* ${2:some description of the task}
+  ${3:when: foo == "bar"}
+  blockinfile:
+    path: "{{ project_root }}/${4:filename.ext}"
+    marker: "${5:# {mark}}${6: marker text}"
+    block: |
+       {7: code}
+    insertafter: '${8:string}'
+    state: present
+    tags:
+      - $1_scripts
+$0

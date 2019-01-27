@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: ans_lineinfile
+# key: lineinfile
+# --
+- name: ${1:Type}* ${2:some description of the task}
+  ${3:when: foo == "bar"}
+  lineinfile:
+    dest: "{{ project_root }}/${4:filename.ext}"
+    line: "${5:line to replace}"
+    insertafter: '${6:string}'
+    ${7:regexp: ''}
+    state: present
+  tags:
+    - $1_scripts
+$0
