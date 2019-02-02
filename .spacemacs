@@ -421,6 +421,16 @@ If SPLIT-ONEWINDOW is non-`nil' window is split in persistent action."
   ;; TODO
 
 
+  ;; ---------------- Latex --------------
+  (with-eval-after-load "ox-latex"
+    (add-to-list 'org-latex-classes
+                 '("koma-article" "\\documentclass{scrartcl}"
+                   ("\\section{%s}" . "\\section*{%s}")
+                   ("\\subsection{%s}" . "\\subsection*{%s}")
+                   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                   ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                   ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+
   ;; ------------------------ ORG Mode ------------------------------
   ;;         Following are settings for ORG mode
   ;;-----------------------------------------------------------------
@@ -513,10 +523,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(line-spacing 0.3)
- '(package-selected-packages
-   (quote
-    (treemacs-projectile treemacs pfuture zenburn-theme yasnippet-snippets yapfify yaml-mode xterm-color xkcd wsd-mode ws-butler writeroom-mode winum which-key web-mode web-beautify vue-mode volatile-highlights vi-tilde-fringe uuidgen utop use-package tuareg toml-mode toc-org tide tagedit symon string-inflection sql-indent spaceline-all-the-icons sound-wav solarized-theme smeargle slim-mode shell-pop selectric-mode scss-mode sass-mode rjsx-mode restart-emacs rainbow-mode rainbow-identifiers rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode prettier-js popwin pony-mode platformio-mode plantuml-mode pippel pipenv pip-requirements persp-mode pcre2el password-generator parinfer paradox ox-reveal ox-gfm orgit org-super-agenda org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file ocp-indent nginx-mode neotree multi-term move-text monokai-theme material-theme markdown-toc magit-svn magit-gitflow lorem-ipsum livid-mode live-py-mode link-hint json-navigator js2-refactor js-doc jinja2-mode irony-eldoc insert-shebang indent-guide importmagic impatient-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-rtags helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-mode-manager helm-make helm-gitignore helm-git-grep helm-flx helm-descbinds helm-css-scss helm-cscope helm-company helm-c-yasnippet helm-ag google-translate google-c-style golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy font-lock+ flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-ocaml flycheck-irony flycheck-gometalinter flycheck-bashate flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help emmet-mode editorconfig dumb-jump dotenv-mode doom-modeline dockerfile-mode docker disaster diminish diff-hl define-word cython-mode csv-mode counsel-projectile company-web company-terraform company-tern company-statistics company-shell company-rtags company-go company-c-headers company-auctex company-ansible company-anaconda column-enforce-mode color-theme-sanityinc-solarized color-identifiers-mode clojure-snippets clojure-cheatsheet clean-aindent-mode clang-format cider-eval-sexp-fu cheat-sh centered-cursor-mode cargo browse-at-remote birds-of-paradise-plus-theme auto-yasnippet auto-highlight-symbol arduino-mode ansible-doc ansible aggressive-indent ace-window ace-link ace-jump-helm-line ac-ispell))))
+ '(line-spacing 0.3))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
