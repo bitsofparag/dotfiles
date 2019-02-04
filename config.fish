@@ -1,4 +1,6 @@
 # https://fishshell.com/docs/current/faq.html
+set -gx PATH $fish_user_paths
+set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
 
 # Set default editor
 set -U EDITOR nano
@@ -36,22 +38,12 @@ end
 function fish_title
     true
 end
-set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
+#set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
 
-# Python pyenv
-# pyenv installed via fisher
-set -gx WORKON_HOME $PYENV_ROOT/versions
-set -gx PROJECT_HOME $HOME/Workspace
-
-# Pipsi settings
-# added by pipsi (https://github.com/mitsuhiko/pipsi)
-# set -x PATH $HOME/.pipsi/bin $PATH
-set -gx PIPSI_HOME $HOME/.pipsi/virtualenvs
-set -gx PIPSI_BIN_DIR $HOME/.pipsi/bin
-set -gx PATH $PIPSI_BIN_DIR $PATH
+# Python
 
 # llvm settings
-set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths
+#set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
@@ -59,3 +51,20 @@ set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.fish ]; and . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.fish
+
+# added by Anaconda3 2018.12 installer
+# >>> conda init >>>
+# !! Contents within this block are managed by 'conda init' !!
+# set __conda_setup (env CONDA_REPORT_ERRORS=false '~/Workspace/vendor/anaconda3/bin/conda' shell.bash hook 2> /dev/null)
+# if test "$status" -eq 0
+#     eval "$__conda_setup"
+# else
+#     if test -f "~/Workspace/vendor/anaconda3/etc/profile.d/conda.sh"
+#         . "~/Workspace/vendor/anaconda3/etc/profile.d/conda.sh"
+#         env CONDA_CHANGEPS1=false conda activate base
+#     else
+#         set -gx PATH $HOME/Workspace/vendor/anaconda3/bin $PATH
+#     end
+# end
+# set -e __conda_setup
+# <<< conda init <<<

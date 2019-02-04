@@ -12,14 +12,14 @@ alias la="exa -abghl --git --color=automatic"
 # ----- cat with beautiful colors
 # alias c='pygmentize -O style=borland -f console256 -g'
 
-# ----- Load pyenv
+# ----- Load pyenv and pyenv-virtualenv
 if [ -d "$PYENV_ROOT" ]; then
     eval "$(pyenv init -)"
+    if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 fi
 
 # ----- Load nvm
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-# ----- Load pyenv-virtualenv
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+# ----- gitignore API
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
