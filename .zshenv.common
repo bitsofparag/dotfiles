@@ -37,6 +37,8 @@ export EDITOR=nano
 
 export MANPATH="/usr/local/man:$MANPATH"
 
+export SHELL="/usr/local/bin/zsh"
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -54,8 +56,6 @@ export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 
 # Python custom paths
-export PATH=$HOME/Library/Python/3.7/bin:/usr/local/opt/python/libexec/bin:$PATH
-
 # PYENV_ROOT=$HOME/.pyenv
 # WORKON_HOME=$PYENV_ROOT/versions
 # PROJECT_HOME=$HOME/Workspace
