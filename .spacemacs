@@ -39,6 +39,7 @@ values."
      gnus
      (go :variables go-use-gometalinter t)
      html
+     ipython-notebook
      (javascript :variables javascript-disable-tern-port-files nil)
      latex
      (markdown :variables markdown-command "pandoc")
@@ -502,6 +503,7 @@ If SPLIT-ONEWINDOW is non-`nil' window is split in persistent action."
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((python . t)
+       (ein . t)
        (emacs-lisp . t)
        (shell . t)
        (js . t)
