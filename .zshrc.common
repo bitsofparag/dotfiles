@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # ----- Aliases
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES;
@@ -9,8 +9,6 @@ alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO;
 # ----- exa:
 alias la="exa -abghl --git --color=automatic"
 
-# ----- cat with beautiful colors
-# alias c='pygmentize -O style=borland -f console256 -g'
 
 # ----- Load pyenv and pyenv-virtualenv
 if [ -d "$PYENV_ROOT" ]; then
@@ -29,3 +27,6 @@ function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
 # ----- jupyter notebook
 alias jno="jupyter notebook --ip 0.0.0.0 --port 7000"
+
+# command line fuzzy finder
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
