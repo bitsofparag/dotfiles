@@ -18,7 +18,6 @@ values."
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
    ;; A layer is a unit of configuration that you can turn on or off
-   dotspacemacs-configuration-layers '(typescript
                                        ansible
      (auto-completion :variables
                       auto-completion-enable-sort-by-usage t
@@ -84,7 +83,8 @@ values."
                                       arduino-mode
                                       wsd-mode
                                       org-super-agenda
-                                      sound-wav)
+                                      sound-wav
+                                      orgtbl-aggregate)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
