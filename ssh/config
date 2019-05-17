@@ -9,3 +9,31 @@ Hostname        gitlab.com
 IdentityFile    ~/.ssh/id_rsa_pers
 User            parag_m
 IdentitiesOnly  yes
+
+Host            nike-bastion
+Hostname        ec2-18-197-98-124.eu-central-1.compute.amazonaws.com
+Port            6011
+IdentityFile    ~/.ssh/id_rsa
+User            ubuntu
+IdentitiesOnly  yes
+
+Host		        nike-ws
+Hostname	      192.168.0.73
+IdentityFile    ~/.ssh/id_rsa
+User		        ubuntu
+IdentitiesOnly	yes
+ProxyCommand	  ssh nike-bastion -W %h:%p
+
+Host		        nbt-bastion
+Hostname	      ec2-18-197-157-159.eu-central-1.compute.amazonaws.com
+Port            6010
+IdentityFile    ~/.ssh/id_rsa
+User		        ubuntu
+IdentitiesOnly	yes
+
+Host		        nbt-ws
+Hostname	      10.0.0.105
+IdentityFile    ~/.ssh/id_rsa
+User		        ubuntu
+IdentitiesOnly	yes
+ProxyCommand	  ssh nbt-bastion -W %h:%p

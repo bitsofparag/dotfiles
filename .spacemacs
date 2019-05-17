@@ -18,7 +18,8 @@ values."
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
    ;; A layer is a unit of configuration that you can turn on or off
-                                       ansible
+   dotspacemacs-configuration-layers '(
+      ansible
      (auto-completion :variables
                       auto-completion-enable-sort-by-usage t
                       auto-completion-enable-snippets-in-popup t
@@ -37,6 +38,7 @@ values."
      git
      gnus
      (go :variables go-use-gometalinter t)
+     haskell
      html
      ipython-notebook
      (javascript :variables javascript-disable-tern-port-files nil)
@@ -63,6 +65,7 @@ values."
      ;; spell-checking
      sql
      terraform
+     typescript
      version-control
      xkcd
      yaml
@@ -510,6 +513,8 @@ If SPLIT-ONEWINDOW is non-`nil' window is split in persistent action."
        (sql . t)
        (org . t)
        (dot . t)
+       (haskell . t)
+       (clojure . t)
        (awk . t)
        ))
     )
