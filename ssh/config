@@ -31,9 +31,14 @@ IdentityFile    ~/.ssh/id_rsa
 User		        ubuntu
 IdentitiesOnly	yes
 
-Host		        nbt-ws
+Host		        nbt-webserver
 Hostname	      10.0.0.105
 IdentityFile    ~/.ssh/id_rsa
 User		        ubuntu
 IdentitiesOnly	yes
 ProxyCommand	  ssh nbt-bastion -W %h:%p
+
+Host		        nbt-disk
+Hostname	      CahJDbi2jgsj.local
+IdentityFile    ~/.ssh/id_rsa
+User		        user
