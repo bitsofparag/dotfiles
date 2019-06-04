@@ -17,7 +17,7 @@ IdentityFile    ~/.ssh/id_rsa
 User            ubuntu
 IdentitiesOnly  yes
 
-Host		        nike-ws
+Host		        nike-webserver
 Hostname	      192.168.0.73
 IdentityFile    ~/.ssh/id_rsa
 User		        ubuntu
@@ -32,7 +32,7 @@ User		        ubuntu
 IdentitiesOnly	yes
 
 Host		        nbt-webserver
-Hostname	      10.0.0.105
+Hostname	      10.0.0.107
 IdentityFile    ~/.ssh/id_rsa
 User		        ubuntu
 IdentitiesOnly	yes
