@@ -78,3 +78,5 @@ export PATH="$HOME/.fastlane/bin:$PATH"
 
 # default paths
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
+# The rest of the file is loaded in $HOME/.zshenv
+# ...

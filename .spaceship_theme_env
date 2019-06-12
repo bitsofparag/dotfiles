@@ -6,7 +6,6 @@ SPACESHIP_PROMPT_ORDER=(
   venv
   node
   package       # Package version
-  php           # PHP section
   exec_time     # Execution time
   line_sep      # Line break
   battery       # Battery level and status
