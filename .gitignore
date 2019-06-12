@@ -9,6 +9,8 @@ smex-items
 !/*.zsh*
 !/.git*
 !/.tmux*
+!/.functions
+!/.*theme_env
 
 org-files/*.sh
 org-files/*.tex
