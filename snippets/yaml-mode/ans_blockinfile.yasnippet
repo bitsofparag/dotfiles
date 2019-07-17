@@ -3,15 +3,15 @@
 # key: blockinfile
 # --
 
-- name: ${1:Type}* ${2:some description of the task}
-  ${3:when: foo == "bar"}
+# https://docs.ansible.com/ansible/latest/modules/blockinfile_module.html#examples
+- name: ${1:Type}* ADD to ${2:filename.ext} block
+  ${6:when: foo == "bar"}
   blockinfile:
-    path: "{{ project_root }}/${4:filename.ext}"
-    marker: "${5:# {mark}}${6: marker text}"
-    block: |
-       {7: code}
-    insertafter: '${8:string}'
+    path: "{{ project_root }}/$2"
+    marker: "${3:# {mark}}${4: marker text}"
+    insertafter: '${5:string}'
     state: present
+    block: |
+       $0
     tags:
       - $1_scripts
-$0

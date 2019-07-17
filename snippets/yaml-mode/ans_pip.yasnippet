@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: ans_pip
+# key: anspip
+# --
+
+# https://docs.ansible.com/ansible/latest/modules/pip_module.html#examples
+- name: ${1:Type}* INSTALL ${2:pkg name} via ${3:pip executable}
+  pip:$0
+    name:
+      - $2
+      - requests>=2.22.0
+    executable: $3
+  tags:
+    - $1_install
