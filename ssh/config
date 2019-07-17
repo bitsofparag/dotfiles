@@ -10,6 +10,16 @@ IdentityFile    ~/.ssh/id_rsa_pers
 User            parag_m
 IdentitiesOnly  yes
 
+Host            rasptest1
+Hostname        rasptest1
+IdentityFile    ~/.ssh/id_rsa
+User            pi
+
+Host            rasptest2
+Hostname        rasptest2
+IdentityFile    ~/.ssh/id_rsa
+User            pi
+
 Host            nike-bastion
 Hostname        ec2-18-197-98-124.eu-central-1.compute.amazonaws.com
 Port            6011
@@ -25,7 +35,7 @@ IdentitiesOnly	yes
 ProxyCommand	  ssh nike-bastion -W %h:%p
 
 Host		        nbt-bastion
-Hostname	      ec2-18-197-157-159.eu-central-1.compute.amazonaws.com
+Hostname	      ec2-18-185-36-243.eu-central-1.compute.amazonaws.com
 Port            6010
 IdentityFile    ~/.ssh/id_rsa
 User		        ubuntu
@@ -38,7 +48,46 @@ User		        ubuntu
 IdentitiesOnly	yes
 ProxyCommand	  ssh nbt-bastion -W %h:%p
 
+Host                    nbt-webserver-ci
+Hostname              10.0.0.102
+IdentityFile    ~/.ssh/id_rsa
+User                    ubuntu
+IdentitiesOnly  yes
+ProxyCommand      ssh nbt-bastion -W %h:%p
+
+Host                    nbt-webserver-nbt-ag
+Hostname              18.194.53.80
+IdentityFile    ~/.ssh/id_rsa
+User                    ubuntu
+IdentitiesOnly  yes
+
+Host		        nbt-runners
+Hostname	      10.0.0.45
+IdentityFile    ~/.ssh/id_rsa
+User		        ubuntu
+IdentitiesOnly	yes
+ProxyCommand	  ssh nbt-bastion -W %h:%p
+
+Host                    conc-webserver
+Hostname              10.0.0.86
+IdentityFile    ~/.ssh/id_rsa
+User                    ubuntu
+IdentitiesOnly  yes
+ProxyCommand      ssh nbt-bastion -W %h:%p
+
+Host                    conc-dockerapp
+Hostname              10.0.0.27
+IdentityFile    ~/.ssh/id_rsa
+User                    ubuntu
+IdentitiesOnly  yes
+ProxyCommand      ssh nbt-bastion -W %h:%p
+
 Host		        nbt-disk
 Hostname	      CahJDbi2jgsj.local
 IdentityFile    ~/.ssh/id_rsa
 User		        user
+
+Host		home-raspi
+Hostname	raspberrypi
+IdentityFile	~/.ssh/id_rsa
+User		pi
