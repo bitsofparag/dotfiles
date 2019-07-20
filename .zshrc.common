@@ -27,7 +27,7 @@ test -r $HOME/.opam/opam-init/init.zsh && . $HOME/.opam/opam-init/init.zsh > /de
 alias jno="jupyter notebook --ip 0.0.0.0 --port 7000"
 
 # command line fuzzy finder
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Loaded via zsh_plugins.txt
 
 # The rest of the file is loaded in $HOME/.zshrc
 # ...

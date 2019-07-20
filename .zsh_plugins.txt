@@ -1,0 +1,10 @@
+# run "antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh"
+robbyrussell/oh-my-zsh path:plugins/git
+robbyrussell/oh-my-zsh path:plugins/git-flow
+robbyrussell/oh-my-zsh path:plugins/git-prompt
+robbyrussell/oh-my-zsh path:plugins/ansible
+robbyrussell/oh-my-zsh path:plugins/docker-compose
+robbyrussell/oh-my-zsh path:plugins/fzf
+zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-history-substring-search
+
