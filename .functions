@@ -33,3 +33,7 @@ readme() {
         fi
     done
 }
+
+f() {
+  fzf | $@
+}

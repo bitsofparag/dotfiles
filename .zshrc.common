@@ -27,7 +27,19 @@ test -r $HOME/.opam/opam-init/init.zsh && . $HOME/.opam/opam-init/init.zsh > /de
 alias jno="jupyter notebook --ip 0.0.0.0 --port 7000"
 
 # command line fuzzy finder
-# Loaded via zsh_plugins.txt
+# If using antibody with zsh, then this is loaded via zsh_plugins.txt
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# -----------------------------
 # The rest of the file is loaded in $HOME/.zshrc
 # ...
+# *** Sample ~/.zshrc ***
+# source $ZSH/oh-my-zsh.sh
+# source ~/.zshrc.common
+# source ~/.zsh_plugins.sh
+
+# autoload -Uz add-zsh-hook
+# _nicy_prompt() {
+#     PROMPT=$(~/.nimble/bin/nicy)
+# }
+# add-zsh-hook precmd _nicy_prompt
