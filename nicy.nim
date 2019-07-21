@@ -14,7 +14,8 @@ when isMainModule:
     dirty = color("×", "red")
     clean = color("•", "green")
     venv = color(virtualenv(), "magenta")
+    node = color(getNvm(), "magenta")
   let git = gitBranch & gitStatus(dirty, clean)
 
   # the prompt
-  echo fmt"{nl}{venv}{cwd}{git}{nl}{prompt}"
+  echo fmt"{nl}{venv}{node}{cwd}{git}{nl}{prompt}"

@@ -34,8 +34,17 @@ readme() {
     done
 }
 
+# ----- fzf
 f() {
-  fzf | $@
+    fzf | $@
+}
+
+# ----- run nvm (dynamically load nvm in the current shell)
+n() {
+    if ! [ -x "$(command -v nvm)" ]; then
+        . "$NVM_DIR/nvm.sh"
+    fi
+    nvm $@
 }
 
 shdl() {
