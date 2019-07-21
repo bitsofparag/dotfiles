@@ -28,7 +28,9 @@ export LESS_TERMCAP_us=$'\e[4;35m' # Start underline
 export LESS_TERMCAP_ue=$'\e[0m' # End underline
 
 # fzf
-export FZF_DEFAULT_OPTS="--layout=reverse --inline-info --preview='head -$LINES {}'"
+export FZF_DEFAULT_OPTS="--extended --layout=reverse --inline-info --preview='head -$LINES {}'"
+export FZF_DEFAULT_COMMAND="fd --type f"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # Nvm
 export NVM_DIR=$HOME/.nvm
@@ -75,6 +77,9 @@ export PATH=$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$
 
 # fastlane path
 export PATH="$HOME/.fastlane/bin:$PATH"
+
+# Rust path
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # default paths
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
