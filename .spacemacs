@@ -157,8 +157,8 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Hack"
-                               :size 12
+   dotspacemacs-default-font '("Inconsolata"
+                               :size 13
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -511,7 +511,6 @@ If SPLIT-ONEWINDOW is non-`nil' window is split in persistent action."
        (shell . t)
        (js . t)
        (sql . t)
-       (org . t)
        (dot . t)
        (haskell . t)
        (clojure . t)

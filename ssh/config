@@ -20,12 +20,41 @@ Hostname        rasptest2
 IdentityFile    ~/.ssh/id_rsa
 User            pi
 
+
 Host            nike-bastion
 Hostname        ec2-18-197-98-124.eu-central-1.compute.amazonaws.com
 Port            6011
 IdentityFile    ~/.ssh/id_rsa
 User            ubuntu
 IdentitiesOnly  yes
+
+Host           	rower-1
+Hostname       	localhost
+Port           	7009
+IdentityFile    ~/.ssh/id_rsa
+User		pi
+ProxyCommand	ssh nike-bastion -W %h:%p
+
+Host            vending-machine
+Hostname        localhost
+Port		7020
+IdentityFile    ~/.ssh/id_rsa
+User            pi
+ProxyCommand	ssh nike-bastion -W %h:%p
+
+Host		nike-geth-node-1
+Hostname	192.168.0.18
+IdentityFile	~/.ssh/id_rsa
+User		ubuntu
+IdentitiesOnly	yes
+ProxyCommand	ssh nike-bastion -W %h:%p
+
+Host            nike-geth-node-2
+Hostname        192.168.0.28
+IdentityFile    ~/.ssh/id_rsa
+User            ubuntu
+IdentitiesOnly  yes
+ProxyCommand    ssh nike-bastion -W %h:%p
 
 Host		        nike-webserver
 Hostname	      192.168.0.73
