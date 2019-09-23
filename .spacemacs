@@ -18,8 +18,8 @@ values."
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
    ;; A layer is a unit of configuration that you can turn on or off
-   dotspacemacs-configuration-layers '(
-      ansible
+   dotspacemacs-configuration-layers '(systemd
+                                       ansible
      (auto-completion :variables
                       auto-completion-enable-sort-by-usage t
                       auto-completion-enable-snippets-in-popup t
@@ -51,6 +51,7 @@ values."
      nginx
      parinfer
      plantuml
+     prettier
      python
      react
      (rust :variables
@@ -292,6 +293,8 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+
+  (setq javascript-fmt-tool 'prettier)
 )
 
 (defun dotspacemacs/user-config ()

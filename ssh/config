@@ -35,12 +35,19 @@ IdentityFile    ~/.ssh/id_rsa
 User		pi
 ProxyCommand	ssh nike-bastion -W %h:%p
 
+Host            rower-2
+Hostname        localhost
+Port            7010
+IdentityFile    ~/.ssh/id_rsa
+User            pi
+ProxyCommand    ssh nike-bastion -W %h:%p
+
 Host            vending-machine
 Hostname        localhost
 Port		7020
 IdentityFile    ~/.ssh/id_rsa
 User            pi
-ProxyCommand	ssh nike-bastion -W %h:%p
+ProxyCommand	ssh nike-bastion -A -W %h:%p
 
 Host		nike-geth-node-1
 Hostname	192.168.0.18
