@@ -52,7 +52,9 @@ values."
      parinfer
      plantuml
      prettier
-     python
+     (python :variables
+             python-enable-yapf-format-on-save t
+             python-sort-imports-on-save t)
      react
      (rust :variables
            rust-format-on-save t)
@@ -535,11 +537,31 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(line-spacing 0.3))
+ '(ein:console-args (quote ((7000 "--profile" "--no-login-p"))))
+ '(ein:console-executable nil)
+ '(ein:default-url-or-port 7000)
+ '(ein:enable-keepalive t)
+ '(ein:force-sync t)
+ '(ein:jupyter-server-args
+   (quote
+    ("--no-browser" "--NotebookApp.password='test123$'" "--NotebookApp.token=''")))
+ '(ein:url-or-port (quote (7000)))
+ '(font-lock-global-modes (quote (not speedbar-mode)))
+ '(line-spacing 0.3)
+ '(org-startup-with-inline-images t t)
+ '(python-check-command "/usr/local/bin/flake8")
+ '(python-indent-guess-indent-offset nil)
+ '(python-indent-guess-indent-offset-verbose nil)
+ '(python-shell-interpreter "ipython")
+ '(python-shell-interpreter-args "--simple-prompt -i")
+ '(python-shell-virtualenv-root "~/.virtualenvs")
+ '(shell-file-name "/usr/local/bin/zsh")
+ '(shell-pop-term-shell "/usr/local/bin/zsh" t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(font-lock-comment-face ((t (:foreground "gray29" :slant italic))))
+ '(org-meta-line ((t (:inherit font-lock-comment-face :slant normal :weight thin :height 0.8)))))
 )

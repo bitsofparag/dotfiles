@@ -92,11 +92,10 @@ IdentitiesOnly  yes
 ProxyCommand      ssh nbt-bastion -W %h:%p
 
 Host                    nbt-webserver-nbt-ag
-Hostname              10.0.0.197
+Hostname              35.158.198.188
 IdentityFile    ~/.ssh/id_rsa
 User                    ubuntu
 IdentitiesOnly  yes
-ProxyCommand      ssh nbt-bastion -W %h:%p
 
 Host                    nbt-webserver-discuss
 Hostname              10.0.1.117
