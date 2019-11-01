@@ -104,16 +104,8 @@ User                    ubuntu
 IdentitiesOnly  yes
 ProxyCommand      ssh nbt-bastion -W %h:%p
 
-
 Host                    conc-webserver
-Hostname              10.0.0.86
-IdentityFile    ~/.ssh/id_rsa
-User                    ubuntu
-IdentitiesOnly  yes
-ProxyCommand      ssh nbt-bastion -W %h:%p
-
-Host                    conc-dockerapp
-Hostname              10.0.0.27
+Hostname              10.0.1.114
 IdentityFile    ~/.ssh/id_rsa
 User                    ubuntu
 IdentitiesOnly  yes
@@ -124,7 +116,8 @@ Hostname	      CahJDbi2jgsj.local
 IdentityFile    ~/.ssh/id_rsa
 User		        user
 
-Host		home-raspi
-Hostname	raspberrypi
-IdentityFile	~/.ssh/id_rsa
+Host		gw-generic
+Hostname	gw-generic
+IdentityFile	~/.ssh/id_rsa_pers
 User		pi
+
