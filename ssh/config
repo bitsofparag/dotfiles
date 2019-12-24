@@ -70,26 +70,13 @@ User		        ubuntu
 IdentitiesOnly	yes
 ProxyCommand	  ssh nike-bastion -W %h:%p
 
-Host		        nbt-bastion
-Hostname	      ec2-18-197-56-214.eu-central-1.compute.amazonaws.com
+Host		nbt-bastion
+Hostname	ec2-3-124-196-60.eu-central-1.compute.amazonaws.com
+#Hostname	2a05:d014:f51:dd00:74bd:6a60:10b2:abe3
 Port            6010
 IdentityFile    ~/.ssh/id_rsa
 User		        ubuntu
 IdentitiesOnly	yes
-
-Host		        nbt-webserver
-Hostname	      10.0.0.107
-IdentityFile    ~/.ssh/id_rsa
-User		        ubuntu
-IdentitiesOnly	yes
-ProxyCommand	  ssh nbt-bastion -W %h:%p
-
-Host                    nbt-webserver-ci
-Hostname              10.0.0.102
-IdentityFile    ~/.ssh/id_rsa
-User                    ubuntu
-IdentitiesOnly  yes
-ProxyCommand      ssh nbt-bastion -W %h:%p
 
 Host                    nbt-webserver-nbt-ag
 Hostname              35.158.198.188
@@ -105,7 +92,7 @@ IdentitiesOnly  yes
 ProxyCommand      ssh nbt-bastion -W %h:%p
 
 Host                    conc-webserver
-Hostname              10.0.1.114
+Hostname              10.0.0.113
 IdentityFile    ~/.ssh/id_rsa
 User                    ubuntu
 IdentitiesOnly  yes
@@ -121,3 +108,7 @@ Hostname	gw-generic
 IdentityFile	~/.ssh/id_rsa_pers
 User		pi
 
+Host		gw-auxolar-local
+Hostname	192.168.0.103
+User		pi
+IdentityFile	~/.ssh/id_rsa_engg

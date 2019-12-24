@@ -33,9 +33,13 @@ git log --pretty=format:"%h%x09%ad%x09%an%x09%s" --date=short | head -n 5
 
 #+MACRO: version-history call_version-history[:eval yes]()[:eval yes :results table :colnames '(Version Date Author Comment)]
 
-#+MACRO: banner @@html:<div class="banner" style="background-image:url('/assets/images/@@$1@@html:');"></div>@@
+#+MACRO: banner @@html:<div class="banner" style="background-image:url('/static/images/@@$1@@html:');"></div>@@
 
-#+MACRO: begin_intro @@html:<p class="intros">$1@@
+#+MACRO: timedate @@html:<div class="timedate"><span>First published: date</span><span>Last updated: </span></div>@@
+
+#+MACRO: blog_intro @@html:<span class="blog-intro">$1</span>@@
+
+#+MACRO: begin_intro @@html:<p class="intro">@@
 #+MACRO: end_intro @@html:</p>@@
 
 #+MACRO: begin_section @@html:<section>@@
@@ -47,15 +51,14 @@ git log --pretty=format:"%h%x09%ad%x09%an%x09%s" --date=short | head -n 5
 #+MACRO: begin_note @@html:<div class="note"><p>@@
 #+MACRO: end_note @@html:</p></div>@@
 
-#+MACRO: begin_panel @@html:<div class="panel"><p>@@
-#+MACRO: end_panel @@html:</p></div>@@
-
 #+MACRO: begin_tip @@html:<div class="tip"><p>@@
 #+MACRO: end_tip @@html:</p></div>@@
 
 #+MACRO: begin_warning @@html:<div class="warning"><p>@@
 #+MACRO: end_warning @@html:</p></div>@@
 
-#+MACRO: toc #+toc: headlines $1
+#+MACRO: tweet @@html:<a href="https://twitter.com/share" class="twitter-share-button" data-text="New blog post" data-via="paragmajum" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>@@
 
-#+MACRO: twitter-share-link-button @@html:<script src="http://platform.twitter.com/widgets.js"></script><a href="https://twitter.com/share" class="twitter-share-button" data-via="$1">Tweet</a>@@
+#+MACRO: linkedin @@html:<a class="link-info" id="linked-share-0" href="http://www.linkedin.com/shareArticle?mini=true&url=$1&source=bitsofparag.com">Share on Linkedin</a>@@
+
+#+MACRO: toc #+toc: headlines $1

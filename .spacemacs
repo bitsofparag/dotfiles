@@ -35,6 +35,7 @@ values."
      csv
      django
      docker
+     emoji
      git
      gnus
      (go :variables go-use-gometalinter t)
@@ -43,6 +44,7 @@ values."
      ipython-notebook
      (javascript :variables javascript-disable-tern-port-files nil)
      latex
+     lsp
      (markdown :variables markdown-command "pandoc")
      ocaml
      (org :variables
@@ -53,6 +55,7 @@ values."
      plantuml
      prettier
      (python :variables
+             python-backend 'lsp
              python-enable-yapf-format-on-save t
              python-sort-imports-on-save t)
      react
@@ -78,8 +81,10 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(vue-mode
+   dotspacemacs-additional-packages '(f
+                                      vue-mode
                                       cheat-sh
+;;                                      company-flow
                                       yasnippet-snippets
                                       editorconfig
                                       platformio-mode
@@ -502,11 +507,15 @@ If SPLIT-ONEWINDOW is non-`nil' window is split in persistent action."
             "xelatex -interaction nonstopmode %f"))
 
     ;;; org highlighting
-    ;; (setq org-latex-listings 'minted
-    ;;       org-latex-packages-alist '(("" "minted"))
-    ;;       org-latex-pdf-process
-    ;;       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-    ;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+    ;;(setq org-latex-listings 'minted
+    ;;      org-latex-packages-alist '(("" "minted"))
+    ;;      org-latex-pdf-process
+    ;;      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+    ;;        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+    ;;; org publish
+    ;;; ---
+
 
     (org-babel-do-load-languages
      'org-babel-load-languages
