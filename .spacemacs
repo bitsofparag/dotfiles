@@ -225,10 +225,10 @@ values."
    dotspacemacs-helm-position 'bottom
    ;; If non nil the paste micro-state is enabled. When enabled pressing `p`
    ;; several times cycle between the kill ring content. (default nil)
-   dotspacemacs-enable-paste-micro-state nil
+   dotspacemacs-enable-paste-micro-state t
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
    ;; the commands bound to the current keystroke sequence. (default 0.4)
-   dotspacemacs-which-key-delay 0.4
+   dotspacemacs-which-key-delay 0.3
    ;; Which-key frame position. Possible values are `right', `bottom' and
    ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
    ;; right; if there is insufficient space it displays it at the bottom.
@@ -557,10 +557,18 @@ This function is called at the very end of Spacemacs initialization."
  '(ein:url-or-port (quote (7000)))
  '(font-lock-global-modes (quote (not speedbar-mode)))
  '(line-spacing 0.3)
- '(org-startup-with-inline-images t t)
+ '(org-babel-python-command "python3")
+ '(org-babel-python-mode (quote python3))
+ '(org-export-async-init-file
+   "/Users/parag-nbt/.emacs.d/layers/+emacs/org/local/org-async-init.el")
+ '(org-export-date-timestamp-format nil)
+ '(org-html-htmlize-output-type (quote css))
+ '(org-re-reveal-no-htmlize-src nil)
+ '(org-startup-with-inline-images t)
  '(python-check-command "/usr/local/bin/flake8")
  '(python-indent-guess-indent-offset nil)
  '(python-indent-guess-indent-offset-verbose nil)
+ '(python-shell-completion-native-disabled-interpreters (quote ("pypy")))
  '(python-shell-interpreter "ipython")
  '(python-shell-interpreter-args "--simple-prompt -i")
  '(python-shell-virtualenv-root "~/.virtualenvs")

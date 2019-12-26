@@ -50,3 +50,5 @@ n() {
 shdl() {
   curl -O $(curl -s http://sci-hub.tw/"$@" | grep location.href | grep -o http.*pdf) ;
 }
+# ------ lsof alias
+function __who-is-using__ { lsof -i :$1 }
