@@ -557,6 +557,8 @@ This function is called at the very end of Spacemacs initialization."
  '(ein:url-or-port (quote (7000)))
  '(font-lock-global-modes (quote (not speedbar-mode)))
  '(line-spacing 0.3)
+ '(org-babel-clojure-backend (quote cider))
+ '(org-babel-python-command "python3")
  '(org-export-async-init-file
    "/Users/parag-nbt/.emacs.d/layers/+emacs/org/local/org-async-init.el")
  '(org-export-date-timestamp-format nil)
@@ -565,7 +567,8 @@ This function is called at the very end of Spacemacs initialization."
  '(org-startup-with-inline-images t)
  '(python-indent-guess-indent-offset nil)
  '(python-indent-guess-indent-offset-verbose nil)
- '(python-shell-interpreter "ipython")
+ '(python-shell-completion-native-enable nil)
+ '(python-shell-interpreter "/usr/local/bin/python3")
  '(python-shell-interpreter-args "--simple-prompt -i")
  '(python-shell-virtualenv-root "~/.virtualenvs")
  '(safe-local-variable-values
