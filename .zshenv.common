@@ -82,6 +82,9 @@ export PATH="$HOME/.fastlane/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 # default paths
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
+export PATH=/usr/local/bin:$PATH
 # The rest of the file is loaded in $HOME/.zshenv
 # ...
+
+# pyenv 
+export PYENV_ROOT=$HOME/.pyenv

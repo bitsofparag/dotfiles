@@ -568,7 +568,6 @@ This function is called at the very end of Spacemacs initialization."
  '(python-indent-guess-indent-offset nil)
  '(python-indent-guess-indent-offset-verbose nil)
  '(python-shell-completion-native-enable nil)
- '(python-shell-interpreter "/usr/local/bin/python3")
  '(python-shell-interpreter-args "--simple-prompt -i")
  '(python-shell-virtualenv-root "~/.virtualenvs")
  '(safe-local-variable-values

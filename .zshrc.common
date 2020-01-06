@@ -15,12 +15,6 @@ alias wifi="wifi-password -q"
 # ----- exa:
 alias la="exa -abghl --git --color=automatic"
 
-# ----- Load pyenv and pyenv-virtualenv
-if [ -d "$PYENV_ROOT" ]; then
-    eval "$(pyenv init -)"
-    if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-fi
-
 # ----- Load nvm
 # [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
@@ -33,6 +27,12 @@ alias jno="jupyter notebook --ip 0.0.0.0 --port 7000"
 # command line fuzzy finder
 # If using antibody with zsh, then this is loaded via zsh_plugins.txt
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# ----- Load pyenv and pyenv-virtualenv
+if [ -d "$PYENV_ROOT" ]; then
+    eval "$(pyenv init -)"
+    if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+fi
 
 # -----------------------------
 # The rest of the file is loaded in $HOME/.zshrc
