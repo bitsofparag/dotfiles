@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: tftag
+# key: tftag
+# --
+variable tags {
+  type = map
+  default = {
+    component = "$1"
+    environment = "staging"
+  }$0
+}
