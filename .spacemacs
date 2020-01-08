@@ -556,7 +556,7 @@ This function is called at the very end of Spacemacs initialization."
  '(ein:force-sync t)
  '(ein:jupyter-server-args
    (quote
-    ("--no-browser" "--NotebookApp.password='test123$'" "--NotebookApp.token=''")))
+    ("--no-browser" "--NotebookApp.password='test1234'" "--NotebookApp.token=''")))
  '(ein:url-or-port (quote (7000)))
  '(font-lock-global-modes (quote (not speedbar-mode)))
  '(line-spacing 0.3)
