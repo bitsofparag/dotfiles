@@ -61,6 +61,10 @@ export WORKON_HOME=$HOME/.virtualenvs
 # --------------- Enhancing PATH -------------------
 export PATH="/usr/local/sbin:$PATH"
 
+# Android paths
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH=$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH
+
 # Add pdftolatex to PATH
 # export PATH="/Library/TeX/texbin:$PATH"
 
@@ -70,10 +74,6 @@ export PATH=$PATH:$GOPATH/bin
 
 # path to sqlite3
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
-
-# Android paths
-export ANDROID_HOME="$HOME/Library/Android/sdk"
-export PATH=$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH
 
 # fastlane path
 export PATH="$HOME/.fastlane/bin:$PATH"
