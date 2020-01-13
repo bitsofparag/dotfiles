@@ -327,6 +327,7 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
   ;;; hooks
+  (add-hook 'before-save-hook 'time-stamp)
   (add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
   )
 
