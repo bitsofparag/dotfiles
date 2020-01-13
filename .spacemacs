@@ -45,6 +45,7 @@ values."
      docker
      emacs-lisp
      git
+     ipython-notebook
      ivy
      (javascript :variables javascript-disable-tern-port-files nil)
      lsp
