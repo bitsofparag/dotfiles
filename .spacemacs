@@ -329,6 +329,18 @@ you should place your code here."
   ;;; hooks
   (add-hook 'before-save-hook 'time-stamp)
   (add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
+
+  ;;; org mode babel
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)
+     (ein . t)
+     (shell . t)
+     (js . t)
+     (sql . t)
+     (haskell . t)
+     (clojure . t)
+     ))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
