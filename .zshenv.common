@@ -36,9 +36,6 @@ export LESS_TERMCAP_mh=$(tput dim)
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{.git,package-lock.json}"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-# Nvm
-export NVM_DIR=$HOME/.nvm
-
 export COMPLETION_WAITING_DOTS="true"
 
 # Needed for Tmuxinator
