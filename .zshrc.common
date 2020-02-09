@@ -1,6 +1,4 @@
-#!/bin/sh
-
-source ~/.functions
+[ -f ~/.functions ] && source ~/.functions
 
 # ----- Aliases
 alias pp='cd ~/Workspace/play'
@@ -26,13 +24,17 @@ alias jno="jupyter notebook --ip 0.0.0.0 --port 7000"
 
 # command line fuzzy finder
 # If using antibody with zsh, then this is loaded via zsh_plugins.txt
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # ----- Load pyenv and pyenv-virtualenv
 if [ -d "$PYENV_ROOT" ]; then
     eval "$(pyenv init -)"
     if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 fi
+
+# ----- Plugins
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
 
 # -----------------------------
 # The rest of the file is loaded in $HOME/.zshrc
@@ -41,9 +43,3 @@ fi
 # source $ZSH/oh-my-zsh.sh
 # source ~/.zshrc.common
 # source ~/.zsh_plugins.sh
-
-# autoload -Uz add-zsh-hook
-# _nicy_prompt() {
-#     PROMPT=$(~/.nimble/bin/nicy)
-# }
-# add-zsh-hook precmd _nicy_prompt
