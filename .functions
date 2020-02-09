@@ -10,7 +10,7 @@ mkd() {
 
 # ----- Weather
 weather() {
-    curl -s "https://wttr.in/${1:-Ponorogo}?m2" | sed -n "1,27p"
+    curl -s "https://wttr.in/${1:-Berlin}?m2" | sed -n "1,27p"
 }
 
 # ----- Git commit browser
@@ -34,21 +34,9 @@ readme() {
     done
 }
 
-# ----- fzf
-f() {
-    fzf | $@
-}
-
-# ----- run nvm (dynamically load nvm in the current shell)
-n() {
-    if ! [ -x "$(command -v nvm)" ]; then
-        . "$NVM_DIR/nvm.sh"
-    fi
-    nvm $@
-}
-
 shdl() {
   curl -O $(curl -s http://sci-hub.tw/"$@" | grep location.href | grep -o http.*pdf) ;
 }
+
 # ------ lsof alias
 function __who-is-using__ { lsof -i :$1 }
