@@ -340,6 +340,15 @@ you should place your code here."
   ;;; e.g (global-set-key (kbd "TAB") 'hippie-expand)
   (global-set-key "\C-ca" 'org-agenda)
 
+  ;;; org highlighting
+  (setq org-latex-listings 'minted
+        org-latex-packages-alist '(("" "minted"))
+        org-latex-pdf-process
+        '("pdflatex -shell-escape -output-directory %o %f"
+          "biber %b"
+          "pdflatex -shell-escape -output-directory %o %f"
+          "pdflatex -shell-escape -output-directory %o %f"))
+
   ;;; org mode babel
   (org-babel-do-load-languages
    'org-babel-load-languages
