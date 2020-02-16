@@ -38,7 +38,7 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      ansible
-     ;; auto-completion
+     auto-completion
      ;; better-defaults
      csv
      django
