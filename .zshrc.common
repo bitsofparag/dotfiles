@@ -9,6 +9,7 @@ alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO;
   killall Finder /System/Library/CoreServices/Finder.app'
 alias who-is-using="__who-is-using__"
 alias wifi="wifi-password -q"
+alias clear='[ $[$RANDOM % 10] = 0 ] && timeout 3 cmatrix; clear || clear'
 
 # ----- exa:
 alias la="exa -abghl --git --color=automatic"
