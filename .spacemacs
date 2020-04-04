@@ -66,7 +66,13 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(org-journal)
+   dotspacemacs-additional-packages '(org-journal
+                                      (org-roam :location (recipe
+                                                           :fetcher github
+                                                           :repo "jethrokuan/org-roam"))
+                                      ox-pandoc
+                                      org-pomodoro
+                                      pdf-tools)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -343,6 +349,8 @@ you should place your code here."
 
   ;;; key-bindings
   ;;; e.g (global-set-key (kbd "TAB") 'hippie-expand)
+  (global-set-key (kbd "C-c c") 'org-capture)
+  (global-set-key (kbd "C-c r") 'org-refile)
   (global-set-key "\C-ca" 'org-agenda)
 
   ;;; org highlighting
@@ -375,6 +383,18 @@ you should place your code here."
                 ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
                 ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
                 ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
+  ;;; org capture template
+  (setq org-capture-templates
+        '(("t" "Quick todo" entry (file+headline "~/Workspace/_/notebooks/agenda/2020.org" "Tasks")
+           "* TODO %?\n  %i\n  %a")
+          ("w" "Work todo" entry (file+headline "~/Workspace/_/notebooks/agenda/work.org" "Tasks")
+           "* TODO %?\n  %i\n  %a")
+          ("c" "Capture" entry (file+datetree "~/Workspace/_/notebooks/agenda/journal/index.org")
+           "* %?\nEntered on %U\n  %i\n  %a")))
+  ;;; org refile targets
+  (setq org-refile-targets '(("~/Workspace/_/notebooks/agenda/2020.org" :maxlevel . 3)
+                             ("~/Workspace/_/notebooks/agenda/work.org" :level . 1)))
+
 
   ;;; org mode babel
   (org-babel-do-load-languages
