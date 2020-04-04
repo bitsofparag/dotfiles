@@ -47,7 +47,6 @@ values."
      git
      html
      ipython-notebook
-     ivy
      (javascript :variables javascript-disable-tern-port-files nil)
      lsp
      markdown
