@@ -328,9 +328,13 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
   ;;; Set variables and functions
-  (setq org-agenda-files '("~/Workspace/_/notebooks/agenda"))
+  (setq org-agenda-files "~/Workspace/_/notebooks/agenda/")
+  (setq org-default-notes-file  "~/Workspace/_/notebooks/agenda/journal/inbox.org")
   (setq org-use-fast-todo-selection t)
   (setq org-treat-S-cursor-todo-selection-as-state-change nil)
+  (setq org-journal-dir "~/Workspace/_/notebooks/agenda/journal")
+  (setq org-roam-directory "~/Workspace/_/notebooks")
+
 
   ;;; hooks
   (add-hook 'text-mode-hook 'auto-fill-mode)
