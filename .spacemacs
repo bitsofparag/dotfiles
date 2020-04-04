@@ -438,6 +438,9 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(js-chain-indent t)
+ '(js-indent-level 2)
+ '(json-reformat:indent-width 2)
  '(lsp-clients-python-library-directories (quote ("/usr/" "$HOME/.pyenv/versions")))
  '(lsp-pyls-plugins-pydocstyle-enabled t)
  '(org-export-backends (quote (ascii html icalendar latex md odt)))
