@@ -347,6 +347,7 @@ you should place your code here."
   ;;; hooks
   (add-hook 'text-mode-hook 'auto-fill-mode)
   (add-hook 'before-save-hook 'time-stamp)
+  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
   (add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
   (add-hook 'after-init-hook 'org-roam--build-cache-async)
 
