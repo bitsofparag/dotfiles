@@ -333,6 +333,8 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  (require 'org-protocol)
+
   ;;; Set variables and functions
   (setq org-agenda-files "~/Workspace/_/notebooks/agenda/")
   (setq org-default-notes-file  "~/Workspace/_/notebooks/agenda/journal/inbox.org")
@@ -346,12 +348,14 @@ you should place your code here."
   (add-hook 'text-mode-hook 'auto-fill-mode)
   (add-hook 'before-save-hook 'time-stamp)
   (add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
+  (add-hook 'after-init-hook 'org-roam--build-cache-async)
 
   ;;; key-bindings
   ;;; e.g (global-set-key (kbd "TAB") 'hippie-expand)
   (global-set-key (kbd "C-c c") 'org-capture)
   (global-set-key (kbd "C-c r") 'org-refile)
   (global-set-key "\C-ca" 'org-agenda)
+  (global-set-key "\C-cnl" 'org-roam)
 
   ;;; org highlighting
   (setq org-latex-listings 'minted
