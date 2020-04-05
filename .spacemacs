@@ -336,7 +336,7 @@ you should place your code here."
   (require 'org-protocol)
 
   ;;; Set variables and functions
-  (setq org-agenda-files "~/Workspace/_/notebooks/agenda/")
+  (setq org-agenda-files (directory-files-recursively "~/Workspace/_/notebooks/agenda" "\.org$"))
   (setq org-default-notes-file  "~/Workspace/_/notebooks/agenda/journal/inbox.org")
   (setq org-use-fast-todo-selection t)
   (setq org-treat-S-cursor-todo-selection-as-state-change nil)
@@ -394,7 +394,7 @@ you should place your code here."
            "* TODO %?\n  %i\n  %a")
           ("w" "Work todo" entry (file+headline "~/Workspace/_/notebooks/agenda/work.org" "Tasks")
            "* TODO %?\n  %i\n  %a")
-          ("c" "Capture" entry (file+datetree "~/Workspace/_/notebooks/agenda/journal/index.org")
+          ("c" "Capture" entry (file+datetree "~/Workspace/_/notebooks/agenda/journal.org")
            "* %?\nEntered on %U\n  %i\n  %a")))
   ;;; org refile targets
   (setq org-refile-targets '(("~/Workspace/_/notebooks/agenda/2020.org" :maxlevel . 3)
