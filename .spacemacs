@@ -398,17 +398,14 @@ you should place your code here."
   (setq org-refile-targets '(("~/Workspace/_/notebooks/agenda/2020.org" :maxlevel . 3)
                              ("~/Workspace/_/notebooks/agenda/work.org" :level . 1)))
 
-
   ;;; org mode babel
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((python . t)
-     (ein . t)
      (shell . t)
      (js . t)
      (sql . t)
      (haskell . t)
-     (clojure . t)
      ))
   )
 
@@ -452,5 +449,5 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(org-drawer ((t (:foreground "gray30")))))
 )
