@@ -46,7 +46,6 @@ values."
      emacs-lisp
      git
      html
-     ipython-notebook
      (javascript :variables javascript-disable-tern-port-files nil)
      lsp
      markdown
@@ -70,8 +69,8 @@ values."
                                       (org-roam :location (recipe
                                                            :fetcher github
                                                            :repo "jethrokuan/org-roam"))
-                                      ox-pandoc
                                       org-pomodoro
+                                      ox-pandoc
                                       pdf-tools)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -333,8 +332,6 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-  (require 'org-protocol)
-
   ;;; Set variables and functions
   (setq org-agenda-files (directory-files-recursively "~/Workspace/_/notebooks/agenda" "\.org$"))
   (setq org-default-notes-file  "~/Workspace/_/notebooks/agenda/journal/inbox.org")
@@ -396,6 +393,7 @@ you should place your code here."
            "* TODO %?\n  %i\n  %a")
           ("c" "Capture" entry (file+datetree "~/Workspace/_/notebooks/agenda/journal.org")
            "* %?\nEntered on %U\n  %i\n  %a")))
+
   ;;; org refile targets
   (setq org-refile-targets '(("~/Workspace/_/notebooks/agenda/2020.org" :maxlevel . 3)
                              ("~/Workspace/_/notebooks/agenda/work.org" :level . 1)))
