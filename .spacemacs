@@ -398,6 +398,7 @@ you should place your code here."
 
   ;;; org refile targets
   (setq org-refile-targets '(("~/Workspace/_/notebooks/agenda/2020.org" :maxlevel . 3)
+                             ("~/Workspace/_/notebooks/agenda/2020-completed.org" :maxlevel . 3)
                              ("~/Workspace/_/notebooks/agenda/work.org" :level . 1)))
 
   ;;; org mode babel
