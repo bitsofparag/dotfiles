@@ -47,7 +47,9 @@ values."
      git
      html
      (javascript :variables javascript-disable-tern-port-files nil)
-     lsp
+     (lsp :variables
+          lsp-ui-sideline-show-symbol t
+          lsp-navigation 'peek)
      markdown
      nginx
      (shell :variables
