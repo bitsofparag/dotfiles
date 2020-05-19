@@ -436,6 +436,8 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(helm-ag-use-agignore t)
+ '(helm-ag-use-grep-ignore-list t)
  '(js-chain-indent t)
  '(js-indent-level 2)
  '(json-reformat:indent-width 2)
@@ -452,5 +454,6 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-drawer ((t (:foreground "gray30")))))
+ '(org-drawer ((t (:foreground "gray30"))))
+ '(org-special-keyword ((t (:foreground "systemIndigoColor")))))
 )
