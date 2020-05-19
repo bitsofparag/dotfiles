@@ -1,30 +1,7 @@
-Host            bitbucket
-Hostname        bitbucket.org
-IdentityFile    ~/.ssh/id_rsa
-User            parag_nbt
-IdentitiesOnly  yes
-
-Host            gitlab
-Hostname        gitlab.com
-IdentityFile    ~/.ssh/id_rsa_pers
-User            parag_m
-IdentitiesOnly  yes
-
-Host            rasptest1
-Hostname        rasptest1
-IdentityFile    ~/.ssh/id_rsa
-User            pi
-
-Host            rasptest2
-Hostname        rasptest2
-IdentityFile    ~/.ssh/id_rsa
-User            pi
-
-
 Host            nike-bastion
 Hostname        ec2-18-197-98-124.eu-central-1.compute.amazonaws.com
 Port            6011
-IdentityFile    ~/.ssh/id_rsa
+IdentityFile    ~/.ssh/conc-demo-webserver
 User            ubuntu
 IdentitiesOnly  yes
 
@@ -73,27 +50,20 @@ ProxyCommand	  ssh nike-bastion -W %h:%p
 Host		nbt-bastion
 Hostname	ec2-3-124-196-60.eu-central-1.compute.amazonaws.com
 #Hostname	2a05:d014:f51:dd00:74bd:6a60:10b2:abe3
-Port            6010
-IdentityFile    ~/.ssh/id_rsa
+Port            22
+IdentityFile    ~/.ssh/paragnbt
 User		        ubuntu
 IdentitiesOnly	yes
 
 Host                    nbt-webserver-nbt-ag
 Hostname              35.158.198.188
-IdentityFile    ~/.ssh/id_rsa
+IdentityFile    ~/.ssh/paragnbt
 User                    ubuntu
 IdentitiesOnly  yes
-
-Host                    nbt-webserver-discuss
-Hostname              10.0.1.117
-IdentityFile    ~/.ssh/id_rsa
-User                    ubuntu
-IdentitiesOnly  yes
-ProxyCommand      ssh nbt-bastion -W %h:%p
 
 Host                    conc-webserver
-Hostname              10.0.0.113
-IdentityFile    ~/.ssh/id_rsa
+Hostname              10.0.1.239
+IdentityFile    ~/.ssh/paragnbt
 User                    ubuntu
 IdentitiesOnly  yes
 ProxyCommand      ssh nbt-bastion -W %h:%p
@@ -102,13 +72,3 @@ Host		        nbt-disk
 Hostname	      CahJDbi2jgsj.local
 IdentityFile    ~/.ssh/id_rsa
 User		        user
-
-Host		gw-generic
-Hostname	gw-generic
-IdentityFile	~/.ssh/id_rsa_pers
-User		pi
-
-Host		gw-auxolar-local
-Hostname	192.168.0.103
-User		pi
-IdentityFile	~/.ssh/id_rsa_engg
