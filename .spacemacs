@@ -56,6 +56,7 @@ values."
              shell-default-height 30
              shell-default-position 'bottom)
      spell-checking
+     sql
      syntax-checking
      systemd
      terraform
@@ -73,6 +74,7 @@ values."
                                                            :repo "jethrokuan/org-roam"))
                                       org-pomodoro
                                       ox-pandoc
+                                      platformio-mode
                                       pdf-tools)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
