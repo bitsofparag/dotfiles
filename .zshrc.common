@@ -1,8 +1,8 @@
 [ -f ~/.functions ] && source ~/.functions
 
 # ----- Aliases
-alias pp='cd ~/Workspace/play'
-alias po='cd ~/Workspace/work'
+alias play='pushd ~/Workspace/play && clear && ls'
+alias work='pushd ~/Workspace/work && clear && ls'
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES;
   killall Finder /System/Library/CoreServices/Finder.app'
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO;

@@ -58,7 +58,7 @@ export LC_CTYPE=en_US.UTF-8
 # ...run "antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh" to load plugins
 
 # --------------- Enhancing PATH -------------------
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 
 # Android paths
 export ANDROID_HOME="$HOME/Library/Android/sdk"
