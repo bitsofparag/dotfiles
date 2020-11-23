@@ -72,3 +72,89 @@ Host		        nbt-disk
 Hostname	      CahJDbi2jgsj.local
 IdentityFile    ~/.ssh/id_rsa
 User		        user
+
+Host           solg_poc_dashboard_testing
+Hostname       18.192.25.109
+User           ubuntu
+IdentitiesOnly yes
+
+Host           solg_fake_api_server_testing
+Hostname       18.159.60.108
+User           ubuntu
+IdentitiesOnly yes
+
+Host           solg_logging_server_testing
+Hostname       3.126.82.151
+Port           6010
+User           ubuntu
+IdentitiesOnly yes
+
+Host           solg_api_proxy_webserver_testing
+Port           6010
+Hostname       18.193.102.193
+User           ubuntu
+IdentitiesOnly yes
+
+Host           solg_poc_dashboard_staging
+Hostname       18.194.105.121
+User           ubuntu
+IdentitiesOnly yes
+
+Host           solg_ops_proxy_webserver_testing
+Port           6010
+Hostname       18.159.206.185
+User           ubuntu
+IdentitiesOnly yes
+
+Host           solg_reverse_ssh_server_testing
+Hostname       18.193.109.152
+User           ubuntu
+Port           6010
+IdentitiesOnly yes
+
+Host           solg_ota_server_testing
+Hostname       3.120.33.97
+User           ubuntu
+IdentitiesOnly yes
+
+Host           solg_sql_editor_testing
+Hostname       18.193.67.53
+User           ubuntu
+IdentitiesOnly yes
+
+Host           kelv_poc_dashboard_testing
+Hostname       3.127.98.123
+User           ubuntu
+IdentitiesOnly yes
+
+Host           kelv_fake_api_server_testing
+Hostname       52.59.241.71
+User           ubuntu
+IdentitiesOnly yes
+
+Host           kelv_poc_dashboard_staging
+Hostname       18.184.133.240
+User           ubuntu
+IdentitiesOnly yes
+
+Host           kelv_ops_proxy_webserver_testing
+Port           6010
+Hostname       18.193.117.68
+User           ubuntu
+IdentitiesOnly yes
+
+Host           kelv_api_proxy_webserver_testing
+Port           6010
+Hostname       18.185.179.230
+User           ubuntu
+IdentitiesOnly yes
+
+Host           kelv_sql_editor_testing
+Hostname       18.185.238.228
+User           ubuntu
+IdentitiesOnly yes
+
+# SSH over Session Manager
+Host		i-* mi-*
+ProxyCommand	sh -c "aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+

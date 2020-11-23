@@ -42,7 +42,7 @@ values."
      ;; better-defaults
      csv
      django
-     docker
+     (docker :variables docker-dockerfile-backend 'lsp)
      emacs-lisp
      git
      html
@@ -50,17 +50,21 @@ values."
      (lsp :variables
           lsp-ui-sideline-show-symbol t
           lsp-navigation 'peek)
-     markdown
+     (markdown :variables 
+		markdown-live-preview-engine 'vmd)
      nginx
      (shell :variables
              shell-default-height 30
              shell-default-position 'bottom)
      php
      spell-checking
-     sql
+     (sql :variables
+       sql-backend 'lsp
+       sql-lsp-sqls-workspace-config-path 'workspace)
      syntax-checking
      systemd
-     terraform
+     (terraform :variables terraform-auto-format-on-save t
+        terraform-backend nil)
      themes-megapack
      version-control
      yaml

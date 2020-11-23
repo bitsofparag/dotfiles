@@ -92,3 +92,6 @@ export GITLAB_CLI_TOKEN=
 
 # ruby
 export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+# devops
+#export HISTIGNORE="&:vault*"

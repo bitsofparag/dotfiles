@@ -19,3 +19,9 @@ npm-debug.log
 xcuserdata
 .#*.*
 Tasks.org
+,*~
+.#*.*
+tmp/*
+.vscode
+sdk
+
