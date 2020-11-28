@@ -360,10 +360,12 @@ you should place your code here."
 
   ;;; key-bindings
   ;;; e.g (global-set-key (kbd "TAB") 'hippie-expand)
+  (global-set-key (kbd "TAB") 'hippie-expand)
   (global-set-key (kbd "C-c c") 'org-capture)
   (global-set-key (kbd "C-c r") 'org-refile)
   (global-set-key "\C-ca" 'org-agenda)
   (global-set-key "\C-cnl" 'org-roam)
+  (global-set-key (kbd "C-c f") 'hs-toggle-hiding)
 
   ;;; org highlighting
   (setq org-latex-listings 'minted
