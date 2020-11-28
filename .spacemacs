@@ -50,8 +50,8 @@ values."
      (lsp :variables
           lsp-ui-sideline-show-symbol t
           lsp-navigation 'peek)
-     (markdown :variables 
-		markdown-live-preview-engine 'vmd)
+     (markdown :variables
+		           markdown-live-preview-engine 'vmd)
      nginx
      (shell :variables
              shell-default-height 30
