@@ -154,6 +154,11 @@ Hostname       18.185.238.228
 User           ubuntu
 IdentitiesOnly yes
 
+Host           concr_poc_dashboard_staging
+Hostname       3.121.114.15
+User           ubuntu
+IdentitiesOnly yes
+
 # SSH over Session Manager
 Host		i-* mi-*
 ProxyCommand	sh -c "aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
