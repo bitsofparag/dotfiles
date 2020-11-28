@@ -448,7 +448,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(helm-ag-use-agignore t)
- '(helm-ag-use-grep-ignore-list t)
+ '(helm-ag-use-grep-ignore-list t t)
  '(js-chain-indent t)
  '(js-indent-level 2)
  '(json-reformat:indent-width 2)
