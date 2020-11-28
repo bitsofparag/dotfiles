@@ -419,6 +419,7 @@ you should place your code here."
      (js . t)
      (sql . t)
      (haskell . t)
+     (http . t)
      ))
   )
 
