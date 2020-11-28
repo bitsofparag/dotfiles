@@ -57,6 +57,7 @@ values."
              shell-default-height 30
              shell-default-position 'bottom)
      php
+     restclient
      spell-checking
      (sql :variables
        sql-backend 'lsp
