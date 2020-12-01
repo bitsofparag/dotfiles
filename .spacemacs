@@ -397,19 +397,21 @@ you should place your code here."
                 ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
                 ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
                 ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
-  ;;; org capture template
+  ;;; org capture templates
   (setq org-capture-templates
-        '(("t" "Quick todo" entry (file+headline "~/Workspace/_/notebooks/agenda/2020.org" "Tasks")
-           "* TODO %?\n  %i\n  %a")
-          ("w" "Work todo" entry (file+headline "~/Workspace/_/notebooks/agenda/work.org" "Tasks")
-           "* TODO %?\n  %i\n  %a")
-          ("c" "Capture" entry (file+datetree "~/Workspace/_/notebooks/agenda/journal.org")
-           "* %?\nEntered on %U\n  %i\n  %a")))
+        '(("c" "org-protocol-capture"
+           entry (file "~/Workspace/_/notebooks/inbox/web-captures.org")
+           "* TODO %:description, %:link :%^{tag1}:%^{tag2}:\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n%i"
+           :prepend t :empty-lines 1)
+          ("k" "org-protocol-store-link"
+           entry (file "~/Workspace/_/notebooks/agenda/bookmark-captures.org")
+           "* [[%:link][%:description]] :%^{tag1}:%^{tag2}:\n"
+           :prepend t :immediate-finish t :empty-lines 1)))
 
   ;;; org refile targets
-  (setq org-refile-targets '(("~/Workspace/_/notebooks/agenda/2020.org" :maxlevel . 3)
-                             ("~/Workspace/_/notebooks/agenda/2020-completed.org" :maxlevel . 3)
-                             ("~/Workspace/_/notebooks/agenda/work.org" :level . 1)))
+  ;;(setq org-refile-targets '(("~/Workspace/_/notebooks/agenda/2020.org" :maxlevel . 3)
+  ;;                           ("~/Workspace/_/notebooks/agenda/2020-completed.org" :maxlevel . 3)
+  ;;                           ("~/Workspace/_/notebooks/agenda/work.org" :level . 1)))
 
   ;;; org mode babel
   (org-babel-do-load-languages
