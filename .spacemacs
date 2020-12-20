@@ -58,7 +58,7 @@ values."
              shell-default-position 'bottom)
      php
      restclient
-     spell-checking
+     (spell-checking :variables spell-checking-enable-by-default nil)
      (sql :variables
        sql-backend 'lsp
        sql-lsp-sqls-workspace-config-path 'workspace)
@@ -75,6 +75,9 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(org-journal
+                                      (org-download :location (recipe
+                                                               :fetcher github
+                                                               :repo "abo-abo/org-download"))
                                       (org-roam :location (recipe
                                                            :fetcher github
                                                            :repo "jethrokuan/org-roam"))
@@ -342,31 +345,47 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  ;;(require 'org-journal) ;; already loaded from private/local
+  (require 'org-download) ;; loaded from private/local
+  ;;(require 'org-roam) ;; already loaded via git
+
   ;;; Set variables and functions
   (setq org-agenda-files (directory-files-recursively "~/Workspace/_/notebooks/agenda" "\.org$"))
-  (setq org-default-notes-file  "~/Workspace/_/notebooks/agenda/journal/inbox.org")
   (setq org-use-fast-todo-selection t)
   (setq org-treat-S-cursor-todo-selection-as-state-change nil)
-  (setq org-journal-dir "~/Workspace/_/notebooks/agenda/journal")
   (setq org-roam-directory "~/Workspace/_/notebooks")
 
 
-  ;;; hooks
+  ;;; ===== hooks =====
   (add-hook 'text-mode-hook 'auto-fill-mode)
   (add-hook 'before-save-hook 'time-stamp)
   (add-hook 'doc-view-mode-hook 'auto-revert-mode)
   (add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
   (add-hook 'after-init-hook 'org-roam--build-cache-async)
 
-  ;;; key-bindings
+  ;;; ===== global key-bindings =====
   ;;; e.g (global-set-key (kbd "TAB") 'hippie-expand)
-  (global-set-key (kbd "TAB") 'hippie-expand)
   (global-set-key (kbd "C-c c") 'org-capture)
   (global-set-key (kbd "C-c r") 'org-refile)
   (global-set-key "\C-ca" 'org-agenda)
   (global-set-key "\C-cnl" 'org-roam)
-  (global-set-key (kbd "C-c f") 'hs-toggle-hiding)
+  (global-set-key (kbd "C-c w") 'hs-toggle-hiding)
 
+  ;;; Org function to clear logbook
+  (defun my-org-clear-logbook ()
+    "Delete logbook drawer of subtree."
+    (interactive)
+    (save-excursion
+      (goto-char (point))
+      (when (save-excursion
+              (save-match-data
+                (beginning-of-line 0)
+                (search-forward-regexp org-drawer-regexp)
+                (goto-char (match-beginning 1))
+                (looking-at "LOGBOOK")))
+        (org-mark-element)
+        (delete-region (region-beginning) (region-end))
+        (org-remove-empty-drawer-at (point)))))
   ;;; org highlighting
   (setq org-latex-listings 'minted
         org-latex-packages-alist '(("" "minted"))
@@ -413,15 +432,102 @@ you should place your code here."
   ;;                           ("~/Workspace/_/notebooks/agenda/2020-completed.org" :maxlevel . 3)
   ;;                           ("~/Workspace/_/notebooks/agenda/work.org" :level . 1)))
 
-  ;;; org mode babel
+  ;;; ===== Org Journal =====
+  ;;; Org journal function to create date-format when creating a new journal
+  (defun my-org-journal-date-format-func (time)
+    "Custom function to insert journal date header,
+and some custom text on a newly created journal file."
+    (when (= (buffer-size) 0)
+      (insert
+       (pcase org-journal-file-type
+         (`daily "#+TITLE: Daily Journal\n\n")
+         (`weekly (concat"#+TITLE: Weekly Journal " (format-time-string "(Wk #%V)" time) "\n\n"))
+         (`monthly "#+TITLE: Monthly Journal\n\n")
+         (`yearly "#+TITLE: Yearly Journal\n\n"))))
+    (concat org-journal-date-prefix (format-time-string "%A, %x" time)))
+
+  ;;; ===== Org Protocol =====
+
+  ;;; ===== Org Roam =====
+  ;;; org roam capture templates
+  '(org-roam-capture-templates
+    '(("d" "default"
+       plain #'org-roam-capture--get-point "%?"
+       :file-name "other-references/%<%Y%m%d%H%M%S>-${slug}"
+       :head "#+title: ${title}
+#+author: Parag M.
+#+roam_tags: ${roam_tags}
+#+Time-stamp: `(insert (format-time-string \"<%Y-%m-%d %a %H:%M>\"))`
+#+SETUPFILE: ~/.emacs.d/private/local/org-templates/level-2.org"
+       :unnarrowed t)
+
+      ("m" "management"
+       plain #'org-roam-capture--get-point "%?"
+       :file-name "management/%<%Y%m%d%H%M%S>-${slug}"
+       :head "#+title: ${title}
+#+author: Parag M.
+#+roam_tags+: management
+#+roam_tags+: ${roam_tags}
+#+Time-stamp: `(insert (format-time-string \"<%Y-%m-%d %a %H:%M>\"))`
+#+SETUPFILE: ~/.emacs.d/private/local/org-templates/level-2.org"
+       :unnarrowed t)
+
+      ("t" "technology"
+       plain #'org-roam-capture--get-point "%?"
+       :file-name "technology/%<%Y%m%d%H%M%S>-${slug}"
+       :head "#+title: ${title}
+#+author: Parag M.
+#+roam_tags: ${roam_tags}
+#+Time-stamp: `(insert (format-time-string \"<%Y-%m-%d %a %H:%M>\"))`\\n#+SETUPFILE: ~/.emacs.d/private/local/org-templates/level-2.org" :unnarrowed t)
+
+      ("i" "improv"
+       plain #'org-roam-capture--get-point "%?"
+       :file-name "improv/%<%Y%m%d%H%M%S>-${slug}"
+       :head "#+title: ${title}
+#+author: Parag M.
+#+roam_tags+: improv
+#+roam_tags+: ${roam_tags}
+#+Time-stamp: `(insert (format-time-string \"<%Y-%m-%d %a %H:%M>\"))`
+#+SETUPFILE: ~/.emacs.d/private/local/org-templates/level-2.org"
+       :unnarrowed t)
+
+      ("p" "projects"
+       plain #'org-roam-capture--get-point "%?"
+       :file-name "projects/%<%Y%m%d%H%M%S>-${slug}"
+       :head "#+title: ${title}
+#+author: Parag M.
+#+roam_tags+: projects
+#+roam_tags+: ${roam_tags}
+#+Time-stamp: `(insert (format-time-string \"<%Y-%m-%d %a %H:%M>\"))`
+#+SETUPFILE: ~/.emacs.d/private/local/org-templates/level-2.org"
+       :unnarrowed t)
+
+      ("s" "arts-sciences"
+       plain #'org-roam-capture--get-point "%?"
+       :file-name "arts-and-sciences/%<%Y%m%d%H%M%S>-${slug}"
+       :head "#+title: ${title}
+#+author: Parag M.
+#+roam_tags: ${roam_tags}
+#+Time-stamp: `(insert (format-time-string \"<%Y-%m-%d %a %H:%M>\"))`
+#+SETUPFILE: ~/.emacs.d/private/local/org-templates/level-2.org"
+       :unnarrowed t)
+      ))
+
+  ;;; ===== org-download =====
+  (require 'org-download)
+  (add-hook 'dired-mode-hook 'org-download-enable)
+
+  ;;; ===== org mode babel =====
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((python . t)
      (shell . t)
+     (zsh . t)
      (js . t)
      (sql . t)
      (haskell . t)
      (http . t)
+     (restclient . t)
      ))
   )
 
@@ -449,6 +555,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(evil-want-Y-yank-to-eol nil)
  '(helm-ag-use-agignore t)
  '(helm-ag-use-grep-ignore-list t t)
  '(js-chain-indent t)
@@ -457,6 +564,19 @@ This function is called at the very end of Spacemacs initialization."
  '(lsp-clients-python-library-directories '("/usr/" "$HOME/.pyenv/versions"))
  '(lsp-pyls-plugins-pydocstyle-enabled t)
  '(org-export-backends '(ascii html icalendar latex md odt))
+ '(org-journal-dir "~/Workspace/_/notebooks/agenda/journal")
+ '(org-journal-enable-agenda-integration t)
+ '(org-journal-file-format "%Y%m%d-journal.org")
+ '(org-journal-file-header "#+roam_tags: daily todos")
+ '(org-journal-file-type 'weekly)
+ '(org-journal-prefix-key "C-c j")
+ '(org-roam-capture-immediate-template
+   '("d" "default" plain #'org-roam-capture--get-point "%?" :file-name "inbox/%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}
+#+roam_tags: ${roam_tags}\\n" :unnarrowed t :immediate-finish t))
+ '(org-roam-directory "~/Workspace/_/notebooks")
+ '(org-roam-mode t nil (org-roam))
+ '(org-roam-tag-separator " ")
+ '(org-roam-tag-sources '(prop vanilla last-directory first-directory))
  '(org-startup-folded t)
  '(org-startup-with-inline-images t)
  '(package-selected-packages

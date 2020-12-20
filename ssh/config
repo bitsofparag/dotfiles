@@ -113,7 +113,8 @@ Port           6010
 IdentitiesOnly yes
 
 Host           solg_ota_server_testing
-Hostname       3.120.33.97
+Hostname       3.127.221.217
+Port           6010
 User           ubuntu
 IdentitiesOnly yes
 
@@ -154,8 +155,13 @@ Hostname       18.185.238.228
 User           ubuntu
 IdentitiesOnly yes
 
+Host           concr_poc_dashboard_testing
+Hostname       3.125.52.70
+User           ubuntu
+IdentitiesOnly yes
+
 Host           concr_poc_dashboard_staging
-Hostname       3.121.114.15
+Hostname       3.121.228.73
 User           ubuntu
 IdentitiesOnly yes
 
