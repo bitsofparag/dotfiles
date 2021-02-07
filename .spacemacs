@@ -45,6 +45,9 @@ values."
      (docker :variables docker-dockerfile-backend 'lsp)
      emacs-lisp
      git
+     (haskell :variables
+              haskell-completion-backend 'dante
+              haskell-enable-hindent t)
      html
      (javascript :variables javascript-disable-tern-port-files nil)
      (lsp :variables
