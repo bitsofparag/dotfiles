@@ -61,6 +61,7 @@ values."
              shell-default-position 'bottom)
      php
      restclient
+     rust
      (spell-checking :variables spell-checking-enable-by-default nil)
      (sql :variables
        sql-backend 'lsp
