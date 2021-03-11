@@ -160,13 +160,14 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(sanityinc-tomorrow-eighties
+   dotspacemacs-themes '(doom-gruvbox
+                         badwolf
+                         sanityinc-tomorrow-eighties
                          sanityinc-tomorrow-bright
                          sanityinc-tomorrow-night
                          subatomic
                          spacemacs-dark
-                         spacemacs-light
-                         zen-and-art)
+                         spacemacs-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -315,7 +316,7 @@ values."
    dotspacemacs-highlight-delimiters 'all
    ;; If non nil, advise quit functions to keep server open when quitting.
    ;; (default nil)
-   dotspacemacs-persistent-server t
+   dotspacemacs-persistent-server nil
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
    ;; (default '("ag" "pt" "ack" "grep"))
@@ -339,7 +340,6 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  (setq-default dotspacemacs-enable-server t)
   (require 'org-protocol)
   )
 
@@ -528,13 +528,13 @@ and some custom text on a newly created journal file."
    'org-babel-load-languages
    '((python . t)
      (shell . t)
-     (zsh . t)
      (js . t)
      (sql . t)
      (haskell . t)
      (http . t)
      (restclient . t)
      ))
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
