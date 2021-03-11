@@ -30,3 +30,5 @@
 	default = current
 [branch]
 	autosetupmerge = always
+[pull]
+	rebase = false
