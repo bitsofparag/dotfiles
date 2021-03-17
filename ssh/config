@@ -123,6 +123,18 @@ Hostname       18.193.67.53
 User           ubuntu
 IdentitiesOnly yes
 
+Host           solg_api_proxy_webserver_prod
+Port           6010
+Hostname       35.158.253.55
+User           ubuntu
+IdentitiesOnly yes
+
+Host           solg_ops_proxy_webserver_prod
+Port           6010
+Hostname       18.197.114.141
+User           ubuntu
+IdentitiesOnly yes
+
 Host           kelv_poc_dashboard_testing
 Hostname       3.127.98.123
 User           ubuntu
