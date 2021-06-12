@@ -160,8 +160,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(doom-gruvbox
-                         badwolf
+   dotspacemacs-themes '(railscasts
+                         afternoon
                          sanityinc-tomorrow-eighties
                          sanityinc-tomorrow-bright
                          sanityinc-tomorrow-night
@@ -299,7 +299,7 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers t
+   dotspacemacs-line-numbers nil
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -392,6 +392,7 @@ you should place your code here."
         (org-mark-element)
         (delete-region (region-beginning) (region-end))
         (org-remove-empty-drawer-at (point)))))
+
   ;;; org highlighting
   (setq org-latex-listings 'minted
         org-latex-packages-alist '(("" "minted"))

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: usage
+# key: usage
+# --
+
+usage() {
+  cat << EOT
+  usage \$0 [${1:-o}]
+  OPTIONS
+    $1 ${2:some text about this option}
+    $0
+EOT
+}

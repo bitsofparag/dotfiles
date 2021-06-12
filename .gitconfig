@@ -8,6 +8,8 @@
 	excludesfile = ~/.gitignore_global
 [commit]
   template = ~/.gitmessage
+[init]
+	defaultBranch = main
 [alias]
 	praise = blame
 	git = !exec git

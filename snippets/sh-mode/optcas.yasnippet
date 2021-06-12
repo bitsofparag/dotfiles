@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: optcas
+# key: optcas
+# --
+
+# Setting default options
+OPT_${1:$(upcase yas-text)}=0
+while getopts ":${1:A}:h" option; do
+  case \$option in
+    $1) # set option -$1
+      OPT_${1:$(upcase yas-text)}=\$OPTARG
+      echo "OPT_${1:$(upcase yas-text)}=\$OPT_${1:$(upcase yas-text)}"
+      ${2:some_method}
+      ;;
+    \?) # Remove this if script runs without options
+      echo "wrong option."
+      usage
+      exit 1
+      ;;
+    h)
+     usage
+     exit 0
+     ;;
+  esac
+done
+shift "\$((\$OPTIND - 1))" # This tells getopts to move on to the next argument.
+# See https://unix.stackexchange.com/questions/214141/explain-the-shell-command-shift-optind-1/214151
+$0

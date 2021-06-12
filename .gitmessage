@@ -1,18 +1,18 @@
-# If applied, this commit will...
-# |<----  Using a Maximum Of 50 Characters  ---->|
+# |<----  Using a Maximum Of 72 Characters  ---->|
+# JIRA-XXX Add|Update|Remove (see Types below) about this task
 
 
 # Why is this change needed?
-Prior to this change, 
+# e.g Prior to this change,
 
 # How does it address the issue?
-This change
+# This change 
 
 # Provide links to any relevant tickets, articles or other resources
 
-
 # --- COMMIT END ---
-# Type can be 
+#
+# Type can be
 #    Add         (new feature)
 #    Update      (update a feature)
 #    Remove      (remove a feature)
@@ -21,6 +21,7 @@ This change
 #    Style       (formatting, missing semi colons, etc; no code change)
 #    Docs        (changes to documentation)
 #    Chore       (updating grunt tasks etc; no production code change)
+#
 # --------------------
 # Remember to
 #    Capitalize the subject line

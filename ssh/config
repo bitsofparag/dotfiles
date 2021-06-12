@@ -135,6 +135,17 @@ Hostname       18.197.114.141
 User           ubuntu
 IdentitiesOnly yes
 
+Host           solg_reverse_ssh_server_prod
+Hostname       18.196.255.201
+User           ubuntu
+Port           6010
+IdentitiesOnly yes
+
+Host           solg_ota_server_prod
+Hostname       18.192.126.4
+User           ubuntu
+IdentitiesOnly yes
+
 Host           kelv_poc_dashboard_testing
 Hostname       3.127.98.123
 User           ubuntu
