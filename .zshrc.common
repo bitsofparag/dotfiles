@@ -26,7 +26,7 @@ alias jno="jupyter notebook --ip 0.0.0.0 --port 7000"
 
 # ----- Load pyenv and pyenv-virtualenv
 if [ -d "$PYENV_ROOT" ]; then
-    eval "$(pyenv init -)"
+    eval "$(pyenv init --path)"
     if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 fi
 
