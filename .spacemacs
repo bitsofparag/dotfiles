@@ -78,13 +78,11 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(org-journal
+   dotspacemacs-additional-packages '(
+                                      org-journal
                                       (org-download :location (recipe
                                                                :fetcher github
                                                                :repo "abo-abo/org-download"))
-                                      (org-roam :location (recipe
-                                                           :fetcher github
-                                                           :repo "jethrokuan/org-roam"))
                                       org-pomodoro
                                       ox-pandoc
                                       platformio-mode
@@ -351,191 +349,127 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-  ;;(require 'org-journal) ;; already loaded from private/local
-  (require 'org-download) ;; loaded from private/local
-  ;;(require 'org-roam) ;; already loaded via git
+  (with-eval-after-load 'org
+    ;;(require 'org-journal) ;; already loaded from private/local
+    (require 'org-download) ;; loaded from private/local
 
-  ;;; Set variables and functions
-  (setq org-agenda-files (directory-files-recursively "~/Workspace/_/notebooks/agenda" "\.org$"))
-  (setq org-use-fast-todo-selection t)
-  (setq org-treat-S-cursor-todo-selection-as-state-change nil)
-  (setq org-roam-directory "~/Workspace/_/notebooks")
+    ;;; Set variables and functions
+    (setq org-agenda-files (directory-files-recursively "~/Workspace/_/notebooks/agenda" "\.org$"))
+    (setq org-use-fast-todo-selection t)
+    (setq org-treat-S-cursor-todo-selection-as-state-change nil)
+    (setq-default fill-column 100)
 
 
-  ;;; ===== hooks =====
-  (add-hook 'text-mode-hook 'auto-fill-mode)
-  (add-hook 'before-save-hook 'time-stamp)
-  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
-  (add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
-  (add-hook 'after-init-hook 'org-roam--build-cache-async)
+    ;;; ===== hooks =====
+    (add-hook 'text-mode-hook 'auto-fill-mode)
+    (add-hook 'before-save-hook 'time-stamp)
+    (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+    (add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
 
-  ;;; ===== global key-bindings =====
-  ;;; e.g (global-set-key (kbd "TAB") 'hippie-expand)
-  (global-set-key (kbd "C-c c") 'org-capture)
-  (global-set-key (kbd "C-c r") 'org-refile)
-  (global-set-key "\C-ca" 'org-agenda)
-  (global-set-key "\C-cnl" 'org-roam)
-  (global-set-key (kbd "C-c w") 'hs-toggle-hiding)
+    ;;; ===== global key-bindings =====
+    ;;; e.g (global-set-key (kbd "TAB") 'hippie-expand)
+    (global-set-key (kbd "C-c c") 'org-capture)
+    (global-set-key (kbd "C-c r") 'org-refile)
+    (global-set-key "\C-ca" 'org-agenda)
+    (global-set-key (kbd "C-c w") 'hs-toggle-hiding)
 
-  ;;; Org function to clear logbook
-  (defun my-org-clear-logbook ()
-    "Delete logbook drawer of subtree."
-    (interactive)
-    (save-excursion
-      (goto-char (point))
-      (when (save-excursion
-              (save-match-data
-                (beginning-of-line 0)
-                (search-forward-regexp org-drawer-regexp)
-                (goto-char (match-beginning 1))
-                (looking-at "LOGBOOK")))
-        (org-mark-element)
-        (delete-region (region-beginning) (region-end))
-        (org-remove-empty-drawer-at (point)))))
+    ;;; Org function to clear logbook
+    (defun my-org-clear-logbook ()
+      "Delete logbook drawer of subtree."
+      (interactive)
+      (save-excursion
+        (goto-char (point))
+        (when (save-excursion
+                (save-match-data
+                  (beginning-of-line 0)
+                  (search-forward-regexp org-drawer-regexp)
+                  (goto-char (match-beginning 1))
+                  (looking-at "LOGBOOK")))
+          (org-mark-element)
+          (delete-region (region-beginning) (region-end))
+          (org-remove-empty-drawer-at (point)))))
 
-  ;;; org highlighting
-  (setq org-latex-listings 'minted
-        org-latex-packages-alist '(("" "minted"))
-        org-latex-pdf-process
-        '("pdflatex -shell-escape -output-directory %o %f"
-          "biber %b"
-          "pdflatex -shell-escape -output-directory %o %f"
-          "pdflatex -shell-escape -output-directory %o %f"))
+    ;;; org highlighting
+    (setq org-latex-listings 'minted
+          org-latex-packages-alist '(("" "minted"))
+          org-latex-pdf-process
+          '("pdflatex -shell-escape -output-directory %o %f"
+            "biber %b"
+            "pdflatex -shell-escape -output-directory %o %f"
+            "pdflatex -shell-escape -output-directory %o %f"))
 
-  ;;; Org task state management
-  (setq org-todo-keywords
-        (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
-                (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING"))))
-  (setq org-todo-keyword-faces
-        (quote (("TODO" :foreground "red" :weight bold)
-                ("NEXT" :foreground "blue" :weight bold)
-                ("DONE" :foreground "forest green" :weight bold)
-                ("WAITING" :foreground "orange" :weight bold)
-                ("HOLD" :foreground "magenta" :weight bold)
-                ("CANCELLED" :foreground "forest green" :weight bold)
-                ("MEETING" :foreground "forest green" :weight bold)
-                ("PHONE" :foreground "forest green" :weight bold))))
-  (setq org-todo-state-tags-triggers
-        (quote (("CANCELLED" ("CANCELLED" . t))
-                ("WAITING" ("WAITING" . t))
-                ("HOLD" ("WAITING") ("HOLD" . t))
-                (done ("WAITING") ("HOLD"))
-                ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
-                ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
-                ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
-  ;;; org capture templates
-  (setq org-capture-templates
-        '(("c" "org-protocol-capture"
-           entry (file "~/Workspace/_/notebooks/inbox/web-captures.org")
-           "* TODO %:description, %:link :%^{tag1}:%^{tag2}:\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n%i"
-           :prepend t :empty-lines 1)
-          ("k" "org-protocol-store-link"
-           entry (file "~/Workspace/_/notebooks/agenda/bookmark-captures.org")
-           "* [[%:link][%:description]] :%^{tag1}:%^{tag2}:\n"
-           :prepend t :immediate-finish t :empty-lines 1)))
+    ;;; Org task state management
+    (setq org-todo-keywords
+          (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+                  (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING"))))
+    (setq org-todo-keyword-faces
+          (quote (("TODO" :foreground "red" :weight bold)
+                  ("NEXT" :foreground "blue" :weight bold)
+                  ("DONE" :foreground "forest green" :weight bold)
+                  ("WAITING" :foreground "orange" :weight bold)
+                  ("HOLD" :foreground "magenta" :weight bold)
+                  ("CANCELLED" :foreground "forest green" :weight bold)
+                  ("MEETING" :foreground "forest green" :weight bold)
+                  ("PHONE" :foreground "forest green" :weight bold))))
+    (setq org-todo-state-tags-triggers
+          (quote (("CANCELLED" ("CANCELLED" . t))
+                  ("WAITING" ("WAITING" . t))
+                  ("HOLD" ("WAITING") ("HOLD" . t))
+                  (done ("WAITING") ("HOLD"))
+                  ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
+                  ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
+                  ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
+    ;;; org capture templates
+    (setq org-capture-templates
+          '(("c" "org-protocol-capture"
+             entry (file "~/Workspace/_/notebooks/inbox/web-captures.org")
+             "* TODO %:description, %:link :%^{tag1}:%^{tag2}:\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n%i"
+             :prepend t :empty-lines 1)
 
-  ;;; org refile targets
-  ;;(setq org-refile-targets '(("~/Workspace/_/notebooks/agenda/2020.org" :maxlevel . 3)
-  ;;                           ("~/Workspace/_/notebooks/agenda/2020-completed.org" :maxlevel . 3)
-  ;;                           ("~/Workspace/_/notebooks/agenda/work.org" :level . 1)))
+            ("k" "org-protocol-store-link"
+             entry (file "~/Workspace/_/notebooks/agenda/bookmark-captures.org")
+             "* [[%:link][%:description]] :%^{tag1}:%^{tag2}:\n"
+             :prepend t :immediate-finish t :empty-lines 1)
 
-  ;;; ===== Org Journal =====
-  ;;; Org journal function to create date-format when creating a new journal
-  (defun my-org-journal-date-format-func (time)
-    "Custom function to insert journal date header,
+            ))
+
+    ;;; org refile targets
+    (setq org-refile-targets '(("~/Workspace/_/notebooks/agenda/2020.org" :maxlevel . 3)
+                               ("~/Workspace/_/notebooks/agenda/2020-completed.org" :maxlevel . 3)
+                               ("~/Workspace/_/notebooks/agenda/work.org" :level . 1)))
+
+    ;;; ===== Org Journal =====
+    ;;; Org journal function to create date-format when creating a new journal
+    (defun my-org-journal-date-format-func (time)
+      "Custom function to insert journal date header,
 and some custom text on a newly created journal file."
-    (when (= (buffer-size) 0)
-      (insert
-       (pcase org-journal-file-type
-         (`daily "#+TITLE: Daily Journal\n\n")
-         (`weekly (concat"#+TITLE: Weekly Journal " (format-time-string "(Wk #%V)" time) "\n\n"))
-         (`monthly "#+TITLE: Monthly Journal\n\n")
-         (`yearly "#+TITLE: Yearly Journal\n\n"))))
-    (concat org-journal-date-prefix (format-time-string "%A, %x" time)))
+      (when (= (buffer-size) 0)
+        (insert
+         (pcase org-journal-file-type
+           (`daily "#+TITLE: Daily Journal\n\n")
+           (`weekly (concat"#+TITLE: Weekly Journal " (format-time-string "(Wk #%V)" time) "\n\n"))
+           (`monthly "#+TITLE: Monthly Journal\n\n")
+           (`yearly "#+TITLE: Yearly Journal\n\n"))))
+      (concat org-journal-date-prefix (format-time-string "%A, %x" time)))
 
-  ;;; ===== Org Protocol =====
+    ;;; ===== Org Protocol =====
 
-  ;;; ===== Org Roam =====
-  ;;; org roam capture templates
-  '(org-roam-capture-templates
-    '(("d" "default"
-       plain #'org-roam-capture--get-point "%?"
-       :file-name "other-references/%<%Y%m%d%H%M%S>-${slug}"
-       :head "#+title: ${title}
-#+author: Parag M.
-#+roam_tags: ${roam_tags}
-#+Time-stamp: `(insert (format-time-string \"<%Y-%m-%d %a %H:%M>\"))`
-#+SETUPFILE: ~/.emacs.d/private/local/org-templates/level-2.org"
-       :unnarrowed t)
+    ;;; ===== org-download =====
+    (require 'org-download)
+    (add-hook 'dired-mode-hook 'org-download-enable)
 
-      ("m" "management"
-       plain #'org-roam-capture--get-point "%?"
-       :file-name "management/%<%Y%m%d%H%M%S>-${slug}"
-       :head "#+title: ${title}
-#+author: Parag M.
-#+roam_tags+: management
-#+roam_tags+: ${roam_tags}
-#+Time-stamp: `(insert (format-time-string \"<%Y-%m-%d %a %H:%M>\"))`
-#+SETUPFILE: ~/.emacs.d/private/local/org-templates/level-2.org"
-       :unnarrowed t)
-
-      ("t" "technology"
-       plain #'org-roam-capture--get-point "%?"
-       :file-name "technology/%<%Y%m%d%H%M%S>-${slug}"
-       :head "#+title: ${title}
-#+author: Parag M.
-#+roam_tags: ${roam_tags}
-#+Time-stamp: `(insert (format-time-string \"<%Y-%m-%d %a %H:%M>\"))`\\n#+SETUPFILE: ~/.emacs.d/private/local/org-templates/level-2.org" :unnarrowed t)
-
-      ("i" "improv"
-       plain #'org-roam-capture--get-point "%?"
-       :file-name "improv/%<%Y%m%d%H%M%S>-${slug}"
-       :head "#+title: ${title}
-#+author: Parag M.
-#+roam_tags+: improv
-#+roam_tags+: ${roam_tags}
-#+Time-stamp: `(insert (format-time-string \"<%Y-%m-%d %a %H:%M>\"))`
-#+SETUPFILE: ~/.emacs.d/private/local/org-templates/level-2.org"
-       :unnarrowed t)
-
-      ("p" "projects"
-       plain #'org-roam-capture--get-point "%?"
-       :file-name "projects/%<%Y%m%d%H%M%S>-${slug}"
-       :head "#+title: ${title}
-#+author: Parag M.
-#+roam_tags+: projects
-#+roam_tags+: ${roam_tags}
-#+Time-stamp: `(insert (format-time-string \"<%Y-%m-%d %a %H:%M>\"))`
-#+SETUPFILE: ~/.emacs.d/private/local/org-templates/level-2.org"
-       :unnarrowed t)
-
-      ("s" "arts-sciences"
-       plain #'org-roam-capture--get-point "%?"
-       :file-name "arts-and-sciences/%<%Y%m%d%H%M%S>-${slug}"
-       :head "#+title: ${title}
-#+author: Parag M.
-#+roam_tags: ${roam_tags}
-#+Time-stamp: `(insert (format-time-string \"<%Y-%m-%d %a %H:%M>\"))`
-#+SETUPFILE: ~/.emacs.d/private/local/org-templates/level-2.org"
-       :unnarrowed t)
-      ))
-
-  ;;; ===== org-download =====
-  (require 'org-download)
-  (add-hook 'dired-mode-hook 'org-download-enable)
-
-  ;;; ===== org mode babel =====
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((python . t)
-     (shell . t)
-     (js . t)
-     (sql . t)
-     (haskell . t)
-     (http . t)
-     (restclient . t)
-     ))
-
+    ;;; ===== org mode babel =====
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((python . t)
+       (shell . t)
+       (js . t)
+       (sql . t)
+       (haskell . t)
+       (http . t)
+       (restclient . t)
+       ))
+    )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -570,20 +504,19 @@ This function is called at the very end of Spacemacs initialization."
  '(json-reformat:indent-width 2)
  '(lsp-clients-python-library-directories '("/usr/" "$HOME/.pyenv/versions"))
  '(lsp-pyls-plugins-pydocstyle-enabled t)
+ '(lsp-pyls-plugins-yapf-enabled t)
+ '(markdown-fontify-code-blocks-natively t)
  '(org-export-backends '(ascii html icalendar latex md odt))
+ '(org-fontify-done-headline t)
+ '(org-fontify-quote-and-verse-blocks t)
+ '(org-fontify-whole-heading-line t)
  '(org-journal-dir "~/Workspace/_/notebooks/agenda/journal")
  '(org-journal-enable-agenda-integration t)
  '(org-journal-file-format "%Y%m%d-journal.org")
  '(org-journal-file-header "#+roam_tags: daily todos")
  '(org-journal-file-type 'weekly)
  '(org-journal-prefix-key "C-c j")
- '(org-roam-capture-immediate-template
-   '("d" "default" plain #'org-roam-capture--get-point "%?" :file-name "inbox/%<%Y%m%d%H%M%S>-${slug}" :head "#+title: ${title}
-#+roam_tags: ${roam_tags}\\n" :unnarrowed t :immediate-finish t))
- '(org-roam-directory "~/Workspace/_/notebooks")
- '(org-roam-mode t nil (org-roam))
- '(org-roam-tag-separator " ")
- '(org-roam-tag-sources '(prop vanilla last-directory first-directory))
+ '(org-src-fontify-natively t)
  '(org-startup-folded t)
  '(org-startup-with-inline-images t)
  '(package-selected-packages
@@ -595,6 +528,10 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-drawer ((t (:foreground "gray30"))))
+ '(default ((t (:background nil))))
+ '(org-block ((t nil)))
+ '(org-block-begin-line ((t nil)))
+ '(org-block-end-line ((t nil)))
+ '(org-drawer ((t (:foreground "gray23"))))
  '(org-special-keyword ((t (:foreground "systemIndigoColor")))))
 )
