@@ -101,7 +101,12 @@ values."
                                       org-pomodoro
                                       ox-pandoc
                                       platformio-mode
-                                      pdf-tools)
+                                      pdf-tools
+                                      (svelte-mode :location (recipe
+                                                              :fetcher github
+                                                              :repo "leafOfTree/svelte-mode"
+                                                              :depth 1))
+   )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
