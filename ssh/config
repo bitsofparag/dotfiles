@@ -119,7 +119,7 @@ User           ubuntu
 IdentitiesOnly yes
 
 Host           solg_sql_editor_testing
-Hostname       18.193.67.53
+Hostname       18.185.94.20
 User           ubuntu
 IdentitiesOnly yes
 
@@ -184,7 +184,7 @@ User           ubuntu
 IdentitiesOnly yes
 
 Host           concr_poc_dashboard_staging
-Hostname       3.121.228.73
+Hostname       3.66.167.20
 User           ubuntu
 IdentitiesOnly yes
 
@@ -197,7 +197,18 @@ Hostname       35.158.84.240
 User           ubuntu
 IdentitiesOnly yes
 
-Host		vitreo_poc_dashboard
-Hostname	35.156.34.139
+Host		vitreo_graf_dashboard_testing
+Hostname	18.184.42.176
 User		ubuntu
 IdentitiesOnly	yes
+
+Host		autobot
+Hostname	192.168.11.69
+User		nbtops
+IdentitiesOnly	yes
+
+
+Host              concr_database_primary_staging
+Hostname          concr-database-staging-postgres.c928fvkhctbl.eu-central-1.rds.amazonaws.com
+User              concr
+ProxyCommand      ssh concr_poc_dashboard_staging -W %h:%p
