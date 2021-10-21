@@ -544,9 +544,10 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:background nil))))
+ '(hl-line ((t (:extend t :background "dark slate gray"))))
  '(org-block ((t nil)))
- '(org-block-begin-line ((t nil)))
- '(org-block-end-line ((t nil)))
+ '(org-block-begin-line ((t (:foreground "gray23"))))
+ '(org-block-end-line ((t (:foreground "gray23"))))
  '(org-drawer ((t (:foreground "gray23"))))
  '(org-special-keyword ((t (:foreground "systemIndigoColor")))))
 )
