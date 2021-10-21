@@ -38,12 +38,14 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      ansible
-     auto-completion
+     (auto-completion :variables
+                      company-emoji-insert-unicode t)
      ;; better-defaults
      csv
      django
      (docker :variables docker-dockerfile-backend 'lsp)
      emacs-lisp
+     emoji
      git
      (haskell :variables
               haskell-completion-backend 'dante
