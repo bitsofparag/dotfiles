@@ -59,6 +59,9 @@ export LC_CTYPE=en_US.UTF-8
 
 # --------------- Enhancing PATH -------------------
 export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+if [ -d ~/.local ]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
 
 # Android paths
 export ANDROID_HOME="$HOME/Library/Android/sdk"
@@ -92,6 +95,9 @@ export GITLAB_CLI_TOKEN=
 
 # ruby
 export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+# Nim
+export PATH="$HOME/.nimble/bin:$PATH"
 
 # devops
 #export HISTIGNORE="&:vault*"
