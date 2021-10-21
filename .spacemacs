@@ -63,25 +63,31 @@ values."
           lsp-ui-sideline-show-symbol t
           lsp-navigation 'peek)
      (markdown :variables
-		           markdown-live-preview-engine 'vmd)
+               markdown-live-preview-engine 'vmd)
      nginx
+     (nim :variables
+          nim-backend 'lsp)
      (shell :variables
              shell-default-height 30
              shell-default-position 'bottom)
      php
      restclient
-     rust
+     (rust :variables
+       lsp-rust-server 'rust-analyzer
+       cargo-process-reload-on-modify t)
      (spell-checking :variables spell-checking-enable-by-default nil)
      (sql :variables
        sql-backend 'lsp
        sql-lsp-sqls-workspace-config-path 'workspace)
      syntax-checking
      systemd
+     templates
      (terraform :variables terraform-auto-format-on-save t
         terraform-backend nil)
      themes-megapack
+     typescript
      version-control
-     yaml
+     (yaml :variables yaml-enable-lsp t)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
