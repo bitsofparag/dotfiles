@@ -41,6 +41,13 @@ values."
      (auto-completion :variables
                       company-emoji-insert-unicode t)
      ;; better-defaults
+     (c-c++ :variables
+            c-c++-lsp-enable-semantic-highlight 'rainbow
+            c-c++-dap-adapters '(dap-lldb)
+            c-c++-enable-organize-includes-on-save t
+            c-c++-enable-clang-format-on-save t
+            c-c++-adopt-subprojects t
+            c-c++-backend 'lsp-clangd)
      csv
      django
      (docker :variables docker-dockerfile-backend 'lsp)
