@@ -79,6 +79,7 @@ values."
      (sql :variables
        sql-backend 'lsp
        sql-lsp-sqls-workspace-config-path 'workspace)
+     svelte
      syntax-checking
      systemd
      templates
