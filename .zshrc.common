@@ -34,6 +34,9 @@ fi
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
 
+# ----- Brew + Pyenv
+alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+
 # -----------------------------
 # The rest of the file is loaded in $HOME/.zshrc
 # ...
