@@ -1,3 +1,31 @@
+Host              ecs-prod
+Hostname          192.168.1.5
+User              ec2-user
+IdentityFile      ~/.ssh/vtrops_ec2
+ProxyCommand      ssh vitreo_bastion_host_prod -W %h:%p
+
+Host		vitreo_bastion_host_prod
+Hostname	3.67.178.165
+IdentityFile	~/.ssh/vtrops_ec2
+User		ec2-user
+
+Host              ecs-testing
+Hostname	  20.10.1.15
+User              ec2-user
+IdentityFile	  ~/.ssh/vtrops_ec2
+ProxyCommand      ssh vitreo_bastion_host_testing -W %h:%p
+
+Host		vitreo_bastion_host_testing
+Hostname	3.67.138.177
+IdentityFile	~/.ssh/vtrops_ec2
+User		ec2-user
+
+Host		vitreo_graf_dashboard_testing
+Hostname	18.184.42.176
+User		ubuntu
+IdentitiesOnly	yes
+
+
 Host            nike-bastion
 Hostname        ec2-18-197-98-124.eu-central-1.compute.amazonaws.com
 Port            6011
@@ -189,18 +217,13 @@ User           ubuntu
 IdentitiesOnly yes
 
 # SSH over Session Manager
-Host		i-* mi-*
-ProxyCommand	sh -c "aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+#Host		i-* mi-*
+#ProxyCommand	sh -c "aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
 
 Host           concr_vitreo_basf_dashboard_staging
 Hostname       35.158.84.240
 User           ubuntu
 IdentitiesOnly yes
-
-Host		vitreo_graf_dashboard_testing
-Hostname	18.184.42.176
-User		ubuntu
-IdentitiesOnly	yes
 
 Host		autobot
 Hostname	192.168.11.69
