@@ -372,7 +372,6 @@ you should place your code here."
 
   (with-eval-after-load 'org
     ;;(require 'org-journal) ;; already loaded from private/local
-    (require 'org-download) ;; loaded from private/local
 
     ;;; Set variables and functions
     (setq org-agenda-files (directory-files-recursively "~/Workspace/_/notebooks/agenda" "\.org$"))
