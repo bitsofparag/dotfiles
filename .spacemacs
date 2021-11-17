@@ -536,6 +536,7 @@ This function is called at the very end of Spacemacs initialization."
  '(org-journal-file-header "#+roam_tags: daily todos")
  '(org-journal-file-type 'weekly)
  '(org-journal-prefix-key "C-c j")
+ '(org-pomodoro-keep-killed-pomodoro-time t)
  '(org-src-fontify-natively t)
  '(org-startup-folded t)
  '(org-startup-with-inline-images t)
