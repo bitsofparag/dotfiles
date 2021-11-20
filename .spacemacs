@@ -389,7 +389,6 @@ you should place your code here."
     ;;; ===== global key-bindings =====
     ;;; e.g (global-set-key (kbd "TAB") 'hippie-expand)
     (global-set-key (kbd "C-c c") 'org-capture)
-    (global-set-key (kbd "C-c r") 'org-refile)
     (global-set-key "\C-ca" 'org-agenda)
     (global-set-key (kbd "C-c w") 'hs-toggle-hiding)
 
@@ -475,8 +474,8 @@ and some custom text on a newly created journal file."
     ;;; ===== Org Protocol =====
 
     ;;; ===== org-download =====
-    (require 'org-download)
-    (add-hook 'dired-mode-hook 'org-download-enable)
+    ;;(require 'org-download)
+    ;;(add-hook 'dired-mode-hook 'org-download-enable)
 
     ;;; ===== org mode babel =====
     (org-babel-do-load-languages
