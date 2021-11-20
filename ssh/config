@@ -1,4 +1,5 @@
 Host              ecs-prod
+#Hostname	  192.168.2.237
 Hostname          192.168.1.5
 User              ec2-user
 IdentityFile      ~/.ssh/vtrops_ec2
@@ -10,7 +11,8 @@ IdentityFile	~/.ssh/vtrops_ec2
 User		ec2-user
 
 Host              ecs-testing
-Hostname	  20.10.1.15
+Hostname	  20.10.2.139
+#Hostname	  20.10.1.15
 User              ec2-user
 IdentityFile	  ~/.ssh/vtrops_ec2
 ProxyCommand      ssh vitreo_bastion_host_testing -W %h:%p
