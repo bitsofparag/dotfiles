@@ -8,6 +8,9 @@
 	excludesfile = ~/.gitignore_global
 [commit]
   template = ~/.gitmessage
+  gpgsign = true
+[gpg]
+  program = gpg
 [init]
 	defaultBranch = main
 [alias]
