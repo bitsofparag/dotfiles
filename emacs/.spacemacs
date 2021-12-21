@@ -59,6 +59,7 @@ values."
               haskell-enable-hindent t)
      html
      (javascript :variables javascript-disable-tern-port-files nil)
+     (latex :variables latex-backend 'lsp)
      (lsp :variables
           lsp-ui-sideline-show-symbol t
           lsp-navigation 'peek)
@@ -73,18 +74,17 @@ values."
      php
      restclient
      (rust :variables
-       lsp-rust-server 'rust-analyzer
-       cargo-process-reload-on-modify t)
+           lsp-rust-server 'rust-analyzer
+           cargo-process-reload-on-modify t)
      (spell-checking :variables spell-checking-enable-by-default nil)
      (sql :variables
-       sql-backend 'lsp
-       sql-lsp-sqls-workspace-config-path 'workspace)
-     svelte
+          sql-backend 'lsp
+          sql-lsp-sqls-workspace-config-path 'workspace)
      syntax-checking
      systemd
      templates
      (terraform :variables terraform-auto-format-on-save t
-        terraform-backend nil)
+                terraform-backend nil)
      themes-megapack
      typescript
      version-control
@@ -95,6 +95,7 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
+                                      code-review
                                       org-journal
                                       (org-download :location (recipe
                                                                :fetcher github
@@ -179,12 +180,13 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(railscasts
+   dotspacemacs-themes '(nord
+                         subatomic
+                         railscasts
                          afternoon
                          sanityinc-tomorrow-eighties
                          sanityinc-tomorrow-bright
                          sanityinc-tomorrow-night
-                         subatomic
                          spacemacs-dark
                          spacemacs-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
@@ -350,6 +352,8 @@ values."
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
    dotspacemacs-whitespace-cleanup 'trailing
+   ;; Set to nil when you want to disable showing the scrollbar while scrolling
+   dotspacemacs-scroll-bar-while-scrolling nil
    ))
 
 (defun dotspacemacs/user-init ()
@@ -360,6 +364,10 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (require 'org-protocol)
+
+  ;; Nord theme settings
+  (setq nord-region-highlight "frost")
+
   )
 
 (defun dotspacemacs/user-config ()
@@ -374,7 +382,7 @@ you should place your code here."
     ;;(require 'org-journal) ;; already loaded from private/local
 
     ;;; Set variables and functions
-    (setq org-agenda-files (directory-files-recursively "~/Workspace/_/notebooks/agenda" "\.org$"))
+    ;;(setq org-agenda-files (directory-files-recursively "~/Workspace/_/notebooks/agenda" "\.org$"))
     (setq org-use-fast-todo-selection t)
     (setq org-treat-S-cursor-todo-selection-as-state-change nil)
     (setq-default fill-column 100)
@@ -453,9 +461,10 @@ you should place your code here."
             ))
 
     ;;; org refile targets
-    (setq org-refile-targets '(("~/Workspace/_/notebooks/agenda/2020.org" :maxlevel . 3)
-                               ("~/Workspace/_/notebooks/agenda/2020-completed.org" :maxlevel . 3)
-                               ("~/Workspace/_/notebooks/agenda/work.org" :level . 1)))
+    ;; TODO: revisit later
+    ;; (setq org-refile-targets '(("~/Workspace/_/notebooks/agenda/2020.org" :maxlevel . 3)
+    ;;                            ("~/Workspace/_/notebooks/agenda/2020-completed.org" :maxlevel . 3)
+    ;;                            ("~/Workspace/_/notebooks/agenda/work.org" :level . 1)))
 
     ;;; ===== Org Journal =====
     ;;; Org journal function to create date-format when creating a new journal
@@ -515,7 +524,10 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("16ab866312f1bd47d1304b303145f339eac46bbc8d655c9bfa423b957aa23cc9" "0d75aa06198c4245ac2a8877bfc56503d5d8199cc85da2c65a6791b84afb9024" default))
  '(evil-want-Y-yank-to-eol nil)
+ '(global-hl-line-mode t)
  '(helm-ag-use-agignore t)
  '(helm-ag-use-grep-ignore-list t t)
  '(js-chain-indent t)
@@ -525,6 +537,8 @@ This function is called at the very end of Spacemacs initialization."
  '(lsp-pyls-plugins-pydocstyle-enabled t)
  '(lsp-pyls-plugins-yapf-enabled t)
  '(markdown-fontify-code-blocks-natively t)
+ '(org-agenda-files
+   '("~/Workspace/_/notebooks/agenda/2018.org" "~/Workspace/_/notebooks/agenda/2019.org" "~/Workspace/_/notebooks/agenda/2020.org" "~/Workspace/_/notebooks/agenda/Bookmarks.org" "~/Workspace/_/notebooks/agenda/To-Read.org" "~/Workspace/_/notebooks/agenda/common.org" "~/Workspace/_/notebooks/agenda/finances.org" "~/Workspace/_/notebooks/agenda/learning.org" "~/Workspace/_/notebooks/agenda/work.org" "/Users/parag/Dropbox/Documents/org/journal/20210111-journal.org"))
  '(org-export-backends '(ascii html icalendar latex md odt))
  '(org-fontify-done-headline t)
  '(org-fontify-quote-and-verse-blocks t)
@@ -540,9 +554,10 @@ This function is called at the very end of Spacemacs initialization."
  '(org-startup-folded t)
  '(org-startup-with-inline-images t)
  '(package-selected-packages
-   '(phpunit phpcbf php-extras php-auto-yasnippets helm-gtags ggtags geben drupal-mode dap-mode posframe bui counsel-gtags company-phpactor phpactor composer php-runtime company-php ac-php-core xcscope php-mode sqlup-mode sql-indent web-mode tagedit slim-mode scss-mode sass-mode pug-mode impatient-mode helm-css-scss helm helm-core haml-mode emmet-mode counsel-css company-web web-completion-data add-node-modules-path yapfify yaml-mode xterm-color web-beautify terraform-mode hcl-mode systemd smeargle shell-pop pyvenv pytest pyenv-mode py-isort pony-mode pip-requirements orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download nginx-mode multi-term mmm-mode markdown-toc markdown-mode magit-gitflow magit-popup livid-mode skewer-mode simple-httpd live-py-mode js2-refactor yasnippet multiple-cursors js2-mode js-doc jinja2-mode hy-mode dash-functional htmlize gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md flyspell-correct-ivy flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit git-commit with-editor eshell-z eshell-prompt-extras esh-help dockerfile-mode docker transient tablist json-mode docker-tramp json-snatcher json-reformat diff-hl cython-mode csv-mode coffee-mode auto-dictionary ansible-doc ansible anaconda-mode pythonic ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump popup f dash s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed async aggressive-indent adaptive-wrap ace-window ace-link avy))
+   '(nord-theme typescript-mode import-js grizzl toml-mode ron-mode racer flycheck-rust cfrs cargo rust-mode phpunit phpcbf php-extras php-auto-yasnippets helm-gtags ggtags geben drupal-mode dap-mode posframe bui counsel-gtags company-phpactor phpactor composer php-runtime company-php ac-php-core xcscope php-mode sqlup-mode sql-indent web-mode tagedit slim-mode scss-mode sass-mode pug-mode impatient-mode helm-css-scss helm helm-core haml-mode emmet-mode counsel-css company-web web-completion-data add-node-modules-path yapfify yaml-mode xterm-color web-beautify terraform-mode hcl-mode systemd smeargle shell-pop pyvenv pytest pyenv-mode py-isort pony-mode pip-requirements orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download nginx-mode multi-term mmm-mode markdown-toc markdown-mode magit-gitflow magit-popup livid-mode skewer-mode simple-httpd live-py-mode js2-refactor yasnippet multiple-cursors js2-mode js-doc jinja2-mode hy-mode dash-functional htmlize gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md flyspell-correct-ivy flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit git-commit with-editor eshell-z eshell-prompt-extras esh-help dockerfile-mode docker transient tablist json-mode docker-tramp json-snatcher json-reformat diff-hl cython-mode csv-mode coffee-mode auto-dictionary ansible-doc ansible anaconda-mode pythonic ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump popup f dash s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed async aggressive-indent adaptive-wrap ace-window ace-link avy))
  '(pyvenv-mode t)
- '(pyvenv-virtualenvwrapper-python "~/.pyenv/shims/python"))
+ '(pyvenv-virtualenvwrapper-python "~/.pyenv/shims/python")
+ '(warning-suppress-types '((\(yasnippet\ backquote-change\)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

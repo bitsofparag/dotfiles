@@ -127,11 +127,12 @@ function dot_gitconfig() {
     dotfiles=${1}
     w=${2} # Workspace root
     stow -d $dotfiles -vSt ~ gitconfig
+    sed -i "s/^\[includeIf \"gitdir:~\/Workspace\/play/\[includeIf \"gitdir:$w\/play/" ~/.gitconfig
     perl -pi -e "s/^\[includeIf \"gitdir:~\/Workspace\/play/\[includeIf \"gitdir:${w}/play/" ~/.gitconfig
     perl -pi -e "s/^\[includeIf \"gitdir:~\/Workspace\/_/\[includeIf \"gitdir:${w}/_/" ~/.gitconfig
     perl -pi -e "s/^\[includeIf \"gitdir:~\/Workspace\/work/\[includeIf \"gitdir:${w}/work/" ~/.gitconfig
 
-    cat <<'EOS' > ~/.gitconfig-work
+    cat <<EOS > ~/.gitconfig-work
 [user]
     name = Parag M.
     email = ${WORK_EMAIL}

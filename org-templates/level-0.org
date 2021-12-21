@@ -1,7 +1,0 @@
-#+OPTIONS: ':nil *:t -:t ::nil <:t \n:nil ^:t arch:headline author:t
-#+OPTIONS: broken-links:nil c:nil creator:t d:(not "LOGBOOK") date:t e:t
-#+OPTIONS: email:admin@bitsofparag.com f:t H:0 inline:t num:nil p:nil pri:nil prop:nil stat:t tags:t
-#+OPTIONS: tasks:t tex:t timestamp:t title:nil toc:nil todo:nil |:t
-
-#+SELECT_TAGS: export
-#+EXCLUDE_TAGS: noexport
