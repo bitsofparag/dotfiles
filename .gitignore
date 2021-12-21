@@ -5,6 +5,7 @@ user
 eshell
 smex-items
 .*
+!.dir_colors
 !.spacemacs
 !*.zsh*
 !.git*
