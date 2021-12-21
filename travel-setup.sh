@@ -13,6 +13,14 @@ GITLAB_PERSONAL_TOKEN=${GITLAB_PERSONAL_TOKEN}
 WORK_EMAIL=${WORK_EMAIL}
 TIMEZONE=${TIMEZONE:-Europe/Berlin}
 
+function set_password() {
+    if [[ -x "$(command -v lsb_release)" ]]; then
+        sudo passwd ubuntu
+    elif [[ -x "$(command -v emerge)" ]]; then
+        sudo passwd
+    fi
+}
+
 function install() {
     if [[ -n "$(command -v apt-get)" ]]; then
        sudo apt-get install -y --no-install-recommends "${@}"
@@ -92,12 +100,14 @@ decorate ssh
 function code_workspace() {
     mkdir -p $1 ${1}/play ${1}/work ${1}/vendor
     [ -d "${1}/_" ] && echo "_ exists" || git clone https://gitlab-ci-token:${GITLAB_PERSONAL_TOKEN}@gitlab.com/parag_m/knowledge.git ${1}/_
+    cd ${1}/_ && git pull origin master && cd -
 }
 decorate code_workspace
 
 
 function clone_dotfiles() {
     [ -d "${1}/dotfiles" ] && echo "dotfiles exists" || git clone https://gitlab-ci-token:${GITLAB_PERSONAL_TOKEN}@gitlab.com/parag_m/dotfiles.git ${1}/dotfiles
+    cd ${1}/dotfiles && git pull origin master && cd -
 }
 decorate clone_dotfiles
 
@@ -105,20 +115,32 @@ decorate clone_dotfiles
 function dot_zsh() {
     dotfiles=${1}
     install zsh
-    stow -d $dotfiles -vSt ~ zsh
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    echo "source ~/.zshenv.common" >> ~/.zshenv
-    echo "export GITLAB_CLI_TOKEN=" >> ~/.zshenv
-    echo "export GITLAB_USER_PARAG=" >> ~/.zshenv
-    echo "source \$ZSH/oh-my-zsh.sh" >> ~/.zshrc
-    echo "source ~/.zshrc.common" >> ~/.zshrc
+    rm -rf $HOME/.oh-my-zsh
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    stow -d $dotfiles -vRt ~ zsh
+
+    cat <<EOS > ~/.zshenv
+source ~/.zshenv.common
+export GITLAB_CLI_TOKEN=${GITLAB_PERSONAL_TOKEN}
+export GITLAB_USER_PARAG=
+EOS
+
+    cat <<EOS > ~/.zshrc
+source \$ZSH/oh-my-zsh.sh
+source ~/.zshrc.common
+EOS
 }
 decorate dot_zsh
 
 
 function dot_dircolors() {
     dotfiles=${1}
-    stow -d $dotfiles -vSt ~ dircolors
+    stow -d $dotfiles -vRt ~ dircolors
+    if ! grep -qF "/mnt/dev" /etc/fstab; then
+        echo "/dev/sda1 /mnt/dev ext4 defaults 0 0" | sudo tee -a /etc/fstab
+    fi
+
+    echo "test -r \"~/.dir_colors\" && eval $(dircolors ~/.dir_colors)" >> ~/.zshrc
 }
 decorate dot_dircolors
 
@@ -126,12 +148,7 @@ decorate dot_dircolors
 function dot_gitconfig() {
     dotfiles=${1}
     w=${2} # Workspace root
-    stow -d $dotfiles -vSt ~ gitconfig
-    sed -i "s/^\[includeIf \"gitdir:~\/Workspace\/play/\[includeIf \"gitdir:$w\/play/" ~/.gitconfig
-    perl -pi -e "s/^\[includeIf \"gitdir:~\/Workspace\/play/\[includeIf \"gitdir:${w}/play/" ~/.gitconfig
-    perl -pi -e "s/^\[includeIf \"gitdir:~\/Workspace\/_/\[includeIf \"gitdir:${w}/_/" ~/.gitconfig
-    perl -pi -e "s/^\[includeIf \"gitdir:~\/Workspace\/work/\[includeIf \"gitdir:${w}/work/" ~/.gitconfig
-
+    stow -d $dotfiles -vRt ~ gitconfig
     cat <<EOS > ~/.gitconfig-work
 [user]
     name = Parag M.
@@ -142,16 +159,16 @@ decorate dot_gitconfig
 
 
 function emacs() {
-    install -y emacs-gtk
+    install emacs-gtk
 }
 decorate emacs
 
 
 function spacemacs() {
+    dotfiles=${1}
+    mv ~/.emacs.d ~/.emacs.d.backup
     git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
-    ln -s $(pwd)/play/dotfiles/.spacemacs ~/.spacemacs
-    rm -rf ~/.emacs.d/private/snippets
-    ln -s $(pwd)/play/dotfiles/snippets ~/.emacs.d/private/snippets
+    stow -d $dotfiles -vRt ~ emacs
     setxkbmap -option 'ctrl:nocaps'
 }
 decorate spacemacs
@@ -164,11 +181,13 @@ decorate security
 # =====================================
 # Execution starts here
 # =====================================
-essentials
+#set_password
 
-locale
+#essentials
 
-timezone
+#locale
+
+#timezone
 
 WORKSPACE_ROOT=$HOME/Workspace
 
@@ -181,9 +200,9 @@ dot_zsh $DOTREPO
 dot_dircolors $DOTREPO
 dot_gitconfig $DOTREPO $WORKSPACE_ROOT
 
+DOTREPO=${WORKSPACE_ROOT}/play/dotfiles
 emacs
-
-spacemacs
+spacemacs $DOTREPO
 
 echo "==> Fin"
 echo "Run chsh -s /bin/zsh"
