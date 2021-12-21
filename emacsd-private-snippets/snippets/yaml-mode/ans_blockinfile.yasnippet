@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: ans_blockinfile
+# key: blockinfile
+# --
+
+# https://docs.ansible.com/ansible/latest/modules/blockinfile_module.html#examples
+- name: ${1:Type}* ADD to ${2:filename.ext} block
+  ${6:when: foo == "bar"}
+  blockinfile:
+    path: "{{ project_root }}/$2"
+    marker: "${3:# {mark}}${4: marker text}"
+    insertafter: '${5:string}'
+    state: present
+    block: |
+       $0
+    tags:
+      - $1_scripts

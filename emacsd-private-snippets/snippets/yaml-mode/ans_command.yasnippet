@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: ans_command
+# key: command
+# --
+
+# https://docs.ansible.com/ansible/latest/modules/command_module.html#examples
+- name: ${1:Type} RUN CMD ${2:/bin/somecmd} ${3:description}
+  command:
+    argv:
+      - $2
+      - ${4:arg1}
+  args:
+    chdir: {{ project_root }}
+    executable: /bin/bash
+  tags:
+    - $1_run
+  register: some_output_var

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: curl2
+# key: curl2
+# --
+:PROPERTIES:
+:header-args+: :schema https
+:header-args+: :host ${3:hostname}
+:header-args+: :select ${4:jq query}
+:END:
+
+#+NAME: ${5:id}
+#+BEGIN_SRC http :pretty :cache yes :results output :exports none
+GET /
+Authorization: Bearer
+#+END_SRC
+$0

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: ans_includerole
+# key: includerole
+# --
+
+# https://docs.ansible.com/ansible/latest/modules/include_role_module.html#examples
+- name: ${1:Type}* RUN ROLE ${2:name of role}
+  $0${4:when: foo == bar}
+  include_role:
+    name: $2
+    tasks_from: ${3:task yml file}
+    apply:
+      tags:
+        - $1_setup
+  tags:
+    - $1_setup

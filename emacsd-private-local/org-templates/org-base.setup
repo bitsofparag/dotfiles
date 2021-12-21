@@ -1,0 +1,66 @@
+# -*- mode: org; -*-
+
+#+MACRO: bgcolor @@html:<div style="background-color: $1;">$2</div>@@
+
+#+MACRO: clearpage @@latex:\\clearpage@@@@odt:<text:p text:style-name="PageBreak"/>@@
+
+#+MACRO: color @@html:<span style="color: $1">$2</span>@@@@latex:\textcolor{$1}{$2}@@@@odt:<text:span text:style-name="$1">$2</text:span>@@
+
+#+MACRO: fixme @@html:<span class="fixme">FIXME</span>@@
+
+#+MACRO: highlight @@html:<span style="background-color: $1;">$2</span>@@
+
+#+MACRO: hl {{{highlight(#FFFF00,$1)}}}
+
+#+MACRO: loremipsum Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+#+MACRO: newline @@latex:\hspace{0pt}\\@@ @@html:<br>@@
+
+#+MACRO: kbd @@html:<kbd>@@$1@@html:</kdb>@@
+
+#+MACRO: dvipng-when-odt (eval (if (org-export-derived-backend-p org-export-current-backend 'odt) "#+OPTIONS: tex:dvipng" ))
+
+#+MACRO: if-latex-else (eval (if (org-export-derived-backend-p org-export-current-backend 'latex) "$1" "$2"))
+
+#+MACRO: style (eval (concat "#+HTML_HEAD_EXTRA: <style></style>"))
+
+#+MACRO: image \includegraphics{$1}
+
+#+name: version-history
+#+begin_src shell :exports none :results silent :colnames '(Version Date Author Comment)
+git log --pretty=format:"%h%x09%ad%x09%an%x09%s" --date=short | head -n 5
+#+end_src
+
+#+MACRO: version-history call_version-history[:eval yes]()[:eval yes :results table :colnames '(Version Date Author Comment)]
+
+#+MACRO: banner @@html:<div class="banner" style="background-image:url('/static/images/@@$1@@html:');"></div>@@
+
+#+MACRO: timedate @@html:<div class="timedate"><span>First published: date</span><span>Last updated: </span></div>@@
+
+#+MACRO: blog_intro @@html:<span class="blog-intro">$1</span>@@
+
+#+MACRO: begin_intro @@html:<p class="intro">@@
+#+MACRO: end_intro @@html:</p>@@
+
+#+MACRO: begin_section @@html:<section>@@
+#+MACRO: end_section @@html:</section>@@
+
+#+MACRO: begin_info @@html:<div class="info"><p>@@
+#+MACRO: end_info @@html:</p></div>@@
+
+#+MACRO: begin_note @@html:<div class="note"><p>@@
+#+MACRO: end_note @@html:</p></div>@@
+
+#+MACRO: begin_tip @@html:<div class="tip"><p>@@
+#+MACRO: end_tip @@html:</p></div>@@
+
+#+MACRO: begin_warning @@html:<div class="warning"><p>@@
+#+MACRO: end_warning @@html:</p></div>@@
+
+#+MACRO: tweet @@html:<a href="https://twitter.com/share" class="twitter-share-button" data-text="New blog post" data-via="paragmajum" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>@@
+
+#+MACRO: linkedin @@html:<a class="link-info" id="linkedin-share-0" href="http://www.linkedin.com/shareArticle?mini=true&url=$1&source=bitsofparag.com"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5 3c0 1.1-.7 2-2 2-1.2 0-2-.9-2-1.9C1 2 1.8 1 3 1s2 .9 2 2zM1 19h4V6H1v13zM14.6 6.2c-2.1 0-3.3 1.2-3.8 2h-.1l-.2-1.7H6.9c0 1.1.1 2.4.1 3.9V19h4v-7.1c0-.4 0-.7.1-1 .3-.7.8-1.6 1.9-1.6 1.4 0 2 1.2 2 2.8V19h4v-7.4c0-3.7-1.9-5.4-4.4-5.4z"/></svg>Share</a>@@
+
+#+MACRO: toc #+toc: headlines $1
+
+#+MACRO: img @@html:<img src="$1" class="gallery-item" style="$2" />@@

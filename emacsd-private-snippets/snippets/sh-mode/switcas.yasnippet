@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: switcas
+# key: switcas
+# --
+
+case "\$1" in
+  ${1:method_name})
+  method_name "${@:2}"
+  ;;
+
+  *)
+  usage
+  exit 127
+  ;;
+esac
+
+exit 0
+$0

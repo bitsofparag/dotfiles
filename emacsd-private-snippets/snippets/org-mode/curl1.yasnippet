@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: curl1
+# key: curl1
+# --
+:PROPERTIES:
+:header-args+: :var username='${1:username value}'
+:header-args+: :var password='${2:password value}'
+:header-args+: :schema https
+:header-args+: :host ${3:hostname}
+:header-args+: :select ${4:jq query}
+:END:
+
+#+NAME: ${5:id}
+#+BEGIN_SRC http :pretty :cache yes :results output :exports none
+POST /auth
+Content-Type: application/json
+
+{
+"username": "${username}",
+"password": "${password}"
+}
+#+END_SRC
+$0

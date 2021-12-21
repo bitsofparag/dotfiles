@@ -1,0 +1,7 @@
+#+OPTIONS: ':nil *:t -:t ::t <:t \n:nil ^:t arch:headline author:t
+#+OPTIONS: broken-links:mark c:nil creator:t d:(not "LOGBOOK") date:t e:t
+#+OPTIONS: email:admin@bitsofparag.com f:t H:2 inline:t num:nil p:nil pri:nil prop:nil stat:t tags:t
+#+OPTIONS: tasks:t tex:t timestamp:t title:t toc:t todo:t |:t
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+DESCRIPTION: Bitsofparag | Personal weblog of Parag Majumdar

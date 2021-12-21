@@ -94,6 +94,9 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
+   ;; 
+   ;; To add your own package:
+   ;; ('my-package :location local) - then scroll down to user-config
    dotspacemacs-additional-packages '(
                                       code-review
                                       org-journal
@@ -377,6 +380,9 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+
+  ;; If my-package has been installed locally, then load it here like so:
+  ;; (require 'my-package)
 
   (with-eval-after-load 'org
     ;;(require 'org-journal) ;; already loaded from private/local

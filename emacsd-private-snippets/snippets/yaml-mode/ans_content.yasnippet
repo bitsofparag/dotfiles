@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: ans_content
+# key: content
+# --
+- name: ${1:Type}* TMPL COPY ${2:filename.ext} to ${3:destination}
+  $0${5:when: foo == "bar"}
+  copy:
+    content: "{{lookup('template', '../templates/$2.j2')}}"
+    dest: "{{project_root}}/$3"
+    force: ${4:force}
+  tags:
+    - $1_tmpl_copy

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# contributor: Parag M. <admin@bitsofparag.com>
+# name: ans_lineinfile
+# key: lineinfile
+# --
+
+# https://docs.ansible.com/ansible/latest/modules/lineinfile_module.html#examples
+- name: ${1:Type}* ADD to ${2:filename.ext} line about
+  $0${6:when\: foo == "bar"}
+  lineinfile:
+    dest: "{{ project_root }}/$2"
+    line: "${3:line to replace}"
+    insertafter: '${4:string}'
+    ${5:regexp: ''}
+    state: present
+  tags:
+    - $1_scripts
