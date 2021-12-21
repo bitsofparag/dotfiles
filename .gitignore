@@ -5,12 +5,12 @@ user
 eshell
 smex-items
 .*
-!/.spacemacs
-!/*.zsh*
-!/.git*
-!/.tmux*
-!/.functions
-!/.*theme_env
+!.spacemacs
+!*.zsh*
+!.git*
+!.tmux*
+!.functions
+!.*theme_env
 
 org-files/*.sh
 org-files/*.tex
