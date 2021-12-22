@@ -5,6 +5,8 @@ set -o pipefail
 
 export $(egrep -v '^#' .env | xargs)
 export LANG=en_US.UTF-8
+export OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+export ARCH="amd64" #TODO
 
 DROPBOX_DOWNLOAD_API="https://content.dropboxapi.com/2/files/download"
 MYTRAVELAPI_TOKEN=${MYTRAVELAPI_TOKEN}
@@ -21,13 +23,15 @@ function set_password() {
     fi
 }
 
+
 function install() {
     if [[ -n "$(command -v apt-get)" ]]; then
-       sudo apt-get install -y --no-install-recommends "${@}"
+       sudo apt-get install -y --no-install-recommends "$@"
     elif [[ -n "$(command -v apt-get)" ]]; then
-        emerge "${@}"
+        emerge "$@"
     fi
 }
+
 
 # Taken from https://unix.stackexchange.com/questions/125819/bash-function-decorator
 function decorate() {
@@ -54,18 +58,17 @@ decorate environment
 
 function essentials() {
     install \
-      build-essential \
-      iputils-ping \
-      curl wget \
-      iptables \
-      psmisc \
-      libpq-dev postgresql-client \
-      python3-pip \
-      zip unzip \
-      openssh-client \
-      git \
-      stow \
-      tzdata
+        build-essential \
+        coreutils \
+        iputils-ping \
+        curl wget \
+        iptables \
+        psmisc \
+        zip unzip \
+        openssh-client \
+        git \
+        stow \
+        tzdata
 }
 decorate essentials
 
@@ -136,11 +139,9 @@ decorate dot_zsh
 function dot_dircolors() {
     dotfiles=${1}
     stow -d $dotfiles -vRt ~ dircolors
-    if ! grep -qF "/mnt/dev" /etc/fstab; then
-        echo "/dev/sda1 /mnt/dev ext4 defaults 0 0" | sudo tee -a /etc/fstab
+    if ! grep -qF "dir_colors" ~/.zshrc; then
+        echo "test -r \"~/.dir_colors\" && eval \$(dircolors ~/.dir_colors)" | tee -a ~/.zshrc
     fi
-
-    echo "test -r \"~/.dir_colors\" && eval $(dircolors ~/.dir_colors)" >> ~/.zshrc
 }
 decorate dot_dircolors
 
@@ -158,36 +159,98 @@ EOS
 decorate dot_gitconfig
 
 
-function emacs() {
-    install emacs-gtk
+function python_stuff() {
+    install python3-pip "$@"
+    git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+    cd ~/.pyenv && src/configure && make -C src
+    cd -
+    echo "Installing pyenv virtualenv..."
+    mkdir -p ~/.pyenv/plugins
+    git clone https://github.com/pyenv/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
 }
-decorate emacs
+decorate python_stuff
 
 
-function spacemacs() {
+function golang_stuff() {
+    gopath=$1
+    curl -OL "https://go.dev/dl/go${GO_VERSION}.${OS}-${ARCH}.tar.gz"
+    sha256sum "go${GO_VERSION}.${OS}-${ARCH}.tar.gz"
+    rm -rf ${gopath}/go && tar -C $gopath -xzf "go${GO_VERSION}.${OS}-${ARCH}.tar.gz"
+    go version
+}
+decorate golang_stuff
+
+
+function rust_stuff() {
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+}
+decorate rust_stuff
+
+
+function nim_stuff() {
+    curl https://nim-lang.org/choosenim/init.sh -sSf | sh
+}
+decorate nim_stuff
+
+
+function pg_utils() {
+    install libpq-dev postgresql-client "$@"
+}
+decorate pg_utils
+
+
+function shell_utils() {
+    install \
+        fzf \
+        xclip \
+        exa \
+        cmatrix
+}
+decorate shell_utils
+
+
+function install_emacs() {
+    install emacs-gtk "$@"
+}
+decorate install_emacs
+
+
+function emacs_utils() {
+    install x11-xkb-utils
+}
+decorate emacs_utils
+
+
+function dot_emacs() {
     dotfiles=${1}
     mv ~/.emacs.d ~/.emacs.d.backup
     git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
     stow -d $dotfiles -vRt ~ emacs
+    stow -d $dotfiles -vRt ~/.emacs.d/private emacsd-private-snippets
+    stow -d $dotfiles -vRt ~/.emacs.d/private/local emacsd-private-local
     setxkbmap -option 'ctrl:nocaps'
 }
-decorate spacemacs
+decorate dot_emacs
+
 
 function security() {
-    install keepassxc
+    install signing-party \
+            pgpdump \
+            keepassxc
 }
 decorate security
 
 # =====================================
 # Execution starts here
 # =====================================
-#set_password
+set_password
 
-#essentials
+#environment
+essentials
+locale
+timezone
 
-#locale
-
-#timezone
+#ssh
 
 WORKSPACE_ROOT=$HOME/Workspace
 
@@ -200,9 +263,23 @@ dot_zsh $DOTREPO
 dot_dircolors $DOTREPO
 dot_gitconfig $DOTREPO $WORKSPACE_ROOT
 
+python_stuff
+
+GOPATH=${WORKSPACE_ROOT}/vendor/go
+golang_stuff $GOPATH
+
+rust_stuff
+
+nim_stuff
+
+pg_utils
+
+shell_utils
+
 DOTREPO=${WORKSPACE_ROOT}/play/dotfiles
-emacs
-spacemacs $DOTREPO
+install_emacs
+emacs_utils
+dot_emacs $DOTREPO
 
 echo "==> Fin"
 echo "Run chsh -s /bin/zsh"
