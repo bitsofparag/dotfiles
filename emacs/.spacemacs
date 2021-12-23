@@ -423,15 +423,6 @@ you should place your code here."
           (delete-region (region-beginning) (region-end))
           (org-remove-empty-drawer-at (point)))))
 
-    ;;; org highlighting
-    (setq org-latex-listings 'minted
-          org-latex-packages-alist '(("" "minted"))
-          org-latex-pdf-process
-          '("pdflatex -shell-escape -output-directory %o %f"
-            "biber %b"
-            "pdflatex -shell-escape -output-directory %o %f"
-            "pdflatex -shell-escape -output-directory %o %f"))
-
     ;;; Org task state management
     (setq org-todo-keywords
           (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
@@ -496,14 +487,40 @@ and some custom text on a newly created journal file."
     ;;; ===== org mode babel =====
     (org-babel-do-load-languages
      'org-babel-load-languages
-     '((python . t)
-       (shell . t)
-       (js . t)
-       (sql . t)
-       (haskell . t)
+     '((haskell . t)
        (http . t)
+       (js . t)
+       (latex . t)
+       (python . t)
        (restclient . t)
+       (shell . t)
+       (sql . t)
        ))
+    )
+
+  ;;; ======= Org LaTeX ==========
+  (with-eval-after-load 'ox-latex
+    (setq org-latex-listings 'minted
+          org-latex-packages-alist '(("" "minted"))
+          org-format-latex-options (plist-put org-format-latex-options :scale 1.2)
+          org-src-fontify-natively t ;; should be already set via customize
+          org-latex-pdf-process
+          '("pdflatex -shell-escape -output-directory %o %f"
+            "biber %b"
+            "pdflatex -shell-escape -output-directory %o %f"
+            "pdflatex -shell-escape -output-directory %o %f"))
+
+    (add-to-list 'org-latex-classes
+                 '("org-plain-latex"
+                   "\\documentclass{article}
+           [NO-DEFAULT-PACKAGES]
+           [PACKAGES]
+           [EXTRA]"
+                   ("\\section{%s}" . "\\section*{%s}")
+                   ("\\subsection{%s}" . "\\subsection*{%s}")
+                   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                   ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                   ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
     )
   )
 
