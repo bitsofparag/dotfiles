@@ -1,0 +1,57 @@
+#cloud-config
+
+disable_root: true
+
+# Cloud init
+write_files:
+  - path: /tmp/workspace-setup.sh
+    content: "${SETUP_SCRIPT_CONTENT}"
+    owner: ${ME}:${ME}
+    permissions: '0644'
+  - path: "/etc/environment"
+    append: true
+    content: "${ENV_CONTENT}"
+
+locale: 'en_US'
+
+users:
+- name: ${ME}
+  passwd: ${MY_PASSWORD}
+  sudo: ALL=(ALL) NOPASSWD:ALL
+  shell: /bin/bash
+  ssh_authorized_keys:
+    - ${SSH_PUBKEY}
+
+#resolv_conf:
+#  nameservers: ['1.1.1.1', '8.8.4.4', '8.8.8.8']
+
+package_update: true
+
+packages:
+- build-essential
+- coreutils
+- iputils-ping
+- curl
+- wget
+- iptables
+- psmisc
+- zip
+- unzip
+- openssh-client
+- git
+- stow
+- tzdata
+- python3-pip
+- python3-dev
+- libpq-dev
+- postgresql-client
+- ubuntu-desktop
+- xrdp
+
+timezone: ${TIMEZONE}
+
+runcmd:
+- /tmp/workspace-setup.sh
+
+output :
+  all : '| tee -a /var/log/cloud-init-output.log'

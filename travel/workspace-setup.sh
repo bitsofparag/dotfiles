@@ -5,13 +5,13 @@ set -o pipefail
 
 export $(egrep -v '^#' .env | xargs)
 export LANG=en_US.UTF-8
-export OS=$(uname -s | tr '[:upper:]' '[:lower:]')
-export ARCH="amd64" #TODO
 
 DROPBOX_DOWNLOAD_API="https://content.dropboxapi.com/2/files/download"
 MYTRAVELAPI_TOKEN=${MYTRAVELAPI_TOKEN}
 GITHUB_PERSONAL_TOKEN=${GITHUB_PERSONAL_TOKEN}
 GITLAB_PERSONAL_TOKEN=${GITLAB_PERSONAL_TOKEN}
+SPOTIFY_CLIENT_ID=${SPOTIFY_CLIENT_ID}
+SPOTIFY_CLIENT_SECRET=${SPOTIFY_CLIENT_SECRET}
 WORK_EMAIL=${WORK_EMAIL}
 TIMEZONE=${TIMEZONE:-Europe/Berlin}
 
@@ -48,6 +48,26 @@ function decorate() {
     }'
 }
 
+function os() {
+    return $(uname -s | tr '[:upper:]' '[:lower:]')
+}
+
+function distro() {
+    # Check for "ubuntu"
+    if [[ -x "$(command -v lsb_release)" ]]; then
+        if [[ "$1" == $(lsb_release -is | tr '[:upper:]' '[:lower:]') ]]; then
+            echo "correct"
+            return 0
+        else
+            echo "not match"
+            return -1
+        fi
+    fi
+}
+
+function arch() {
+    return $(uname -p)
+}
 
 function environment() {
     [ -d "~/Workspace" ] && echo "Workspace is mounted/ready" || $(echo "Please run 'sudo mount -t ntfs /dev/nvme0n1pX $HOME/Workspace"; exit 1)
@@ -56,7 +76,8 @@ function environment() {
 decorate environment
 
 
-function essentials() {
+function install_essentials() {
+    # May be already completed by cloud-init
     install \
         build-essential \
         coreutils \
@@ -70,26 +91,29 @@ function essentials() {
         stow \
         tzdata
 }
-decorate essentials
+decorate install_essentials
 
 
-function locale() {
+function set_locale() {
+    # May be already completed by cloud-init
     install locales locales-all
     echo "$LANG UTF-8" | sudo tee /etc/locale.gen \
       && sudo locale-gen $LANG \
       && sudo update-locale LANG=$LANG LC_CTYPE=$LANG
 }
-decorate locale
+decorate set_locale
 
 
-function timezone() {
+function set_timezone() {
+    # May be already completed by cloud-init
     sudo ln -fs /usr/share/zoneinfo/${TIMEZONE} /etc/localtime
     sudo dpkg-reconfigure --frontend noninteractive tzdata
 }
-decorate timezone
+decorate set_timezone
 
 
-function ssh() {
+function setup_ssh() {
+    # May be already completed by cloud-init
     curl -X POST ${DROPBOX_DOWNLOAD_API} \
          --header "Authorization: Bearer ${MYTRAVELAPI_TOKEN}" \
          --header "Dropbox-API-Arg: {\"path\": \"/Documents/travel/id_travel\"}" > ~/.ssh/id_travel
@@ -97,15 +121,15 @@ function ssh() {
     eval $(ssh-agent)
     ssh-add ~/.ssh/id_travel
 }
-decorate ssh
+decorate setup_ssh
 
 
-function code_workspace() {
+function prep_code_workspace() {
     mkdir -p $1 ${1}/play ${1}/work ${1}/vendor
     [ -d "${1}/_" ] && echo "_ exists" || git clone https://gitlab-ci-token:${GITLAB_PERSONAL_TOKEN}@gitlab.com/parag_m/knowledge.git ${1}/_
     cd ${1}/_ && git pull origin master && cd -
 }
-decorate code_workspace
+decorate prep_code_workspace
 
 
 function clone_dotfiles() {
@@ -176,6 +200,7 @@ function golang_stuff() {
     curl -OL "https://go.dev/dl/go${GO_VERSION}.${OS}-${ARCH}.tar.gz"
     sha256sum "go${GO_VERSION}.${OS}-${ARCH}.tar.gz"
     rm -rf ${gopath}/go && tar -C $gopath -xzf "go${GO_VERSION}.${OS}-${ARCH}.tar.gz"
+    echo "Go path is set via dotfiles. Path is ${PATH}"
     go version
 }
 decorate golang_stuff
@@ -183,6 +208,11 @@ decorate golang_stuff
 
 function rust_stuff() {
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    cargo install cargo-edit
+    cargo install cargo-audit
+    cargo install cargo-outdated
+    rustup component add rustfmt
+    rustup component add clippy
 }
 decorate rust_stuff
 
@@ -193,32 +223,105 @@ function nim_stuff() {
 decorate nim_stuff
 
 
-function pg_utils() {
+function install_pg_utils() {
     install libpq-dev postgresql-client "$@"
 }
-decorate pg_utils
+decorate install_pg_utils
 
 
-function shell_utils() {
+function install_shell_utils() {
+    if [[ -f ~/.zshrc.common ]]; then
+        echo "Installing zsh-syntax-highlighting..."
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
+            ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+        echo "Installing zsh-autosuggestions..."
+        git clone https://github.com/zsh-users/zsh-autosuggestions \
+            ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
+    fi
+
     install \
         fzf \
         xclip \
         exa \
+        fswatch \
+        tree \
         cmatrix
+    if [[  ]]
+    install fonts-powerline
+
+    # On Gentoo
+    # git clone https://github.com/powerline/fonts.git --depth=1
+    # # install
+    # cd fonts
+    # ./install.sh
+    # # clean-up a bit
+    # cd ..
+    # rm -rf fonts
 }
-decorate shell_utils
+decorate install_shell_utils
+
+
+function install_devtools() {
+    install \
+        tldr \
+        cookiecutter \
+        pkg-config automake \
+        jq
+}
+decorate install_devtools
+
+
+function node_npm_stuff() {
+    echo "Installing Volta..."
+    curl https://get.volta.sh | bash
+    volta install node@lts
+    volta list
+
+    echo "Installing Deno..."
+    curl -fsSL https://deno.land/x/install/install.sh | sh
+
+    echo "Installing PNPM..."
+    curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
+    pnpm add -g pnpm
+
+    echo "Installing global NPM packages..."
+    pnpm add -g @storybook/cli \
+         eslint \
+         js-beautify \
+         prettier \
+         import-js \
+         http-server \
+         typescript typescript-language-server \
+         dockerfile-language-server-nodejs \
+         bash-language-server \
+         @cloudflare/wrangler \
+         semver
+    pnpm ls -depth=0 -g
+}
+decorate node_npm_stuff
+
+
+function ops_stuff() {
+    if [[ -x "$(command -v pip)" ]]; then
+        pip install --user ansible awscli
+    fi
+
+    echo "Installing Hashicorp stuff..."
+    curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+    sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+    sudo apt-get update && install nomad terraform packer
+    install podman skopeo
+    #TODO alias docker
+
+}
+decorate ops_stuff
 
 
 function install_emacs() {
     install emacs-gtk "$@"
 }
 decorate install_emacs
-
-
-function emacs_utils() {
-    install x11-xkb-utils
-}
-decorate emacs_utils
 
 
 function dot_emacs() {
@@ -233,6 +336,45 @@ function dot_emacs() {
 decorate dot_emacs
 
 
+function install_emacs_utils() {
+    install x11-xkb-utils
+    if [[ -x "$(command -v pip)" ]]; then
+        pip install 'python-language-server[all]'
+    fi
+
+    install \
+        ispell \
+        silversearcher-ag
+}
+decorate install_emacs_utils
+
+
+function latex_stuff() {
+    install texlive-base
+    sudo tlmgr update --self
+}
+decorate latex_stuff
+
+
+# TODO: use distro check
+function setup_spotify() {
+    # Assuming debian/ubuntu
+    curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo apt-key add -
+    echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+    sudo apt-get update && install spotify-client
+    git clone https://github.com/hnarayanan/shpotify.git ${1}/shpotify
+    chmod +x ${1}/shpotify/spotify
+    echo "export PATH=\"${1}/shpotify:$PATH\"" >> ~/.zshrc
+}
+decorate setup_spotify
+
+
+function setup_tutorials() {
+    curl -L https://git.io/install-rustlings | bash -s ${WORKSPACE_ROOT}/vendor/rustlings
+}
+decorate setup_tutorials
+
+
 function security() {
     install signing-party \
             pgpdump \
@@ -243,18 +385,18 @@ decorate security
 # =====================================
 # Execution starts here
 # =====================================
-set_password
+#set_password
 
 #environment
-essentials
-locale
-timezone
+#install_essentials
+#set_locale
+#set_timezone
 
-#ssh
+#setup_ssh
 
 WORKSPACE_ROOT=$HOME/Workspace
 
-code_workspace ${WORKSPACE_ROOT}
+prep_code_workspace ${WORKSPACE_ROOT}
 
 clone_dotfiles ${WORKSPACE_ROOT}/play
 
@@ -272,14 +414,16 @@ rust_stuff
 
 nim_stuff
 
-pg_utils
+install_pg_utils
 
-shell_utils
+install_shell_utils
 
 DOTREPO=${WORKSPACE_ROOT}/play/dotfiles
 install_emacs
-emacs_utils
+install_emacs_utils
 dot_emacs $DOTREPO
+
+setup_spotify
 
 echo "==> Fin"
 echo "Run chsh -s /bin/zsh"
