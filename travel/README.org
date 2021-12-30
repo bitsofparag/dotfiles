@@ -1,0 +1,19 @@
+#+title: Travel setup
+
+* Setup
+
+- Ensure you have the .env file updated.
+
+- Run the following script to obtain the rendered cloud-init file:
+
+#+begin_src sh
+set -a; source .env; set +a;
+export ENV_CONTENT=$(cat .env | base64)
+export SETUP_SCRIPT_CONTENT=$(cat workspace-setup.sh | base64)
+envsubst < instance-init.yaml > rendered.yaml
+#+end_src
+
+
+* Run on Multipass
+
+- =multipass launch --name=travel --cloud-init=rendered.yaml -vvvv=

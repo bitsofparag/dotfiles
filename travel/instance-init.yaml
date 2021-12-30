@@ -5,12 +5,12 @@ disable_root: true
 # Cloud init
 write_files:
   - path: /tmp/workspace-setup.sh
-    content: "${SETUP_SCRIPT_CONTENT}"
+    content: '${SETUP_SCRIPT_CONTENT}'
     owner: ${ME}:${ME}
     permissions: '0644'
-  - path: "/etc/environment"
+  - path: '/etc/environment'
     append: true
-    content: "${ENV_CONTENT}"
+    content: '${ENV_CONTENT}'
 
 locale: 'en_US'
 
@@ -48,7 +48,7 @@ packages:
 - ubuntu-desktop
 - xrdp
 
-timezone: ${TIMEZONE}
+timezone: '${TIMEZONE}'
 
 runcmd:
 - /tmp/workspace-setup.sh
