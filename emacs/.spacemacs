@@ -58,7 +58,11 @@ values."
               haskell-completion-backend 'dante
               haskell-enable-hindent t)
      html
-     (javascript :variables javascript-disable-tern-port-files nil)
+     (javascript :variables
+                 javascript-backend 'lsp
+                 javascript-disable-tern-port-files nil
+                 javascript-fmt-on-save t
+                 javascript-fmt-tool 'prettier)
      (latex :variables latex-backend 'lsp)
      (lsp :variables
           lsp-ui-sideline-show-symbol t
