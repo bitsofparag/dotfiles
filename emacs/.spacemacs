@@ -54,6 +54,10 @@ values."
      emacs-lisp
      emoji
      git
+     (go :variables
+         go-tab-width 4
+         go-format-before-save t
+         go-backend 'lsp)
      (haskell :variables
               haskell-completion-backend 'dante
               haskell-enable-hindent t)
@@ -187,8 +191,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(dracula
-                         gruvbox
+   dotspacemacs-themes '(farmhouse-dark
+                         dracula
                          nord
                          subatomic
                          afternoon
@@ -201,7 +205,8 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("IBM Plex Mono"
+   ;; Previous font used: "IBM Plex Mono"
+   dotspacemacs-default-font '("Jetbrains Mono"
                                :size 13
                                :weight normal
                                :width normal
@@ -398,6 +403,11 @@ you should place your code here."
     (setq org-treat-S-cursor-todo-selection-as-state-change nil)
     (setq-default fill-column 100)
 
+    ;;;; Adjust display on some Emacs properties
+    (add-to-list 'font-lock-extra-managed-props 'display)
+    (font-lock-add-keywords 'org-mode '(("\\(\{\{\{\\)" 1 '(face nil display "❴"))))
+    (font-lock-add-keywords 'org-mode '(("\\(\}\}\}\\)" 1 '(face nil display "❵"))))
+
 
     ;;; ===== hooks =====
     (add-hook 'text-mode-hook 'auto-fill-mode)
@@ -552,24 +562,59 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(compilation-message-face 'default)
+ '(css-indent-offset 2)
  '(custom-safe-themes
    '("16ab866312f1bd47d1304b303145f339eac46bbc8d655c9bfa423b957aa23cc9" "0d75aa06198c4245ac2a8877bfc56503d5d8199cc85da2c65a6791b84afb9024" default))
+ '(doom-ephemeral-region-highlight '\'frost)
  '(evil-want-Y-yank-to-eol nil)
+ '(exwm-floating-border-color "#d3c5a0")
+ '(frame-brackground-mode 'dark)
  '(global-hl-line-mode t)
  '(helm-ag-use-agignore t)
  '(helm-ag-use-grep-ignore-list t t)
+ '(highlight-parentheses-background-colors '("#2492db" "#95a5a6" nil))
+ '(highlight-tail-colors ((("#eee4b4" "#f3f3c1") . 0) (("#e8e5bb" "#eff3cf") . 20)))
+ '(hl-todo-keyword-faces
+   '(("TODO" . "#dc752f")
+     ("NEXT" . "#dc752f")
+     ("THEM" . "#2d9574")
+     ("PROG" . "#4f97d7")
+     ("OKAY" . "#4f97d7")
+     ("DONT" . "#f2241f")
+     ("FAIL" . "#f2241f")
+     ("DONE" . "#86dc2f")
+     ("NOTE" . "#b1951d")
+     ("KLUDGE" . "#b1951d")
+     ("HACK" . "#b1951d")
+     ("TEMP" . "#b1951d")
+     ("FIXME" . "#dc752f")
+     ("XXX+" . "#dc752f")
+     ("\\?\\?\\?+" . "#dc752f")))
+ '(jdee-db-active-breakpoint-face-colors (cons "#f0f0f0" "#a89984"))
+ '(jdee-db-requested-breakpoint-face-colors (cons "#f0f0f0" "#79740e"))
+ '(jdee-db-spec-breakpoint-face-colors (cons "#f0f0f0" "#928374"))
  '(js-chain-indent t)
  '(js-indent-level 2)
  '(json-reformat:indent-width 2)
  '(lsp-clients-python-library-directories '("/usr/" "$HOME/.pyenv/versions"))
  '(lsp-pyls-plugins-pydocstyle-enabled t)
  '(lsp-pyls-plugins-yapf-enabled t)
+ '(magit-diff-use-overlays nil)
  '(markdown-fontify-code-blocks-natively t)
+ '(notmuch-search-line-faces
+   '(("unread" :foreground "#aeee00")
+     ("flagged" :foreground "#0a9dff")
+     ("deleted" :foreground "#ff2c4b" :bold t)))
+ '(nrepl-message-colors
+   '("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3"))
+ '(objed-cursor-color "#9d0006")
  '(org-agenda-files
    '("~/Workspace/_/notebooks/agenda/2018.org" "~/Workspace/_/notebooks/agenda/2019.org" "~/Workspace/_/notebooks/agenda/2020.org" "~/Workspace/_/notebooks/agenda/Bookmarks.org" "~/Workspace/_/notebooks/agenda/To-Read.org" "~/Workspace/_/notebooks/agenda/common.org" "~/Workspace/_/notebooks/agenda/finances.org" "~/Workspace/_/notebooks/agenda/learning.org" "~/Workspace/_/notebooks/agenda/work.org" "/Users/parag/Dropbox/Documents/org/journal/20210111-journal.org"))
  '(org-export-backends '(ascii html icalendar latex md odt))
  '(org-fontify-done-headline t)
  '(org-fontify-quote-and-verse-blocks t)
+ '(org-fontify-todo-headline nil)
  '(org-fontify-whole-heading-line t)
  '(org-journal-dir "~/Workspace/_/notebooks/agenda/journal")
  '(org-journal-enable-agenda-integration t)
@@ -583,16 +628,52 @@ This function is called at the very end of Spacemacs initialization."
  '(org-startup-with-inline-images t)
  '(package-selected-packages
    '(nord-theme typescript-mode import-js grizzl toml-mode ron-mode racer flycheck-rust cfrs cargo rust-mode phpunit phpcbf php-extras php-auto-yasnippets helm-gtags ggtags geben drupal-mode dap-mode posframe bui counsel-gtags company-phpactor phpactor composer php-runtime company-php ac-php-core xcscope php-mode sqlup-mode sql-indent web-mode tagedit slim-mode scss-mode sass-mode pug-mode impatient-mode helm-css-scss helm helm-core haml-mode emmet-mode counsel-css company-web web-completion-data add-node-modules-path yapfify yaml-mode xterm-color web-beautify terraform-mode hcl-mode systemd smeargle shell-pop pyvenv pytest pyenv-mode py-isort pony-mode pip-requirements orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download nginx-mode multi-term mmm-mode markdown-toc markdown-mode magit-gitflow magit-popup livid-mode skewer-mode simple-httpd live-py-mode js2-refactor yasnippet multiple-cursors js2-mode js-doc jinja2-mode hy-mode dash-functional htmlize gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md flyspell-correct-ivy flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit git-commit with-editor eshell-z eshell-prompt-extras esh-help dockerfile-mode docker transient tablist json-mode docker-tramp json-snatcher json-reformat diff-hl cython-mode csv-mode coffee-mode auto-dictionary ansible-doc ansible anaconda-mode pythonic ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump popup f dash s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed async aggressive-indent adaptive-wrap ace-window ace-link avy))
+ '(pdf-view-midnight-colors (cons "#282828" "#fbf1c7"))
+ '(pos-tip-background-color "#FFFACE")
+ '(pos-tip-foreground-color "#272822")
  '(pyvenv-mode t)
  '(pyvenv-virtualenvwrapper-python "~/.pyenv/shims/python")
- '(warning-suppress-types '((\(yasnippet\ backquote-change\)))))
+ '(rustic-ansi-faces
+   ["#fbf1c7" "#9d0006" "#79740e" "#b57614" "#076678" "#b16286" "#427b58" "#282828"])
+ '(sml/active-background-color "#34495e")
+ '(sml/active-foreground-color "#ecf0f1")
+ '(sml/inactive-background-color "#dfe4ea")
+ '(sml/inactive-foreground-color "#34495e")
+ '(vc-annotate-background "#fbf1c7")
+ '(vc-annotate-color-map
+   (list
+    (cons 20 "#79740e")
+    (cons 40 "#8d7410")
+    (cons 60 "#a17512")
+    (cons 80 "#b57614")
+    (cons 100 "#b3620e")
+    (cons 120 "#b14e08")
+    (cons 140 "#af3a03")
+    (cons 160 "#af472e")
+    (cons 180 "#b0545a")
+    (cons 200 "#b16286")
+    (cons 220 "#aa415b")
+    (cons 240 "#a32030")
+    (cons 260 "#9d0006")
+    (cons 280 "#9a2021")
+    (cons 300 "#97413c")
+    (cons 320 "#946258")
+    (cons 340 "#504945")
+    (cons 360 "#504945")))
+ '(vc-annotate-very-old-color nil)
+ '(warning-suppress-types '((\(yasnippet\ backquote-change\))))
+ '(web-mode-css-indent-offset 2)
+ '(web-mode-markup-indent-offset 2)
+ '(weechat-color-list
+   '(unspecified "#272822" "#3C3D37" "#F70057" "#F92672" "#86C30D" "#A6E22E" "#BEB244" "#E6DB74" "#40CAE4" "#66D9EF" "#FB35EA" "#FD5FF0" "#74DBCD" "#A1EFE4" "#F8F8F2" "#F8F8F0")))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:background nil))))
- '(hl-line ((t (:extend t :background "dark slate gray"))))
+ '(highlight-parentheses-highlight ((nil (:weight ultra-bold))) t)
+ '(hl-line ((t (:extend t :background "SlateGray4"))))
  '(org-block ((t nil)))
  '(org-block-begin-line ((t (:foreground "gray23"))))
  '(org-block-end-line ((t (:foreground "gray23"))))

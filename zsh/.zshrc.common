@@ -27,12 +27,13 @@ alias jno="jupyter notebook --ip 0.0.0.0 --port 7000"
 # ----- Load pyenv and pyenv-virtualenv
 if [ -d "$PYENV_ROOT" ]; then
     eval "$(pyenv init --path)"
+    eval "$(pyenv init -)"
     if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 fi
 
 # ----- Plugins
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(zsh-syntax-highlighting zsh-autosuggestions)
 
 # ----- Brew + Pyenv
 alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'

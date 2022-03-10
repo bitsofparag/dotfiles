@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: tfdyncon
+# key: tfdyncon
+# --
+dynamic "${1:property_name}" {
+  for_each = var.environment == "prod" || var.environment == "stg" ? [1] : []
+  content {
+    $0
+  }
+}
