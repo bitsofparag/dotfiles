@@ -6,19 +6,23 @@
 #+TITLE: ${1:Title}
 #+author: Parag M.
 #+date: `(format-time-string "%d-%m-%Y")`
-#+SETUPFILE: ~/.emacs.d/private/local/org-templates/org-base.setup
-#+SETUPFILE: ~/.emacs.d/private/local/org-templates/level-2.org
+#+Time-stamp: `(format-time-string "%d-%m-%Y")`
+#+SETUPFILE: ../../../.setup/macros
+#+SETUPFILE: ../../../.setup/options
+#+OPTIONS: broken-links:mark H:2 title:t
+#+STARTUP: fninline
 
-@@html:<div class="timedate">@@
-@@html:<span class="timedate-pub">// Published `(format-time-string "%B, %d")`</span>@@
-@@html:<span class="timedate-upd">@@
-(updated: {{{time(%Y/%m/%d)}}})
-@@html:</span>@@
-@@html:</div>@@
+#+begin_metadata
+Published on {{{date(%e %b %Y)}}} • Updated {{{modification-time(%e %b %Y)}}}
+#+end_metadata
+
+#+begin_share
+{{{tweet(https://www.bitsofparag.com/blog/`(format-time-string "%Y")`/`(format-time-string "%m")`/${1:$(downcase(replace-regexp-in-string \" \" \"-\" yas-text))}.html, $1)}}} {{{linkedin(https://www.bitsofparag.com/blog/`(format-time-string "%Y")`/`(format-time-string "%m")`/${1:$(downcase(replace-regexp-in-string \" \" \"-\" yas-text))}.html)}}}
+#+end_share
 
 * Objective :noexport:
 
-  $0To show something about something
+  ${0:To show something about something}
 
 * Message :noexport:
 
@@ -41,5 +45,3 @@
 
     }
   #+END_SRC
-
-  {{{tweet}}} {{{linkedin(https://example.com)}}}

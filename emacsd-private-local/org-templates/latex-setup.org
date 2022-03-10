@@ -12,7 +12,7 @@
 #+LATEX_HEADER: \usepackage{graphicx}
 #+LATEX_HEADER: \usepackage{amsmath, amsthm, amssymb, xparse}
 #+LATEX_HEADER: \usepackage[table, xcdraw]{xcolor}
-#+LATEX_HEADER: \usepackage{chemfig}
+#+LATEX_HEADER: \usepackage{chemfig, mhchem}
 
 % Colorizing links in a nicer way.
 % -------------------------------
