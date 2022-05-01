@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: tfremotestate
+# key: tfremotestate
+# --
+data "terraform_remote_state" "${1:networking}" {
+  backend = "remote"
+  config = {
+    organization = var.organization
+    workspaces = {
+      name = "$1-\${var.environment}"
+    }
+  }
+}

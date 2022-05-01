@@ -5,9 +5,10 @@
 #@module labels
 #@description Tf module to add common labels to resources
 module "labels" {
-  source      = "../labels"
-  project     = var.project
+  source      = "app.terraform.io/${1:bitsofparag}/labels/aws"
+  project     = var.project_namespace
   name        = var.name
   environment = var.environment
-  label_order = ["project", "name", "environment"]
+  label_order = ["environment", "project"]
 }
+$0

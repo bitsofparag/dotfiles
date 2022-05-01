@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: tfbackend
+# key: tfbackend
+# --
+terraform {
+  cloud {
+    organization = "${1:bitsofparag}"
+    workspaces {
+      tags = ["${2:workspace_name}"]
+    }
+  }
+
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+    }
+
+    ${3:cloudflare = \{
+      source = "cloudflare/cloudflare"
+    \}}
+  }
+}
+$0

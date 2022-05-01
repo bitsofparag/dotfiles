@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: tfcfrecord
+# key: tfcfrecord
+# --
+
+
+# Add the following to required providers:
+#
+# cloudflare = {
+#   source = "cloudflare/cloudflare"
+# }
+
+provider "cloudflare" {
+  email   = var.cloudflare_email
+  api_key = var.cloudflare_api_key
+}
+
+data "cloudflare_zones" "primary_domain" {
+  filter {
+    name   = var.domain_name
+    status = "active"
+  }
+}
+
+resource "cloudflare_record" "apps_name_servers" {
+  provider = cloudflare
+  count    = 4
+  zone_id  = var.cloudflare_zone_id != "" ? var.cloudflare_zone_id : lookup(data.cloudflare_zones.primary_domain.zones[0], "id")
+  name     = "\${var.environment}-apps.\${var.domain-name}"
+  value    = data.terraform_remote_state.genesis.outputs.aws_route53_zone_apps.name_servers[count.index]
+  type     = "NS"
+  ttl      = 3600
+}

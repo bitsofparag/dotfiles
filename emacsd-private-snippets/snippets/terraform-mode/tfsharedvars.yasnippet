@@ -1,0 +1,46 @@
+# -*- mode: snippet -*-
+# name: tfsharedvars
+# key: tfsharedvars
+# --
+# Shared vars
+# ---------------------------
+variable "default_region" {
+  description = "Default region usually assigned on account creation."
+  type        = string
+  default     = "eu-central-1"
+}
+
+variable "organization" {
+  type        = string
+  default     = "$1"
+  description = "The organization name where this workspace is created."
+}
+
+variable "project" {
+  type        = string
+  default     = "$2"
+  description = "Project name (e.g 'acme')"
+}
+
+variable "project_namespace" {
+  type        = string
+  default     = "$2"
+  description = "Short project namespace (e.g 'acme')"
+}
+
+variable "environment" {
+  type        = string
+  default     = "dev"
+  description = "Environment (e.g. 'dev' or 'prod')"
+}
+
+variable "tags" {
+  type        = map(string)
+  default     = {}
+  description = "Additional tags for e.g. {\\"network\\" = \\"vpc\\"}."
+}
+
+variable "label" {
+  type = string
+  default = ""
+}
