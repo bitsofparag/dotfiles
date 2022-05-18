@@ -6,7 +6,6 @@ disable_root: true
 write_files:
   - path: /tmp/workspace-setup.sh
     content: '${SETUP_SCRIPT_CONTENT}'
-    owner: ${ME}:${ME}
     permissions: '0644'
   - path: '/etc/environment'
     append: true

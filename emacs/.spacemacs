@@ -50,7 +50,7 @@ values."
             c-c++-backend 'lsp-clangd)
      csv
      django
-     (docker :variables docker-dockerfile-backend 'lsp)
+     (docker :variables docker-dockerfile-backend 'nil)
      emacs-lisp
      emoji
      git
@@ -80,6 +80,10 @@ values."
              shell-default-height 30
              shell-default-position 'bottom)
      php
+     (python :variables
+             python-backend 'lsp
+             python-formatter 'yapf
+             python-format-on-save t)
      restclient
      (rust :variables
            lsp-rust-server 'rust-analyzer
